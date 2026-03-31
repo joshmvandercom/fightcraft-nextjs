@@ -1,0 +1,100 @@
+programs:
+  - slug: kickboxing
+    name: Kickboxing
+    image: /images/home/kickboxing.jpg
+    short_description: "High-energy striking that builds power, endurance, and confidence."
+    locations: [san-jose, merced, brevard]
+    header_title: "Kickboxing"
+    header_subtitle: "Get a full-body workout without the traditional gym routine"
+    primary_title: "Discover Your Best Self at Our Premier Kickboxing Program"
+    primary_text_1: "Elevate your fitness game beyond the mundane with FightCraft's Premier Kickboxing Classes. Guided by world-class instructors, step into a space where you can unleash your inner champion. Say goodbye to dull gym routines as you power through challenging exercises, striking heavy bags in the high-energy ambiance of our vibrant community."
+    primary_text_2: "Sign up for our Kickboxing Classes and experience a workout revolution that not only boosts your stamina but also fortifies your strength, accelerates weight loss, and empowers you with the confidence to face life's unexpected twists."
+    callout_title: "Unlock Your Potential Through Kickboxing"
+    callout_text: "Here at FightCraft, our mission revolves around setting you up for success. Tailored to fit every fitness level — from gym newbies hoping for an effective workout and weight loss, to professional athletes seeking peak performance — our Kickboxing Classes are the fast track to achieving your goals."
+    bullets:
+      - "Shed pounds through high-energy routines"
+      - "Melt work stress with every punch"
+      - "Elevate fighting skills to professional levels"
+      - "Boost metabolism and torch calories"
+      - "Master advanced techniques for competition"
+      - "Build resilience in a supportive community"
+
+  - slug: muay-thai
+    name: Muay Thai
+    image: /images/home/muay-thai.webp
+    short_description: "The Art of 8 Limbs. Master strikes using fists, elbows, knees, and shins."
+    locations: [san-jose, merced, brevard]
+    header_title: "Muay Thai"
+    header_subtitle: "Get a full-body workout without the traditional gym routine"
+    primary_title: "Unlock Your True Potential at Our Leading Muay Thai Program"
+    primary_text_1: "Revolutionize your fitness routine with FightCraft's Elite Muay Thai Program, also known as the Art of 8 Limbs. Under the expert guidance of our world-class instructors, you'll be striking pads and heavy bags, channeling stress into every powerful move. Engage all eight limbs in a holistic workout that takes you beyond the ordinary."
+    primary_text_2: "Muay Thai is a game-changer for busy students and professionals, offering a unique way to channel stress into powerful strikes. As you engage all eight limbs, you'll sharpen mental acuity essential for work and academics. It's not just a workout; it's a lifestyle shift designed to help you excel in all areas of life."
+    callout_title: "What We Do"
+    callout_text: "Whether you're seeking enhanced fitness, participating in sport fighting, aiming for weight loss, or simply embracing a new hobby, we've got you covered. Our highly attentive instructors are skilled in tailoring training programs to meet diverse needs."
+    bullets:
+      - "Shed pounds through high-energy routines"
+      - "Melt work stress with every punch"
+      - "Elevate fighting skills to professional levels"
+      - "Boost metabolism and torch calories"
+      - "Master advanced techniques for competition"
+      - "Build resilience in a supportive community"
+
+  - slug: brazilian-jiu-jitsu
+    name: Brazilian Jiu Jitsu
+    image: /images/home/bjj.webp
+    short_description: "The gentle art. Ground-based martial arts focused on technique and leverage."
+    locations: [san-jose]
+    header_title: "Brazilian Jiu Jitsu"
+    header_subtitle: "Master the gentle art and unlock your strategic mind"
+    primary_title: "Discover the Chess Match of Martial Arts at Our Premier BJJ Academy"
+    primary_text_1: "Transform your approach to fitness and self-defense with FightCraft's Elite Brazilian Jiu Jitsu Program, known as the Gentle Art. Under the mentorship of our highly skilled instructors, you'll learn to use leverage, timing, and technique to overcome larger, stronger opponents."
+    primary_text_2: "BJJ is perfect for busy professionals and students who want a mental challenge alongside their physical workout. As you learn to solve complex positional puzzles on the mat, you'll develop problem-solving skills that translate directly to work and life challenges."
+    callout_title: "Our Approach"
+    callout_text: "Whether you're looking to improve your fitness, learn practical self-defense, compete in tournaments, or simply challenge yourself mentally, our BJJ program adapts to your goals. Our patient and knowledgeable instructors excel at breaking down complex techniques into manageable steps."
+    bullets:
+      - "Build functional strength and flexibility"
+      - "Develop unshakeable mental toughness"
+      - "Learn practical self-defense techniques"
+      - "Improve problem-solving and strategic thinking"
+      - "Compete in tournaments and test your skills"
+      - "Join a supportive brotherhood/sisterhood of practitioners"
+
+  - slug: kids-martial-arts
+    name: Kids & Teens
+    image: /images/home/kids-kickboxing.jpg
+    short_description: "Building confident, disciplined, and respectful young warriors."
+    locations: [san-jose, merced]
+    header_title: "Kids & Teens Martial Arts"
+    header_subtitle: "Building confident, disciplined, and respectful young warriors"
+    primary_title: "Give Your Child the Ultimate Advantage at Our Premier Kids Program"
+    primary_text_1: "Empower your child with FightCraft's comprehensive Kids Martial Arts Program, expertly blending Kickboxing and Brazilian Jiu Jitsu techniques designed specifically for young learners. Our certified instructors create a structured yet fun environment where children develop physical coordination, mental focus, and unshakeable self-confidence."
+    primary_text_2: "Our program is specifically designed to help children excel in school and social situations. As they master new techniques and earn belt promotions, kids develop goal-setting abilities, improved focus for homework, and the confidence to stand up to bullies."
+    callout_title: "What Your Child Will Learn"
+    callout_text: "Whether your child is naturally athletic or just starting their fitness journey, our program meets them where they are. Our patient and enthusiastic instructors specialize in working with children, using games, challenges, and positive reinforcement to teach fundamentals."
+    bullets:
+      - "Build physical fitness and coordination"
+      - "Develop focus and concentration for school"
+      - "Learn anti-bullying and self-defense skills"
+      - "Earn belt promotions and achieve goals"
+      - "Make lasting friendships in a positive environment"
+      - "Gain confidence that lasts a lifetime"
+
+  - slug: mixed-martial-arts
+    name: Mixed Martial Arts
+    image: /images/home/vern.jpeg
+    short_description: "Complete combat training across all ranges of fighting."
+    locations: [san-jose]
+    header_title: "Mixed Martial Arts"
+    header_subtitle: "Master all aspects of combat in the world's fastest-growing sport"
+    primary_title: "Become a Complete Fighter at Our Elite MMA Academy"
+    primary_text_1: "Elevate your martial arts journey with FightCraft's comprehensive Mixed Martial Arts Program, where striking meets grappling in the most dynamic combat sport on the planet. Our expert instructors will guide you through the integration of Muay Thai, Boxing, Brazilian Jiu Jitsu, and Wrestling techniques that define modern MMA."
+    primary_text_2: "MMA training pushes you beyond the limits of single-discipline martial arts, demanding excellence in striking, clinch work, takedowns, and ground fighting. It's not just about learning to fight; it's about becoming mentally and physically unstoppable."
+    callout_title: "Complete Combat Training"
+    callout_text: "Whether your goal is amateur competition, professional fighting, or simply training at the highest level, our MMA program provides the complete skill set. Our experienced coaches have trained fighters at all levels and understand how to develop well-rounded athletes safely and effectively."
+    bullets:
+      - "Master striking, grappling, and ground fighting"
+      - "Develop elite-level cardiovascular fitness"
+      - "Learn fight strategy and tactical thinking"
+      - "Train with experienced coaches and training partners"
+      - "Prepare for amateur or professional competition"
+      - "Build unbreakable mental toughness"

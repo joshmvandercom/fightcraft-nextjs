@@ -1,0 +1,55 @@
+locations:
+  - slug: san-jose
+    name: San Jose
+    label: Headquarters
+    status: open
+    address: 1825 W. San Carlos St.
+    city: San Jose
+    state: CA
+    zip: "95128"
+    lat: 37.3382
+    lng: -121.8863
+    phone: "(408) 693-5522"
+    email: friends@fightcraft.com
+    instagram: "@fightcraftsj"
+    programs:
+      - Kickboxing
+      - Muay Thai
+      - Brazilian Jiu Jitsu
+      - Kids Martial Arts
+      - Mixed Martial Arts
+
+  - slug: merced
+    name: Merced
+    label: Coming Soon
+    status: coming_soon
+    address: Coming Soon
+    city: Merced
+    state: CA
+    zip: "95340"
+    lat: 37.3022
+    lng: -120.4829
+    phone: null
+    email: friends@fightcraft.com
+    instagram: "@fightcraft.merced"
+    programs:
+      - Kickboxing
+      - Muay Thai
+      - Teens Kickboxing
+
+  - slug: brevard
+    name: Brevard
+    label: null
+    status: open
+    address: 170 King Street
+    city: Brevard
+    state: NC
+    zip: "28712"
+    lat: 35.2334
+    lng: -82.7343
+    phone: null
+    email: friends@fightcraft.com
+    instagram: null
+    programs:
+      - Kickboxing
+      - Muay Thai
