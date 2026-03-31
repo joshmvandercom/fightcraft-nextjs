@@ -25,10 +25,14 @@ export default function Locations({ locations, linked = false }: LocationsProps)
   }, [])
 
   return (
-    <section id="locations" className="bg-black text-white py-24 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section id="locations" className="relative text-white py-24 px-6">
+      <div className="absolute inset-0">
+        <img src="/images/home/carlos.jpeg" alt="" className="w-full h-full object-cover grayscale" />
+        <div className="absolute inset-0 bg-black/85" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto">
         <div className="mb-16">
-          <h2 className="font-heading text-5xl md:text-7xl uppercase font-bold tracking-tight">Find Your Gym</h2>
+          <h2 className="font-heading text-5xl md:text-7xl uppercase font-bold tracking-tight">Our Locations</h2>
           <div className="w-16 h-px bg-white mt-6" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -1,12 +1,18 @@
+import BrandBadge from './BrandBadge'
+
 interface PageHeroProps {
   title: string
   subtitle?: string
   image?: string
   youtubeId?: string
   tall?: boolean
+  badge?: {
+    locationName?: string
+    state?: string
+  }
 }
 
-export default function PageHero({ title, subtitle, image, youtubeId, tall = false }: PageHeroProps) {
+export default function PageHero({ title, subtitle, image, youtubeId, tall = false, badge }: PageHeroProps) {
   return (
     <section className={`relative flex items-center justify-center overflow-hidden ${tall ? 'min-h-[70vh]' : 'min-h-[50vh]'}`}>
       {youtubeId ? (
@@ -31,7 +37,17 @@ export default function PageHero({ title, subtitle, image, youtubeId, tall = fal
         <div className="absolute inset-0 bg-black" />
       )}
 
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20">
+      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20 flex flex-col items-center">
+        {badge && (
+          <div className="mb-10">
+            <BrandBadge
+              locationName={badge.locationName?.replace(/\s+/g, '_').toUpperCase()}
+              state={badge.state}
+              variant="light"
+              size="md"
+            />
+          </div>
+        )}
         <h1 className="font-heading text-5xl sm:text-6xl md:text-8xl uppercase font-bold tracking-tight text-white">
           {title}
         </h1>

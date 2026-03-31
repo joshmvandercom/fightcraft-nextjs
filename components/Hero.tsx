@@ -7,14 +7,14 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <p className="font-heading text-sm uppercase tracking-[0.4em] text-white/40 mb-6">
-          The Premier Boutique Martial Arts Community
+        <p className="font-heading text-sm uppercase tracking-[0.3em] text-white/60 mb-6">
+          FIGHTCRAFT &mdash; PREMIER_MARTIAL_ARTS
         </p>
         <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl uppercase font-bold leading-[0.95] tracking-tight text-white">
           Escape the Mundane.<br />
           Become Your Best Self.
         </h1>
-        <p className="text-white/50 mt-6 max-w-xl mx-auto text-base md:text-lg leading-relaxed">
+        <p className="text-white/70 mt-6 max-w-xl mx-auto text-base md:text-lg leading-relaxed">
           Learn modern martial arts — for every level, at a gym near you.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">

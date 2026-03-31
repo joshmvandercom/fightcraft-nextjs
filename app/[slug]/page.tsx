@@ -47,8 +47,8 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
           {/* Left — sticky on desktop */}
           <div className="lg:sticky lg:top-0 lg:h-screen flex items-start px-6 py-24 lg:pt-32">
             <div className="max-w-lg">
-              <p className="font-heading text-xs uppercase tracking-widest text-black/30 mb-4">
-                FightCraft Martial Arts
+              <p className="font-heading text-xs uppercase tracking-[0.3em] text-black/50 mb-4">
+                FIGHTCRAFT &mdash; {location.city.replace(/\s+/g, '_').toUpperCase()}_{location.state}
               </p>
               <h2 className="font-heading text-4xl md:text-5xl uppercase font-bold tracking-tight text-black mb-6">
                 A Boutique MMA Academy for All Skill Levels

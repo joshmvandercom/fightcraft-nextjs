@@ -95,3 +95,9 @@
 | 2026-03-31 | Program cards: `aspect-[16/10]`, grayscale→color on hover with `duration-700`, `scale-105` |
 | 2026-03-31 | Location switcher navigates to `/{slug}` page instead of dynamic JS swap |
 | 2026-03-31 | Location info displayed as horizontal 4-column bar on `neutral-100` |
+| 2026-03-31 | Brand: underscore typography convention — `FIGHT_CRAFT`, `SAN_JOSE      CA`, `PREMIER_MARTIAL_ARTS` |
+| 2026-03-31 | Brand: double-border box (outer `border-2` + inner `border`) for cards and badge |
+| 2026-03-31 | Brand: `BrandBadge` component — FC mark + thin rule + underscore text. Sizes: sm/md/lg. Variants: light/dark |
+| 2026-03-31 | Brand: location cards use double-border treatment + underscore city/state label |
+| 2026-03-31 | Brand: eyebrow labels use `tracking-[0.3em]` with underscore naming |
+| 2026-03-31 | Brand: footer uses FC mark + `FIGHT_CRAFT` text instead of logo image |
