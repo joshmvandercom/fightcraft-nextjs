@@ -99,13 +99,13 @@ export default function Nav({ locations, programs }: NavProps) {
 
         {/* Desktop Links — centered */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="/" className="font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white transition-colors">Home</a>
+          <a href="/" className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors">Home</a>
 
           {/* About Dropdown */}
           <div className="relative" ref={aboutRef}>
             <button
               onClick={() => { setAboutOpen(!aboutOpen); setContextOpen(false) }}
-              className="font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white transition-colors flex items-center gap-1"
+              className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors flex items-center gap-1"
             >
               About
               <svg className={`w-3 h-3 transition-transform ${aboutOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,15 +114,16 @@ export default function Nav({ locations, programs }: NavProps) {
             </button>
             {aboutOpen && (
               <div className="absolute top-full left-0 mt-3 py-2 bg-black border border-white/20 min-w-[180px]">
-                <a href="/about" className="block px-4 py-2 font-heading text-xs uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/5 transition-colors">About Us</a>
-                <a href="/about/faq" className="block px-4 py-2 font-heading text-xs uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/5 transition-colors">FAQ</a>
-                <a href="/about/reviews" className="block px-4 py-2 font-heading text-xs uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/5 transition-colors">Reviews</a>
-                <a href="/about/core-values" className="block px-4 py-2 font-heading text-xs uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/5 transition-colors">Core Values</a>
+                <a href="/about" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">About Us</a>
+                <a href="/about/faq" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">FAQ</a>
+                <a href="/about/reviews" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Reviews</a>
+                <a href="/about/core-values" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Core Values</a>
+                <a href="/first-timers" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">First Timers</a>
               </div>
             )}
           </div>
 
-          <a href="/locations" className="font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white transition-colors">Locations</a>
+          <a href="/locations" className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors">Locations</a>
 
           {/* Context Nav — Programs & Schedule inline when location is set */}
           {currentLocation && (
@@ -133,7 +134,7 @@ export default function Nav({ locations, programs }: NavProps) {
               <div className="relative" ref={contextRef}>
                 <button
                   onClick={() => { setContextOpen(!contextOpen); setAboutOpen(false) }}
-                  className="font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white transition-colors flex items-center gap-1"
+                  className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors flex items-center gap-1"
                 >
                   Programs
                   <svg className={`w-3 h-3 transition-transform ${contextOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,7 +144,7 @@ export default function Nav({ locations, programs }: NavProps) {
                 {contextOpen && (
                   <div className="absolute top-full left-0 mt-3 py-2 bg-black border border-white/20 min-w-[200px]">
                     {locationPrograms.map(p => (
-                      <a key={p.slug} href={`/${currentLocation.slug}/programs/${p.slug}`} className="block px-4 py-2 font-heading text-xs uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                      <a key={p.slug} href={`/${currentLocation.slug}/programs/${p.slug}`} className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">
                         {p.name}
                       </a>
                     ))}
@@ -151,7 +152,7 @@ export default function Nav({ locations, programs }: NavProps) {
                 )}
               </div>
 
-              <a href={`/${currentLocation.slug}/schedule`} className="font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white transition-colors">
+              <a href={`/${currentLocation.slug}/schedule`} className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors">
                 Schedule
               </a>
             </>
@@ -164,13 +165,13 @@ export default function Nav({ locations, programs }: NavProps) {
             <div className="relative" ref={locationSwitcherRef}>
               <button
                 onClick={() => { setLocationSwitcherOpen(!locationSwitcherOpen); setAboutOpen(false); setContextOpen(false) }}
-                className="font-heading text-sm uppercase tracking-widest text-white/50 hover:text-white transition-colors flex items-center gap-2"
+                className="font-heading text-base uppercase tracking-widest text-white hover:text-white/80 transition-colors flex items-center gap-2"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                {currentLocation.name}
+                <span className="font-bold">{currentLocation.name}</span>
                 <svg className={`w-3 h-3 transition-transform ${locationSwitcherOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -184,7 +185,7 @@ export default function Nav({ locations, programs }: NavProps) {
                       className={`block w-full text-left px-4 py-2 font-heading text-xs uppercase tracking-widest transition-colors hover:bg-white/5 ${loc.slug === currentLocation.slug ? 'text-white' : 'text-white/50 hover:text-white'}`}
                     >
                       {loc.name}
-                      {loc.slug === currentLocation.slug && <span className="ml-2 text-white/30">&bull;</span>}
+                      {loc.slug === currentLocation.slug && <span className="ml-2 text-white/50">&bull;</span>}
                     </a>
                   ))}
                 </div>
@@ -215,12 +216,13 @@ export default function Nav({ locations, programs }: NavProps) {
           <a href="/about/faq" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">FAQ</a>
           <a href="/about/reviews" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">Reviews</a>
           <a href="/about/core-values" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">Core Values</a>
+          <a href="/first-timers" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">First Timers</a>
         </div>
         <a href="/locations" onClick={() => setMobileOpen(false)} className="font-heading text-3xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Locations</a>
 
         {currentLocation && (
           <div className="mt-4 pt-6 border-t border-white/20 w-full">
-            <p className="font-heading text-xs uppercase tracking-widest text-white/30 mb-4">{currentLocation.name}</p>
+            <p className="font-heading text-xs uppercase tracking-widest text-white/50 mb-4">{currentLocation.name}</p>
             <div className="flex flex-col gap-3 pl-2">
               {locationPrograms.map(p => (
                 <a key={p.slug} href={`/${currentLocation.slug}/programs/${p.slug}`} onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">

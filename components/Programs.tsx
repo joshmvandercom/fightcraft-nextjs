@@ -1,3 +1,4 @@
+import ScrollRevealImage from './ScrollRevealImage'
 import type { Program, Location } from '@/lib/content'
 
 interface ProgramsProps {
@@ -50,7 +51,7 @@ export default function Programs({ programs, locations, locationSlug }: Programs
               href={locationSlug ? `/${locationSlug}/programs/${program.slug}` : '#'}
               className="group relative overflow-hidden aspect-[4/3] block"
             >
-              <img src={program.image} alt={program.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
+              <ScrollRevealImage src={program.image} alt={program.name} className="w-full h-full object-cover group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition-colors" />
               <div className="absolute inset-0 p-6 flex flex-col justify-end">
                 <h3 className="font-heading text-3xl uppercase font-bold tracking-tight text-white mb-2">{program.name}</h3>

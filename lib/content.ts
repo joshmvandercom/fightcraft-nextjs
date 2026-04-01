@@ -20,6 +20,7 @@ export interface Location {
   phone: string | null
   email: string
   instagram: string | null
+  contact_email: string
   programs: string[]
 }
 
@@ -37,6 +38,8 @@ export interface Program {
   callout_title: string
   callout_text: string
   bullets: string[]
+  seo_text?: string
+  seo_closing?: string
 }
 
 export interface CoreValue {

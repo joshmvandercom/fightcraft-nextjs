@@ -45,7 +45,7 @@ export default async function SchedulePage({ params }: { params: Promise<{ slug:
                   <div className="space-y-3">
                     {day.classes.map((cls, i) => (
                       <div key={i} className="py-2">
-                        <p className="font-heading text-xs uppercase tracking-wider text-black/40">{cls.time}</p>
+                        <p className="font-heading text-xs uppercase tracking-wider text-black/50">{cls.time}</p>
                         <p className="text-sm text-black/80 mt-0.5">{cls.name}</p>
                       </div>
                     ))}
@@ -63,7 +63,7 @@ export default async function SchedulePage({ params }: { params: Promise<{ slug:
           )}
 
           <div className="mt-16 pt-12 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p className="text-sm text-black/40">Schedule subject to change. Contact us for the most up-to-date times.</p>
+            <p className="text-sm text-black/50">Schedule subject to change. Contact us for the most up-to-date times.</p>
             <div className="flex gap-4">
               {location.phone && (
                 <a href={`tel:${location.phone}`} className="inline-block px-6 py-3 bg-black text-white font-heading text-xs uppercase tracking-widest hover:bg-black/80 transition-colors">

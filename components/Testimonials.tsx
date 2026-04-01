@@ -1,3 +1,6 @@
+'use client'
+
+import { useRef } from 'react'
 import type { Testimonial } from '@/lib/content'
 
 interface TestimonialsProps {
@@ -27,19 +30,58 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   )
 }
 
+function ArrowButton({ direction, onClick }: { direction: 'left' | 'right'; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="hidden md:flex w-12 h-12 items-center justify-center border border-white/20 text-white/60 hover:text-white hover:border-white transition-colors"
+      aria-label={`Scroll ${direction}`}
+    >
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        {direction === 'left' ? (
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+        ) : (
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+        )}
+      </svg>
+    </button>
+  )
+}
+
 export default function Testimonials({ testimonials, layout = 'carousel' }: TestimonialsProps) {
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  function scroll(direction: 'left' | 'right') {
+    if (!scrollRef.current) return
+    const amount = 420
+    scrollRef.current.scrollBy({
+      left: direction === 'left' ? -amount : amount,
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <section id="testimonials" className="bg-black text-white py-24 px-6">
       <div className="max-w-7xl mx-auto">
         {layout === 'carousel' && (
-          <div className="mb-16">
-            <h2 className="font-heading text-5xl md:text-7xl uppercase font-bold tracking-tight">What People Say</h2>
-            <div className="w-16 h-px bg-white mt-6" />
+          <div className="mb-16 flex items-end justify-between">
+            <div>
+              <h2 className="font-heading text-5xl md:text-7xl uppercase font-bold tracking-tight">What People Say</h2>
+              <div className="w-16 h-px bg-white mt-6" />
+            </div>
+            <div className="hidden md:flex gap-2">
+              <ArrowButton direction="left" onClick={() => scroll('left')} />
+              <ArrowButton direction="right" onClick={() => scroll('right')} />
+            </div>
           </div>
         )}
 
         {layout === 'carousel' ? (
-          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
+          <div
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
             {testimonials.map(t => (
               <div key={t.name} className="snap-start shrink-0 w-[320px] md:w-[400px]">
                 <TestimonialCard t={t} />

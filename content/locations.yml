@@ -12,6 +12,7 @@ locations:
     phone: "(408) 693-5522"
     email: friends@fightcraft.com
     instagram: "@fightcraftsj"
+    contact_email: friends@fightcraft.com
     programs:
       - Kickboxing
       - Muay Thai
@@ -33,6 +34,7 @@ locations:
     phone: null
     email: friends@fightcraft.com
     instagram: "@fightcraft.merced"
+    contact_email: patrick@fightcraft.com
     programs:
       - Kickboxing
       - Muay Thai
@@ -50,7 +52,8 @@ locations:
     lng: -82.7343
     phone: null
     email: friends@fightcraft.com
-    instagram: null
+    instagram: "@fightcraftbrevard"
+    contact_email: ricky@fightcraft.com
     programs:
       - Kickboxing
       - Muay Thai

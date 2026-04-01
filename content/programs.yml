@@ -20,6 +20,8 @@ programs:
       - "Boost metabolism and torch calories"
       - "Master advanced techniques for competition"
       - "Build resilience in a supportive community"
+    seo_text: "Our San Jose kickboxing sessions blend elements of Muay Thai and traditional boxing, offering a transformative fitness experience that goes beyond conventional South Bay gym workouts. Feel the stress of Silicon Valley melt away as you discover newfound energy and self-assurance. Whether you're coming from Campbell, Willow Glen, Santa Clara, or Los Gatos — we're committed to empowering each member of our community, helping you become the hero in your own life story."
+    seo_closing: "From novices to fighters, our classes are designed for all skill levels. At FightCraft San Jose on West San Carlos Street, come for the intense training and stay for the amazing community to discover what all the hype is about. We're proud to serve the greater San Jose area including Campbell, Willow Glen, Cupertino, and the entire South Bay."
 
   - slug: muay-thai
     name: Muay Thai
@@ -40,6 +42,8 @@ programs:
       - "Boost metabolism and torch calories"
       - "Master the Art of 8 Limbs"
       - "Build resilience in a supportive community"
+    seo_text: "Our San Jose Muay Thai classes offer an enriching blend of traditional techniques and modern applications, providing a dynamic fitness journey that transcends ordinary workouts. As you engage in this multifaceted martial art, expect stress to dissolve and a surge of fresh energy and confidence to take its place. We're here to embolden each individual in our diverse South Bay community, equipping you to be the protagonist of your own life's narrative."
+    seo_closing: "From novices to fighters, our classes are designed for all skill levels. At FightCraft San Jose, come for the intense training and stay for the amazing community to discover what all the hype is about. Serving the South Bay including Campbell, Santa Clara, Willow Glen, Cupertino, and Los Gatos."
 
   - slug: brazilian-jiu-jitsu
     name: Brazilian Jiu Jitsu
@@ -60,6 +64,8 @@ programs:
       - "Improve problem-solving and strategic thinking"
       - "Compete in tournaments and test your skills"
       - "Join a supportive brotherhood/sisterhood of practitioners"
+    seo_text: "Our San Jose BJJ classes combine traditional techniques with modern training methods, creating a comprehensive learning experience that builds both physical and mental strength. As you progress through the ranks, expect to develop laser-sharp focus, improved problem-solving abilities, and the kind of quiet confidence that comes from knowing you can handle yourself in any situation. We foster a respectful and inclusive community right here in the South Bay."
+    seo_closing: "From complete beginners to seasoned grapplers, our classes welcome all experience levels. At FightCraft San Jose, come for the incredible workout and stay for the life-changing community that makes BJJ more than just a martial art. Proudly serving San Jose, Campbell, Willow Glen, Santa Clara, and the greater South Bay."
 
   - slug: no-gi-jiu-jitsu
     name: No Gi Jiu Jitsu
@@ -80,6 +86,8 @@ programs:
       - "Build explosive athleticism on the mat"
       - "Train skills that transfer to MMA and self-defense"
       - "Compete in No Gi and submission-only tournaments"
+    seo_text: "No Gi at FightCraft San Jose reflects the cutting edge of submission grappling. Our curriculum draws from ADCC-style rulesets, modern leg entanglement systems, and the wrestling-heavy approach that defines today's competitive scene. Whether you train during our morning or evening sessions, you'll find a room full of training partners who push each other to improve — from white belts to competitors. We're building San Jose's most progressive grappling community."
+    seo_closing: "Whether you're a seasoned competitor or just curious about submission grappling, our No Gi program welcomes you. At FightCraft San Jose, we're developing the next generation of grapplers in the South Bay. Come roll with us and find out why our members keep coming back. Serving San Jose, Campbell, Santa Clara, and the entire Silicon Valley."
 
   - slug: kids-martial-arts
     name: Kids & Teens
@@ -100,6 +108,8 @@ programs:
       - "Earn belt promotions and achieve goals"
       - "Make lasting friendships in a positive environment"
       - "Gain confidence that lasts a lifetime"
+    seo_text: "Our San Jose kids program combines traditional martial arts values with modern child development principles. As your child progresses through our belt system, expect to see improvements in focus, respect for others, and the kind of inner strength that helps them navigate growing up. We maintain a safe, inclusive environment where kids from across the South Bay — San Jose, Campbell, Willow Glen — can discover their potential."
+    seo_closing: "From shy beginners to natural athletes, our classes are designed for children of all personalities and skill levels. At FightCraft San Jose, come see why parents across the South Bay choose us to help their children become confident, respectful, and capable young people."
 
   - slug: mixed-martial-arts
     name: Mixed Martial Arts
@@ -120,6 +130,8 @@ programs:
       - "Train with experienced coaches and training partners"
       - "Prepare for amateur or professional competition"
       - "Build unbreakable mental toughness"
+    seo_text: "Our San Jose MMA classes integrate techniques from multiple disciplines while emphasizing the unique strategies that make MMA the most exciting combat sport in the world. Expect to develop elite-level fitness, tactical thinking, and mental fortitude that translates to success in all areas of life. We maintain the highest safety standards while providing authentic, competition-level training right here in the South Bay."
+    seo_closing: "From dedicated martial artists to aspiring fighters, our MMA program attracts serious students ready to push their limits. At FightCraft San Jose, come train where champions are made and discover what you're truly capable of achieving. Serving San Jose, Santa Clara, Campbell, and the greater Silicon Valley."
 
   # ─── MERCED ─────────────────────────────────────────────
 
@@ -142,6 +154,8 @@ programs:
       - "Train with coaches who compete and teach"
       - "Join the Central Valley's newest fight community"
       - "All fitness levels welcome from day one"
+    seo_text: "Our Merced kickboxing classes bring the same proven FightCraft methodology to the heart of the Central Valley. Each session blends traditional striking fundamentals with modern training science, giving you a workout that's both effective and engaging. Whether you're coming from Atwater, Los Banos, or anywhere in Merced County, our G Street location is your home for authentic kickboxing instruction that actually teaches you how to fight."
+    seo_closing: "From first-timers to experienced strikers, FightCraft Merced welcomes everyone. Come discover why the Central Valley is talking about FightCraft — real coaches, real technique, and a community that has your back. Serving Merced, Atwater, Los Banos, and the greater Central Valley."
 
   - slug: muay-thai
     name: Muay Thai
@@ -162,6 +176,8 @@ programs:
       - "Train authentic Thai boxing in Merced"
       - "Progress from beginner to advanced at your pace"
       - "Connect with a growing fight community"
+    seo_text: "Muay Thai at FightCraft Merced is more than pad work and bag rounds — it's a complete system for developing striking proficiency, mental toughness, and elite conditioning. Our Central Valley students benefit from the same curriculum and coaching standards that made FightCraft a respected name in Northern California martial arts. Every class is structured for progression, so whether it's your first week or your hundredth, you're always moving forward."
+    seo_closing: "You don't have to leave the Central Valley for world-class Muay Thai. At FightCraft Merced, we're building a fight community that rivals anything in the Bay Area. Come train, learn, and grow with us. Serving Merced, Atwater, Los Banos, Turlock, and the surrounding Central Valley communities."
 
   - slug: kids-martial-arts
     name: Teens Kickboxing
@@ -182,6 +198,8 @@ programs:
       - "Relieve stress in a healthy, positive way"
       - "Connect with like-minded peers in Merced"
       - "Develop discipline and mental toughness"
+    seo_text: "Teenagers in the Central Valley need a positive outlet, and FightCraft Merced's Teens Kickboxing program delivers exactly that. Our coaches connect with teens in a way that builds mutual respect — no yelling, no boot camp theatrics, just structured training that develops real skills and genuine confidence. Teens from across Merced County are finding their place here."
+    seo_closing: "Your teen doesn't need another screen — they need something real. At FightCraft Merced, teens discover discipline, community, and the kind of self-belief that carries them through high school and beyond. Serving families across Merced, Atwater, Los Banos, and the Central Valley."
 
   # ─── BREVARD ────────────────────────────────────────────
 
@@ -204,6 +222,8 @@ programs:
       - "Relieve stress and build unshakeable confidence"
       - "Join a tight-knit Western NC fight community"
       - "All experience levels welcome"
+    seo_text: "FightCraft Brevard's kickboxing program is built for the people of Western North Carolina — active, independent, and ready for a real challenge. Our King Street academy brings California-level martial arts instruction to the Blue Ridge, with classes that fit around your mountain lifestyle. Whether you're a Pisgah trail runner, a Brevard local, or driving in from Hendersonville or Asheville, you'll find a welcoming mat and coaches who care about your progress."
+    seo_closing: "From complete beginners to fitness enthusiasts looking for something more, FightCraft Brevard is where Western North Carolina comes to train. Come for the workout, stay for the community. Serving Brevard, Hendersonville, Pisgah Forest, Asheville, and the greater WNC region."
 
   - slug: muay-thai
     name: Muay Thai
@@ -224,3 +244,5 @@ programs:
       - "Train under experienced, competition-tested coaches"
       - "Structured progression for all skill levels"
       - "Be part of something new in Western North Carolina"
+    seo_text: "There's nothing else like FightCraft Brevard's Muay Thai program in Western North Carolina. We brought authentic Thai boxing to the mountains because this community deserves the same caliber of training available in major cities. Our coaches have trained and competed under the FightCraft system, and they bring that depth of knowledge to every class on King Street. From Pisgah Forest residents to Asheville commuters, our mat is open to all."
+    seo_closing: "Western North Carolina now has a home for authentic Muay Thai. At FightCraft Brevard, you'll train the real Art of 8 Limbs in a community that celebrates hard work and mutual respect. Serving Brevard, Hendersonville, Pisgah Forest, Asheville, Mills River, and all of WNC."

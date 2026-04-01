@@ -26,10 +26,24 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: Promise<{ slug: string; program: string }> }): Promise<Metadata> {
   return params.then(({ slug, program: programSlug }) => {
     const loc = getLocations().find(l => l.slug === slug)
-    const prog = getPrograms().find(p => p.slug === programSlug)
+    const prog = getPrograms().find(p => p.slug === programSlug && p.location === slug)
+    const title = prog && loc ? `${prog.name} in ${loc.city} | FightCraft` : 'FightCraft'
+    const description = prog ? `${prog.header_subtitle}. ${prog.short_description}` : ''
     return {
-      title: prog && loc ? `${prog.name} in ${loc.city} | FightCraft` : 'FightCraft',
-      description: prog ? `${prog.header_subtitle}. ${prog.short_description}` : '',
+      title,
+      description,
+      openGraph: prog ? {
+        title,
+        description,
+        images: [{ url: prog.image, width: 1200, height: 630 }],
+        type: 'website',
+      } : undefined,
+      twitter: prog ? {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [prog.image],
+      } : undefined,
     }
   })
 }
@@ -37,7 +51,7 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string; p
 export default async function ProgramPage({ params }: { params: Promise<{ slug: string; program: string }> }) {
   const { slug, program: programSlug } = await params
   const location = getLocations().find(l => l.slug === slug)
-  const program = getPrograms().find(p => p.slug === programSlug)
+  const program = getPrograms().find(p => p.slug === programSlug && p.location === slug)
   if (!location || !program) notFound()
 
   const testimonials = getTestimonials()
@@ -96,25 +110,45 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* Bullets */}
+      {/* SEO content — 3 column: text | bullets | closing */}
       <section className="bg-neutral-100 text-black py-24 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="font-heading text-2xl uppercase font-bold tracking-tight text-black mb-8">What You&apos;ll Get</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {program.bullets.map(bullet => (
-              <div key={bullet} className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-black shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span className="text-black/70">{bullet}</span>
-              </div>
-            ))}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Left — SEO body text */}
+          <div>
+            {program.seo_text && (
+              <p className="text-base text-black/60 leading-relaxed">{program.seo_text}</p>
+            )}
           </div>
-          <div className="mt-12">
-            <a href={`/${location.slug}`} className="inline-block font-heading text-xs uppercase tracking-widest text-black/40 hover:text-black transition-colors">
-              &larr; Back to FightCraft {location.name}
-            </a>
+
+          {/* Center — bullets */}
+          <div>
+            <h3 className="font-heading text-lg uppercase font-bold tracking-tight text-black mb-6">
+              Why {program.name} at FightCraft?
+            </h3>
+            <div className="space-y-3">
+              {program.bullets.map(bullet => (
+                <div key={bullet} className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-black shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-black/70 font-medium">{bullet}</span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* Right — closing text */}
+          <div>
+            {program.seo_closing && (
+              <p className="text-base text-black/60 leading-relaxed">{program.seo_closing}</p>
+            )}
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto mt-12">
+          <a href={`/${location.slug}`} className="inline-block font-heading text-xs uppercase tracking-widest text-black/50 hover:text-black transition-colors">
+            &larr; Back to FightCraft {location.name}
+          </a>
         </div>
       </section>
 

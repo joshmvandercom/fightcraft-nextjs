@@ -16,13 +16,8 @@ export default function Footer({ locations }: FooterProps) {
                 <div key={loc.slug}>
                   <a href={`/${loc.slug}`} className="font-heading text-lg uppercase text-white hover:text-white/70 transition-colors">
                     {loc.name}
-                    {loc.label === 'Headquarters' && <span className="text-xs text-white/40 ml-2">HQ</span>}
                   </a>
-                  {loc.status === 'coming_soon' ? (
-                    <p className="text-sm text-white/40">Coming Soon</p>
-                  ) : (
-                    <p className="text-sm text-white/60">{loc.address}<br />{loc.city}, {loc.state} {loc.zip}</p>
-                  )}
+                  <p className="text-sm text-white/60">{loc.address}<br />{loc.city}, {loc.state} {loc.zip}</p>
                 </div>
               ))}
             </div>
@@ -41,24 +36,29 @@ export default function Footer({ locations }: FooterProps) {
 
           <div>
             <h3 className="font-heading text-sm uppercase tracking-widest text-white mb-6">Connect</h3>
-            <div className="space-y-3">
-              {locations.filter(loc => loc.instagram).map(loc => (
-                <p key={loc.slug} className="text-sm text-white/60">
-                  <span className="text-white/70">{loc.name}:</span> {loc.instagram}
-                </p>
+            <div className="space-y-4">
+              {locations.map(loc => (
+                <div key={loc.slug}>
+                  <p className="font-heading text-xs uppercase tracking-wider text-white/80">{loc.name}</p>
+                  {loc.instagram && (
+                    <a href={`https://instagram.com/${loc.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="block text-sm text-white/60 hover:text-white transition-colors">{loc.instagram}</a>
+                  )}
+                  {loc.contact_email && (
+                    <a href={`mailto:${loc.contact_email}`} className="text-sm text-white/60 hover:text-white transition-colors">
+                      {loc.contact_email}
+                    </a>
+                  )}
+                </div>
               ))}
             </div>
-            <p className="text-sm text-white/60 mt-6">
-              <a href="mailto:friends@fightcraft.com" className="hover:text-white transition-colors">friends@fightcraft.com</a>
-            </p>
           </div>
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <span className="font-display text-4xl text-white/40 leading-none">FC</span>
-            <div className="w-px h-6 bg-white/10" />
-            <span className="font-heading text-[10px] uppercase tracking-[0.3em] text-white/40">FIGHTCRAFT</span>
+            <img src="/images/fc-white-initials.svg" alt="FC" className="h-8 brightness-0 invert" />
+            <div className="w-px h-6 bg-white/20" />
+            <span className="font-heading text-sm uppercase tracking-[0.3em] text-white">FIGHTCRAFT</span>
           </div>
           <p className="text-[10px] uppercase tracking-[0.2em] text-white/40">&copy; {new Date().getFullYear()} FIGHTCRAFT. All rights reserved.</p>
         </div>

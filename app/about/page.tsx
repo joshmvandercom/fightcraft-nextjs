@@ -55,7 +55,7 @@ export default function AboutPage() {
               { num: '03', title: 'Have Fun', body: 'Training should be something you look forward to. Our community makes every class an experience, not just a workout.' },
             ].map(card => (
               <div key={card.num} className="border border-black/10 p-8">
-                <p className="font-heading text-xs uppercase tracking-widest text-black/30 mb-3">{card.num}</p>
+                <p className="font-heading text-xs uppercase tracking-widest text-black/50 mb-3">{card.num}</p>
                 <h3 className="font-heading text-2xl uppercase font-bold tracking-tight text-black mb-4">{card.title}</h3>
                 <p className="text-sm text-black/60 leading-relaxed">{card.body}</p>
               </div>

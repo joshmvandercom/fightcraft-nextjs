@@ -5,6 +5,7 @@ import Testimonials from '@/components/Testimonials'
 import LeadCapture from '@/components/LeadCapture'
 import SetLocation from './SetLocation'
 import CTAButton from '@/components/CTAButton'
+import ScrollRevealImage from '@/components/ScrollRevealImage'
 import { getLocations, getPrograms, getTestimonials } from '@/lib/content'
 
 export function generateStaticParams() {
@@ -14,9 +15,23 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   return params.then(({ slug }) => {
     const loc = getLocations().find(l => l.slug === slug)
+    const title = loc ? `FightCraft ${loc.name} | Martial Arts in ${loc.city}, ${loc.state}` : 'FightCraft'
+    const description = loc ? `FightCraft ${loc.name} offers Kickboxing, Muay Thai, and more in ${loc.city}, ${loc.state}. All levels welcome.` : ''
     return {
-      title: loc ? `FightCraft ${loc.name} | Martial Arts in ${loc.city}, ${loc.state}` : 'FightCraft',
-      description: loc ? `FightCraft ${loc.name} offers Kickboxing, Muay Thai, and more in ${loc.city}, ${loc.state}. All levels welcome.` : '',
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        images: [{ url: '/images/home/kickboxing.jpg', width: 1200, height: 630 }],
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: ['/images/home/kickboxing.jpg'],
+      },
     }
   })
 }
@@ -38,7 +53,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
         title={`FightCraft ${location.name}`}
         subtitle={location.status === 'coming_soon' ? 'Coming Soon' : `${location.city}, ${location.state}`}
         youtubeId={slug === 'san-jose' ? 'iimq3DGVEJE' : undefined}
-        image={slug !== 'san-jose' ? '/images/home/kickboxing.jpg' : undefined}
+        image="/images/home/kickboxing.jpg"
         tall
       />
 
@@ -49,7 +64,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
           <div className="lg:sticky lg:top-0 lg:h-screen flex items-start px-6 py-24 lg:pt-32">
             <div className="max-w-lg">
               <p className="font-heading text-xs uppercase tracking-[0.3em] text-black/50 mb-4">
-                FIGHTCRAFT &mdash; {location.city.replace(/\s+/g, '_').toUpperCase()}_{location.state}
+                FIGHTCRAFT // {location.city.replace(/\s+/g, '_').toUpperCase()}_{location.state}
               </p>
               <h2 className="font-heading text-4xl md:text-5xl uppercase font-bold tracking-tight text-black mb-6">
                 A Boutique MMA Academy for All Skill Levels
@@ -74,10 +89,10 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                 href={`/${location.slug}/programs/${program.slug}`}
                 className="group block relative overflow-hidden aspect-[16/10]"
               >
-                <img
+                <ScrollRevealImage
                   src={program.image}
                   alt={program.name}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-colors duration-500" />
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
@@ -87,7 +102,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                   <p className="text-sm text-white/70 max-w-md leading-relaxed">
                     {program.short_description}
                   </p>
-                  <span className="font-heading text-xs uppercase tracking-widest text-white/40 group-hover:text-white transition-colors mt-4">
+                  <span className="font-heading text-xs uppercase tracking-widest text-white/60 group-hover:text-white transition-colors mt-4">
                     Learn More &rarr;
                   </span>
                 </div>
@@ -102,22 +117,22 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
         <section className="bg-neutral-100 text-black py-24 px-6">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
-              <p className="font-heading text-xs uppercase tracking-widest text-black/40 mb-3">Address</p>
+              <p className="font-heading text-xs uppercase tracking-widest text-black/50 mb-3">Address</p>
               <p className="text-black/70">{location.address}<br />{location.city}, {location.state} {location.zip}</p>
             </div>
             {location.phone && (
               <div>
-                <p className="font-heading text-xs uppercase tracking-widest text-black/40 mb-3">Phone</p>
+                <p className="font-heading text-xs uppercase tracking-widest text-black/50 mb-3">Phone</p>
                 <a href={`tel:${location.phone}`} className="text-black/70 hover:text-black transition-colors">{location.phone}</a>
               </div>
             )}
             <div>
-              <p className="font-heading text-xs uppercase tracking-widest text-black/40 mb-3">Email</p>
+              <p className="font-heading text-xs uppercase tracking-widest text-black/50 mb-3">Email</p>
               <a href={`mailto:${location.email}`} className="text-black/70 hover:text-black transition-colors">{location.email}</a>
             </div>
             {location.instagram && (
               <div>
-                <p className="font-heading text-xs uppercase tracking-widest text-black/40 mb-3">Instagram</p>
+                <p className="font-heading text-xs uppercase tracking-widest text-black/50 mb-3">Instagram</p>
                 <p className="text-black/70">{location.instagram}</p>
               </div>
             )}

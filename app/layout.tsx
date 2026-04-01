@@ -9,6 +9,21 @@ export const metadata: Metadata = {
   title: 'FightCraft | Premier Martial Arts',
   description: 'FightCraft is a premier martial arts community with locations in San Jose, Merced, and Brevard. Kickboxing, Muay Thai, BJJ, and more.',
   icons: { icon: '/images/fc-white-initials.svg' },
+  metadataBase: new URL('https://fightcraft.com'),
+  openGraph: {
+    title: 'FightCraft | Premier Martial Arts',
+    description: 'Kickboxing, Muay Thai, BJJ, MMA, and more. All levels welcome.',
+    url: 'https://fightcraft.com',
+    siteName: 'FightCraft',
+    images: [{ url: '/images/fc-logo-circle-social.png', width: 512, height: 512 }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'FightCraft | Premier Martial Arts',
+    description: 'Kickboxing, Muay Thai, BJJ, MMA, and more. All levels welcome.',
+    images: ['/images/fc-logo-circle-social.png'],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
