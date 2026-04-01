@@ -14,6 +14,8 @@ export default function Nav({ locations, programs }: NavProps) {
     setMobileOpenState(open)
     document.body.style.overflow = open ? 'hidden' : ''
   }
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
+  const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
   const [contextOpen, setContextOpen] = useState(false)
   const [locationSwitcherOpen, setLocationSwitcherOpen] = useState(false)
@@ -228,37 +230,66 @@ export default function Nav({ locations, programs }: NavProps) {
         </button>
 
         <a href="/" onClick={() => setMobileOpen(false)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Home</a>
-        <a href="/about" onClick={() => setMobileOpen(false)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">About</a>
-        <div className="pl-6 flex flex-col gap-3">
-          <a href="/about/faq" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">FAQ</a>
-          <a href="/about/reviews" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">Reviews</a>
-          <a href="/about/core-values" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">Core Values</a>
+
+        {/* About dropdown */}
+        <div className="w-full">
+          <button onClick={() => setMobileAboutOpen(!mobileAboutOpen)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors flex items-center gap-2">
+            About
+            <svg className={`w-4 h-4 transition-transform ${mobileAboutOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {mobileAboutOpen && (
+            <div className="pl-4 mt-3 flex flex-col gap-3">
+              <a href="/about" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">About Us</a>
+              <a href="/about/faq" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">FAQ</a>
+              <a href="/about/reviews" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Reviews</a>
+              <a href="/about/core-values" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Core Values</a>
+            </div>
+          )}
         </div>
+
+        {/* Programs dropdown */}
+        {currentLocation && (
+          <div className="w-full">
+            <button onClick={() => setMobileProgramsOpen(!mobileProgramsOpen)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors flex items-center gap-2">
+              Programs
+              <svg className={`w-4 h-4 transition-transform ${mobileProgramsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {mobileProgramsOpen && (
+              <div className="pl-4 mt-3 flex flex-col gap-3">
+                {locationPrograms.map(p => (
+                  <a key={p.slug} href={`/${currentLocation.slug}/programs/${p.slug}`} onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">
+                    {p.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {currentLocation && (
+          <a href={`/${currentLocation.slug}/schedule`} onClick={() => setMobileOpen(false)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Schedule</a>
+        )}
+
         <a href="/locations" onClick={() => setMobileOpen(false)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Locations</a>
 
         {/* Location switcher */}
         {currentLocation && (
-          <div className="mt-4 pt-6 border-t border-white/20 w-full">
+          <div className="pt-4 border-t border-white/20 w-full">
             <p className="font-heading text-[10px] uppercase tracking-[0.2em] text-white/40 mb-3">Your Location</p>
             <select
               value={currentLocation.slug}
               onChange={e => updateContext(e.target.value)}
-              className="w-full px-4 pr-10 py-3 mb-6 bg-white/10 text-white font-heading text-sm uppercase tracking-widest border-0 focus:outline-none focus:ring-1 focus:ring-white/30 appearance-none"
+              className="w-full px-4 pr-10 py-3 bg-white/10 text-white font-heading text-sm uppercase tracking-widest border-0 focus:outline-none focus:ring-1 focus:ring-white/30 appearance-none"
               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '16px' }}
             >
               {locations.map(loc => (
                 <option key={loc.slug} value={loc.slug} className="bg-black">{loc.name}</option>
               ))}
             </select>
-
-            <div className="flex flex-col gap-3">
-              {locationPrograms.map(p => (
-                <a key={p.slug} href={`/${currentLocation.slug}/programs/${p.slug}`} onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">
-                  {p.name}
-                </a>
-              ))}
-              <a href={`/${currentLocation.slug}/schedule`} onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">Schedule</a>
-            </div>
           </div>
         )}
       </div>

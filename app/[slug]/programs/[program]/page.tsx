@@ -5,6 +5,7 @@ import Testimonials from '@/components/Testimonials'
 import LeadCapture from '@/components/LeadCapture'
 import SetLocation from '../../SetLocation'
 import CTAButton from '@/components/CTAButton'
+import AutoPlayVideo from '@/components/AutoPlayVideo'
 import { getLocations, getPrograms, getTestimonials } from '@/lib/content'
 
 export function generateStaticParams() {
@@ -97,13 +98,9 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               </div>
               <div className="flex justify-center lg:justify-end pb-6 lg:pb-0 lg:my-[-24px]">
                 <div className="group w-[300px] md:w-[360px] rounded-3xl overflow-hidden shadow-2xl cursor-pointer">
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full aspect-[9/16] object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  <AutoPlayVideo
                     src={program.callout_video}
+                    className="w-full aspect-[9/16] object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                   />
                 </div>
               </div>
