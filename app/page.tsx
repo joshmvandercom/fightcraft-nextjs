@@ -44,8 +44,8 @@ export default function Home() {
         </div>
       </section>
 
-      <Locations locations={locations} />
       <Programs programs={programs} locations={locations} />
+      <Locations locations={locations} />
       <LeadCapture />
       <Testimonials testimonials={testimonials} />
     </>
