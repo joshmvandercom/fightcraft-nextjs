@@ -6,6 +6,8 @@ programs:
     image: /images/home/kickboxing.jpg
     short_description: "High-energy striking that builds power, endurance, and confidence."
     location: san-jose
+    callout_image: /images/home/muay-thai-callout.jpg
+    callout_video: /images/home/reel.mp4
     header_title: "Kickboxing"
     header_subtitle: "San Jose's premier kickboxing program"
     primary_title: "Discover Your Best Self at San Jose's Premier Kickboxing Academy"
@@ -28,6 +30,7 @@ programs:
     image: /images/home/muay-thai.webp
     short_description: "The Art of 8 Limbs. Master strikes using fists, elbows, knees, and shins."
     location: san-jose
+    callout_image: /images/home/muay-thai-callout.jpg
     header_title: "Muay Thai"
     header_subtitle: "San Jose's elite Muay Thai training"
     primary_title: "Unlock Your True Potential at San Jose's Leading Muay Thai Academy"
@@ -50,6 +53,7 @@ programs:
     image: /images/home/bjj.webp
     short_description: "The gentle art. Ground-based martial arts focused on technique and leverage."
     location: san-jose
+    callout_image: /images/home/bjj-callout.jpg
     header_title: "Brazilian Jiu Jitsu"
     header_subtitle: "San Jose's premier BJJ academy"
     primary_title: "Discover the Chess Match of Martial Arts at San Jose's Premier BJJ Academy"
@@ -72,6 +76,7 @@ programs:
     image: /images/home/nogi.jpg
     short_description: "Submission grappling without the traditional gi. Fast-paced and dynamic."
     location: san-jose
+    callout_video: /images/home/nogi-reel.mp4
     header_title: "No Gi Jiu Jitsu"
     header_subtitle: "Fast-paced submission grappling in San Jose"
     primary_title: "Experience the Evolution of Grappling at FightCraft San Jose"
@@ -114,23 +119,24 @@ programs:
   - slug: mixed-martial-arts
     name: Mixed Martial Arts
     image: /images/home/vern.jpeg
-    short_description: "Complete combat training across all ranges of fighting."
+    short_description: "Wall work, striking for MMA, takedowns, and complete combat training."
     location: san-jose
+    callout_video: /images/home/mma-reel.mp4
     header_title: "Mixed Martial Arts"
     header_subtitle: "San Jose's elite MMA training program"
-    primary_title: "Become a Complete Fighter at FightCraft San Jose's Elite MMA Academy"
-    primary_text_1: "Elevate your martial arts journey with FightCraft San Jose's comprehensive Mixed Martial Arts Program, where striking meets grappling in the most dynamic combat sport on the planet. Our expert instructors, with real competition experience, will guide you through the integration of Muay Thai, Boxing, Brazilian Jiu Jitsu, and Wrestling techniques that define modern MMA."
-    primary_text_2: "MMA training at our San Jose academy pushes you beyond the limits of single-discipline martial arts, demanding excellence in striking, clinch work, takedowns, and ground fighting. As you master transitions between ranges, you'll develop the kind of complete confidence that comes from knowing you can handle yourself in any situation."
-    callout_title: "Complete Combat Training"
-    callout_text: "Whether your goal is amateur competition, professional fighting, or simply training at the highest level in San Jose, our MMA program provides the complete skill set. Our experienced coaches have trained fighters at all levels and understand how to develop well-rounded athletes safely and effectively through individualized training plans."
+    primary_title: "Train Like a Real Fighter at FightCraft San Jose"
+    primary_text_1: "FightCraft San Jose's MMA program goes beyond the basics. Our curriculum covers the full spectrum of modern mixed martial arts — wall work and cage positioning, striking for MMA, takedown offense and defense, clinch fighting, ground-and-pound, and submission grappling. Each class focuses on the transitions between ranges that separate trained fighters from hobbyists."
+    primary_text_2: "Wall work is a cornerstone of our MMA training. You'll learn how to fight effectively against the cage — underhooks, body lock positioning, trip setups, and how to create or deny space when the fight goes to the fence. These are the skills that win real fights, and they don't get taught in most gyms."
+    callout_title: "What Our MMA Training Covers"
+    callout_text: "Our San Jose MMA program is structured around the situations you'll actually face. Striking for MMA isn't the same as pure kickboxing — you need to strike with takedown awareness, manage distance differently, and know when to close versus when to create space. We drill wall work scenarios, takedown entries from the clinch, ground-and-pound positioning, and how to chain techniques across ranges. Our coaches have cornered and trained competitive fighters and bring that real-world understanding to every session."
     bullets:
-      - "Master striking, grappling, and ground fighting"
-      - "Develop elite-level cardiovascular fitness"
-      - "Learn fight strategy and tactical thinking"
-      - "Train with experienced coaches and training partners"
-      - "Prepare for amateur or professional competition"
-      - "Build unbreakable mental toughness"
-    seo_text: "Our San Jose MMA classes integrate techniques from multiple disciplines while emphasizing the unique strategies that make MMA the most exciting combat sport in the world. Expect to develop elite-level fitness, tactical thinking, and mental fortitude that translates to success in all areas of life. We maintain the highest safety standards while providing authentic, competition-level training right here in the South Bay."
+      - "Wall work and cage positioning drills"
+      - "Striking for MMA with takedown awareness"
+      - "Takedown offense, defense, and scrambles"
+      - "Clinch fighting and dirty boxing"
+      - "Ground-and-pound and positional control"
+      - "Range transitions and fight IQ development"
+    seo_text: "FightCraft San Jose's MMA program is built around the realities of modern fighting. Wall work, cage positioning, clinch transitions, striking with takedown threat — these are the skills that separate complete martial artists from one-dimensional fighters. Our South Bay academy trains students to fight in all ranges, with dedicated sessions for MMA-specific striking, wrestling for MMA, and live situational drilling. Whether you're preparing to compete or just want to train at the highest level, our San Carlos Street gym is where serious MMA training happens in the South Bay."
     seo_closing: "From dedicated martial artists to aspiring fighters, our MMA program attracts serious students ready to push their limits. At FightCraft San Jose, come train where champions are made and discover what you're truly capable of achieving. Serving San Jose, Santa Clara, Campbell, and the greater Silicon Valley."
 
   # ─── MERCED ─────────────────────────────────────────────
@@ -140,6 +146,8 @@ programs:
     image: /images/home/kickboxing.jpg
     short_description: "High-energy striking that builds power, endurance, and confidence."
     location: merced
+    callout_image: /images/home/muay-thai-callout.jpg
+    callout_video: /images/home/reel.mp4
     header_title: "Kickboxing"
     header_subtitle: "Merced's home for kickboxing training"
     primary_title: "Transform Your Fitness at Merced's Newest Kickboxing Academy"
@@ -162,6 +170,7 @@ programs:
     image: /images/home/muay-thai.webp
     short_description: "The Art of 8 Limbs. Master strikes using fists, elbows, knees, and shins."
     location: merced
+    callout_image: /images/home/muay-thai-callout.jpg
     header_title: "Muay Thai"
     header_subtitle: "Authentic Muay Thai training in Merced"
     primary_title: "Bring the Art of 8 Limbs to Life at FightCraft Merced"
@@ -208,6 +217,8 @@ programs:
     image: /images/home/kickboxing.jpg
     short_description: "High-energy striking that builds power, endurance, and confidence."
     location: brevard
+    callout_image: /images/home/muay-thai-callout.jpg
+    callout_video: /images/home/reel.mp4
     header_title: "Kickboxing"
     header_subtitle: "Brevard's premier kickboxing academy"
     primary_title: "Discover a New You at Brevard's Premier Kickboxing Academy"
@@ -230,6 +241,7 @@ programs:
     image: /images/home/muay-thai.webp
     short_description: "The Art of 8 Limbs. Master strikes using fists, elbows, knees, and shins."
     location: brevard
+    callout_image: /images/home/muay-thai-callout.jpg
     header_title: "Muay Thai"
     header_subtitle: "Authentic Muay Thai in Western North Carolina"
     primary_title: "Master the Art of 8 Limbs at FightCraft Brevard"
@@ -246,3 +258,51 @@ programs:
       - "Be part of something new in Western North Carolina"
     seo_text: "There's nothing else like FightCraft Brevard's Muay Thai program in Western North Carolina. We brought authentic Thai boxing to the mountains because this community deserves the same caliber of training available in major cities. Our coaches have trained and competed under the FightCraft system, and they bring that depth of knowledge to every class on King Street. From Pisgah Forest residents to Asheville commuters, our mat is open to all."
     seo_closing: "Western North Carolina now has a home for authentic Muay Thai. At FightCraft Brevard, you'll train the real Art of 8 Limbs in a community that celebrates hard work and mutual respect. Serving Brevard, Hendersonville, Pisgah Forest, Asheville, Mills River, and all of WNC."
+
+  - slug: mixed-martial-arts
+    name: Mixed Martial Arts
+    image: /images/home/vern.jpeg
+    short_description: "Wall work, striking for MMA, takedowns, and complete combat training."
+    location: brevard
+    callout_video: /images/home/mma-reel.mp4
+    header_title: "Mixed Martial Arts"
+    header_subtitle: "MMA training in Western North Carolina"
+    primary_title: "Real MMA Training Comes to Western North Carolina"
+    primary_text_1: "FightCraft Brevard's MMA program covers what real fighting actually looks like — wall work and clinch positioning, striking with takedown awareness, wrestling transitions, and ground control. This isn't cardio kickboxing with a cage in the background. It's structured combat training that develops your ability to fight in every range."
+    primary_text_2: "Our Brevard MMA sessions emphasize the practical side of mixed martial arts. You'll drill wall work scenarios — how to use the cage to your advantage, how to escape when you're pinned, and how to chain strikes with takedowns from the clinch. These are the details that matter in a real fight, and they're what sets FightCraft apart from general fitness programs."
+    callout_title: "MMA in the Mountains"
+    callout_text: "Until FightCraft arrived on King Street, serious MMA training in Western North Carolina meant driving to Charlotte or beyond. Now Brevard, Hendersonville, Asheville, and the surrounding communities have access to the same caliber of training found in major fight camps. Our coaches bring the FightCraft system — proven in California — to WNC, with sessions covering MMA striking, wall work, takedown integration, and live situational rounds."
+    bullets:
+      - "Wall work and clinch positioning"
+      - "Striking for MMA with takedown threat"
+      - "Takedown offense and defense"
+      - "Ground control and transitions"
+      - "Live situational drilling"
+      - "All experience levels welcome"
+    seo_text: "FightCraft Brevard brings legitimate MMA training to the Blue Ridge — wall work, cage positioning, clinch fighting, MMA-specific striking, and takedown integration. Our King Street academy trains the complete skill set that modern mixed martial arts demands, with coaches who've competed and cornered at high levels. From Pisgah Forest residents to Asheville commuters, this is the only place in WNC to train real MMA."
+    seo_closing: "Whether you've been training for years or you've never set foot on a mat, FightCraft Brevard's MMA program is built for you. Come train the way fighters actually train — wall work, clinch, ground, and everything in between. Serving Brevard, Hendersonville, Asheville, Pisgah Forest, Mills River, and all of WNC."
+
+  # ─── SAN JOSE (additional) ─────────────────────────────
+
+  - slug: wrestling
+    name: Wrestling
+    image: /images/home/wrestling.jpg
+    short_description: "Takedowns, control, and the foundation of all combat sports."
+    location: san-jose
+    callout_video: /images/home/wrestling-reel.mp4
+    header_title: "Wrestling"
+    header_subtitle: "Wrestling training in San Jose"
+    primary_title: "Build the Foundation of Every Fighter at FightCraft San Jose"
+    primary_text_1: "Wrestling is the backbone of combat sports, and FightCraft San Jose's wrestling program develops the takedown ability, top control, and scrambling skills that separate good martial artists from great ones. Whether you're a BJJ player who needs better takedowns, an MMA fighter sharpening your ground game, or someone who's never shot a double leg — our coaches will build your wrestling from the ground up."
+    primary_text_2: "Our San Jose wrestling program blends folkstyle and freestyle techniques with the practical applications needed for MMA and self-defense. You'll develop explosive power, unbreakable grips, and the kind of mental grit that only wrestling can forge. Classes are structured for all levels, with drilling progressions that let beginners learn alongside experienced grapplers."
+    callout_title: "Why Wrestling at FightCraft?"
+    callout_text: "Wrestling is the most underrated martial art for self-defense and the most valuable skill in MMA. At FightCraft San Jose, we teach wrestling as both a standalone discipline and as a complement to your striking and Jiu Jitsu. Our coaches bring collegiate and competitive experience to every session, breaking down complex takedown sequences into repeatable skills."
+    bullets:
+      - "Learn takedowns, throws, and trips"
+      - "Develop top control and scrambling ability"
+      - "Build explosive power and conditioning"
+      - "Cross-train to elevate your BJJ and MMA"
+      - "Structured progression for all experience levels"
+      - "Train with experienced wrestling coaches"
+    seo_text: "FightCraft San Jose's wrestling program fills a critical gap in South Bay martial arts. While most academies focus on striking or Jiu Jitsu, we recognize that wrestling is the glue that holds a complete martial arts game together. Our San Carlos Street academy offers dedicated wrestling classes with coaches who've competed at high levels and know how to translate that experience into practical skills for students of all backgrounds."
+    seo_closing: "Whether you're a complete beginner or an experienced grappler looking to sharpen your wrestling, FightCraft San Jose has a place for you on the mat. Come discover the martial art that builds champions. Serving San Jose, Campbell, Willow Glen, Santa Clara, Cupertino, and the greater South Bay."

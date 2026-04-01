@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/about/faq`, changeFrequency: 'monthly' as const, priority: 0.6 },
     { url: `${baseUrl}/about/reviews`, changeFrequency: 'monthly' as const, priority: 0.6 },
     { url: `${baseUrl}/about/core-values`, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/privacy-policy`, changeFrequency: 'yearly' as const, priority: 0.2 },
+    { url: `${baseUrl}/refund-policy`, changeFrequency: 'yearly' as const, priority: 0.2 },
   ]
 
   const locationPages = locations.map(loc => ({

@@ -20,6 +20,7 @@ locations:
       - No Gi Jiu Jitsu
       - Kids Martial Arts
       - Mixed Martial Arts
+      - Wrestling
 
   - slug: merced
     name: Merced
@@ -57,3 +58,4 @@ locations:
     programs:
       - Kickboxing
       - Muay Thai
+      - Mixed Martial Arts

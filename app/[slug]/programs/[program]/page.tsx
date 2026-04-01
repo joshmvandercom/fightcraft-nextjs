@@ -35,14 +35,14 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string; p
       openGraph: prog ? {
         title,
         description,
-        images: [{ url: prog.image, width: 1200, height: 630 }],
+        images: [{ url: `https://fightcraft.com${prog.image}`, width: 1200, height: 630 }],
         type: 'website',
       } : undefined,
       twitter: prog ? {
         card: 'summary_large_image',
         title,
         description,
-        images: [prog.image],
+        images: [`https://fightcraft.com${prog.image}`],
       } : undefined,
     }
   })
@@ -86,29 +86,51 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* Callout — image with overlapping card */}
-      <section className="bg-white text-black py-24 px-6">
-        <div className="max-w-6xl mx-auto relative">
-          {/* Image — takes up ~60% width */}
-          <div className="w-full lg:w-[60%]">
-            <div className="aspect-[4/3]">
-              <img
-                src={program.image}
-                alt={program.name}
-                className="w-full h-full object-cover grayscale"
-              />
-            </div>
-          </div>
-
-          {/* Overlapping card */}
-          <div className="relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[50%] mt-[-3rem] lg:mt-0 mx-6 lg:mx-0">
-            <div className="bg-black text-white p-10 md:p-14">
-              <h2 className="font-heading text-2xl md:text-4xl uppercase font-bold tracking-tight mb-6">{program.callout_title}</h2>
-              <p className="text-base text-white/60 leading-relaxed">{program.callout_text}</p>
+      {program.callout_video ? (
+        <div className="bg-black lg:bg-transparent">
+          <div className="relative max-w-5xl mx-auto overflow-visible">
+            <div className="hidden lg:block absolute left-[-50vw] right-[-50vw] top-0 bottom-0 bg-black" />
+            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6">
+              <div className="py-16 lg:py-24">
+                <h2 className="font-heading text-2xl md:text-3xl uppercase font-bold tracking-tight text-white mb-6">{program.callout_title}</h2>
+                <p className="text-base text-white/60 leading-relaxed">{program.callout_text}</p>
+              </div>
+              <div className="flex justify-center lg:justify-end pb-6 lg:pb-0 lg:my-[-24px]">
+                <div className="group w-[300px] md:w-[360px] rounded-3xl overflow-hidden shadow-2xl cursor-pointer">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full aspect-[9/16] object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    src={program.callout_video}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      ) : (
+        <section className="bg-white text-black py-24 px-6">
+          <div className="max-w-6xl mx-auto relative">
+            <div className="w-full lg:w-[60%]">
+              <div className="aspect-[4/3]">
+                <img
+                  src={program.callout_image || program.image}
+                  alt={program.name}
+                  className="w-full h-full object-cover grayscale"
+                />
+              </div>
+            </div>
+            <div className="relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[50%] mt-[-3rem] lg:mt-0 mx-6 lg:mx-0">
+              <div className="bg-black text-white p-10 md:p-14">
+                <h2 className="font-heading text-2xl md:text-4xl uppercase font-bold tracking-tight mb-6">{program.callout_title}</h2>
+                <p className="text-base text-white/60 leading-relaxed">{program.callout_text}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* SEO content — 3 column: text | bullets | closing */}
       <section className="bg-neutral-100 text-black py-24 px-6">

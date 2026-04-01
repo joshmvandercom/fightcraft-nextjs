@@ -15,14 +15,14 @@ export const metadata: Metadata = {
     description: 'Kickboxing, Muay Thai, BJJ, MMA, and more. All levels welcome.',
     url: 'https://fightcraft.com',
     siteName: 'FightCraft',
-    images: [{ url: '/images/fc-logo-circle-social.png', width: 512, height: 512 }],
+    images: [{ url: 'https://fightcraft.com/images/og-default.png', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'FightCraft | Premier Martial Arts',
     description: 'Kickboxing, Muay Thai, BJJ, MMA, and more. All levels welcome.',
-    images: ['/images/fc-logo-circle-social.png'],
+    images: ['https://fightcraft.com/images/og-default.png'],
   },
 }
 

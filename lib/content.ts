@@ -37,6 +37,8 @@ export interface Program {
   primary_text_2: string
   callout_title: string
   callout_text: string
+  callout_image?: string
+  callout_video?: string
   bullets: string[]
   seo_text?: string
   seo_closing?: string
