@@ -1,5 +1,6 @@
 import BrandBadge from './BrandBadge'
 import AutoPlayVideo from './AutoPlayVideo'
+import QuickForm from './QuickForm'
 
 interface PageHeroProps {
   title: string
@@ -16,7 +17,7 @@ interface PageHeroProps {
 
 export default function PageHero({ title, subtitle, image, youtubeId, videoSrc, tall = false, badge }: PageHeroProps) {
   return (
-    <section className={`relative flex items-center justify-center overflow-hidden ${tall ? 'min-h-[70vh]' : 'min-h-[50vh]'}`}>
+    <section className={`relative flex flex-col overflow-hidden ${tall ? 'min-h-screen md:min-h-[70vh]' : 'min-h-[70vh] md:min-h-[50vh]'}`}>
       {videoSrc ? (
         <div className="absolute inset-0">
           <AutoPlayVideo
@@ -47,7 +48,7 @@ export default function PageHero({ title, subtitle, image, youtubeId, videoSrc, 
         <div className="absolute inset-0 bg-black" />
       )}
 
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20 flex flex-col items-center">
+      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20 flex-1 flex flex-col items-center justify-center">
         {badge && (
           <div className="mb-10">
             <BrandBadge
@@ -66,6 +67,10 @@ export default function PageHero({ title, subtitle, image, youtubeId, videoSrc, 
             {subtitle}
           </p>
         )}
+      </div>
+
+      <div className="relative z-10">
+        <QuickForm />
       </div>
     </section>
   )
