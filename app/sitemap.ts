@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { getLocations, getPrograms } from '@/lib/content'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://fightcraft.com'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fightcraft.com'
   const locations = getLocations()
   const programs = getPrograms()
 

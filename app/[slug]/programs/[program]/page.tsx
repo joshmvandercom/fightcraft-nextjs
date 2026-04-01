@@ -35,14 +35,14 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string; p
       openGraph: prog ? {
         title,
         description,
-        images: [{ url: `https://fightcraft.com${prog.image}`, width: 1200, height: 630 }],
+        images: [{ url: prog.image, width: 1200, height: 630 }],
         type: 'website',
       } : undefined,
       twitter: prog ? {
         card: 'summary_large_image',
         title,
         description,
-        images: [`https://fightcraft.com${prog.image}`],
+        images: [prog.image],
       } : undefined,
     }
   })

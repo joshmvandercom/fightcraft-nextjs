@@ -8,21 +8,27 @@ import { getLocations, getPrograms } from '@/lib/content'
 export const metadata: Metadata = {
   title: 'FightCraft | Premier Martial Arts',
   description: 'FightCraft is a premier martial arts community with locations in San Jose, Merced, and Brevard. Kickboxing, Muay Thai, BJJ, and more.',
-  icons: { icon: '/images/fc-white-initials.svg' },
-  metadataBase: new URL('https://fightcraft.com'),
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/images/fc-white-initials.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/images/fc-logo-circle-social.png',
+  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://fightcraft.com'),
   openGraph: {
     title: 'FightCraft | Premier Martial Arts',
     description: 'Kickboxing, Muay Thai, BJJ, MMA, and more. All levels welcome.',
     url: 'https://fightcraft.com',
     siteName: 'FightCraft',
-    images: [{ url: 'https://fightcraft.com/images/og-default.png', width: 1200, height: 630 }],
+    images: [{ url: '/images/og-default.png', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'FightCraft | Premier Martial Arts',
     description: 'Kickboxing, Muay Thai, BJJ, MMA, and more. All levels welcome.',
-    images: ['https://fightcraft.com/images/og-default.png'],
+    images: ['/images/og-default.png'],
   },
 }
 

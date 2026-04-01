@@ -23,14 +23,14 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string }>
       openGraph: {
         title,
         description,
-        images: [{ url: 'https://fightcraft.com/images/home/kickboxing.jpg', width: 1200, height: 630 }],
+        images: [{ url: '/images/home/kickboxing.jpg', width: 1200, height: 630 }],
         type: 'website',
       },
       twitter: {
         card: 'summary_large_image',
         title,
         description,
-        images: ['https://fightcraft.com/images/home/kickboxing.jpg'],
+        images: ['/images/home/kickboxing.jpg'],
       },
     }
   })
