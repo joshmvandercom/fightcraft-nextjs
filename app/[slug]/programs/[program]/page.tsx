@@ -60,7 +60,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <SetLocation slug={slug} />
-      <PageHero title={program.header_title} subtitle={program.header_subtitle} image={program.image} youtubeId={program.hero_video} tall />
+      <PageHero title={program.header_title} subtitle={program.header_subtitle} image={program.image} videoSrc={program.hero_video} tall />
 
       {/* Primary content — title + two-column body + CTA */}
       <section className="bg-neutral-100 text-black py-24 px-6">

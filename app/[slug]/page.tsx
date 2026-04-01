@@ -54,7 +54,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
       <PageHero
         title={`FightCraft ${location.name}`}
         subtitle={location.status === 'coming_soon' ? 'Coming Soon' : `${location.city}, ${location.state}`}
-        youtubeId={slug === 'san-jose' ? 'iimq3DGVEJE' : undefined}
+        videoSrc={slug === 'san-jose' ? '/images/home/hero.mp4' : undefined}
         image="/images/home/kickboxing.jpg"
         tall
       />

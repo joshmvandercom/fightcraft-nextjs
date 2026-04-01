@@ -1,18 +1,14 @@
 import CTAButton from './CTAButton'
+import AutoPlayVideo from './AutoPlayVideo'
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 overflow-hidden">
-          <iframe
-            src="https://www.youtube.com/embed/iimq3DGVEJE?autoplay=1&mute=1&loop=1&playlist=iimq3DGVEJE&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1"
-            allow="autoplay"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none grayscale"
-            style={{ border: 0, width: 'max(177.78vh, 100vw)', height: 'max(56.25vw, 100vh)' }}
-            title="Background video"
-          />
-        </div>
+        <AutoPlayVideo
+          src="/images/home/hero.mp4"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover grayscale"
+        />
         <div className="absolute inset-0 bg-black/70" />
       </div>
 

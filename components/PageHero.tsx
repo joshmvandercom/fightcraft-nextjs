@@ -1,10 +1,12 @@
 import BrandBadge from './BrandBadge'
+import AutoPlayVideo from './AutoPlayVideo'
 
 interface PageHeroProps {
   title: string
   subtitle?: string
   image?: string
   youtubeId?: string
+  videoSrc?: string
   tall?: boolean
   badge?: {
     locationName?: string
@@ -12,10 +14,18 @@ interface PageHeroProps {
   }
 }
 
-export default function PageHero({ title, subtitle, image, youtubeId, tall = false, badge }: PageHeroProps) {
+export default function PageHero({ title, subtitle, image, youtubeId, videoSrc, tall = false, badge }: PageHeroProps) {
   return (
     <section className={`relative flex items-center justify-center overflow-hidden ${tall ? 'min-h-[70vh]' : 'min-h-[50vh]'}`}>
-      {youtubeId ? (
+      {videoSrc ? (
+        <div className="absolute inset-0">
+          <AutoPlayVideo
+            src={videoSrc}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover grayscale"
+          />
+          <div className="absolute inset-0 bg-black/70" />
+        </div>
+      ) : youtubeId ? (
         <div className="absolute inset-0">
           <div className="absolute inset-0 overflow-hidden">
             <iframe

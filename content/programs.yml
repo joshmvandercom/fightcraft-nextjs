@@ -54,7 +54,7 @@ programs:
     short_description: "The gentle art. Ground-based martial arts focused on technique and leverage."
     location: san-jose
     callout_image: /images/home/bjj-callout.jpg
-    hero_video: 6JUigQ-9jkA
+    hero_video: /images/home/bjj-hero.mp4
     header_title: "Brazilian Jiu Jitsu"
     header_subtitle: "San Jose's premier BJJ academy"
     primary_title: "Discover the Chess Match of Martial Arts at San Jose's Premier BJJ Academy"
