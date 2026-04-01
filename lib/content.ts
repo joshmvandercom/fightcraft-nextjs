@@ -35,6 +35,7 @@ export interface Program {
   primary_title: string
   primary_text_1: string
   primary_text_2: string
+  hero_video?: string
   callout_title: string
   callout_text: string
   callout_image?: string
