@@ -9,7 +9,11 @@ interface NavProps {
 }
 
 export default function Nav({ locations, programs }: NavProps) {
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileOpen, setMobileOpenState] = useState(false)
+  const setMobileOpen = (open: boolean) => {
+    setMobileOpenState(open)
+    document.body.style.overflow = open ? 'hidden' : ''
+  }
   const [aboutOpen, setAboutOpen] = useState(false)
   const [contextOpen, setContextOpen] = useState(false)
   const [locationSwitcherOpen, setLocationSwitcherOpen] = useState(false)
@@ -203,7 +207,7 @@ export default function Nav({ locations, programs }: NavProps) {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-black z-40 flex flex-col items-start justify-center px-10 gap-6 transition-transform duration-300 md:hidden ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed inset-0 bg-black z-40 flex flex-col items-start px-10 pt-24 pb-10 gap-6 overflow-y-auto transition-transform duration-300 md:hidden ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <button onClick={() => setMobileOpen(false)} className="absolute top-6 right-6 p-2" aria-label="Close menu">
           <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M6 18L18 6M6 6l12 12" />
