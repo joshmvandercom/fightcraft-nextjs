@@ -10,8 +10,41 @@ export default function Home() {
   const programs = getPrograms()
   const testimonials = getTestimonials()
 
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'FightCraft',
+    url: 'https://fightcraft.com',
+    logo: 'https://fightcraft.com/images/fc-logo-circle-social.png',
+    description: 'FightCraft is a premier martial arts community with locations in San Jose, Merced, and Brevard. Kickboxing, Muay Thai, BJJ, and more.',
+    sameAs: [
+      'https://instagram.com/fightcraftsj',
+      'https://instagram.com/fightcraft.merced',
+      'https://instagram.com/fightcraftbrevard',
+    ],
+    subOrganization: locations.map(loc => ({
+      '@type': 'SportsActivityLocation',
+      name: `FightCraft ${loc.name}`,
+      url: `https://fightcraft.com/${loc.slug}`,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: loc.address,
+        addressLocality: loc.city,
+        addressRegion: loc.state,
+        postalCode: loc.zip,
+        addressCountry: 'US',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: loc.lat,
+        longitude: loc.lng,
+      },
+    })),
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       <Hero />
 
       {/* All Levels Welcome */}

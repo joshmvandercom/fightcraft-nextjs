@@ -5,6 +5,7 @@ import Testimonials from '@/components/Testimonials'
 import LeadCapture from '@/components/LeadCapture'
 import SetLocation from './SetLocation'
 import CTAButton from '@/components/CTAButton'
+import LocalBusinessSchema from '@/components/LocalBusinessSchema'
 import ScrollRevealImage from '@/components/ScrollRevealImage'
 import { getLocations, getPrograms, getTestimonials } from '@/lib/content'
 
@@ -48,6 +49,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      <LocalBusinessSchema location={location} programs={locationPrograms.map(p => p.name)} />
       <SetLocation slug={slug} />
       <PageHero
         title={`FightCraft ${location.name}`}
