@@ -1,4 +1,4 @@
-import ScrollRevealImage from './ScrollRevealImage'
+import ProgramCard from './ProgramCard'
 import type { Program, Location } from '@/lib/content'
 
 interface ProgramsProps {
@@ -16,7 +16,6 @@ export default function Programs({ programs, locations, locationSlug }: Programs
   if (locationSlug) {
     displayPrograms = programs.filter(p => p.location === locationSlug)
   } else {
-    // Deduplicate by slug for the global view — show one card per program type
     const seen = new Set<string>()
     displayPrograms = programs.filter(p => {
       if (seen.has(p.slug)) return false
@@ -26,11 +25,13 @@ export default function Programs({ programs, locations, locationSlug }: Programs
   }
 
   // For global view, collect which locations offer each program
-  const programLocations: Record<string, string[]> = {}
+  const programLocations: Record<string, { slug: string; name: string }[]> = {}
   if (!locationSlug) {
     programs.forEach(p => {
       if (!programLocations[p.slug]) programLocations[p.slug] = []
-      programLocations[p.slug].push(p.location)
+      if (!programLocations[p.slug].find(l => l.slug === p.location)) {
+        programLocations[p.slug].push({ slug: p.location, name: locationNames[p.location] || p.location })
+      }
     })
   }
 
@@ -45,26 +46,16 @@ export default function Programs({ programs, locations, locationSlug }: Programs
         </div>
 
         <div className="flex flex-wrap justify-center gap-6">
-          {displayPrograms.map((program) => (
-            <a
+          {displayPrograms.map(program => (
+            <ProgramCard
               key={`${program.location}-${program.slug}`}
-              href={locationSlug ? `/${locationSlug}/programs/${program.slug}` : '#'}
-              className="group relative overflow-hidden aspect-[4/3] block w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
-            >
-              <ScrollRevealImage src={program.image} alt={program.name} className="w-full h-full object-cover group-hover:scale-105" />
-              <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition-colors" />
-              <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                <h3 className="font-heading text-3xl uppercase font-bold tracking-tight text-white mb-2">{program.name}</h3>
-                <p className="text-sm text-white/70 mb-4 max-w-xs">{program.short_description}</p>
-                {!locationSlug && programLocations[program.slug] && (
-                  <div className="flex gap-2">
-                    {programLocations[program.slug].map(locSlug => (
-                      <span key={locSlug} className="text-[10px] text-white/50 uppercase tracking-widest">{locationNames[locSlug] || locSlug}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </a>
+              slug={program.slug}
+              name={program.name}
+              image={program.image}
+              shortDescription={program.short_description}
+              availableLocations={programLocations[program.slug] || [{ slug: program.location, name: locationNames[program.location] }]}
+              locationSlug={locationSlug}
+            />
           ))}
         </div>
       </div>

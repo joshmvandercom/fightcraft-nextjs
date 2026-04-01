@@ -198,12 +198,19 @@ export default function Nav({ locations, programs }: NavProps) {
           )}
         </div>
 
-        {/* Mobile Hamburger */}
-        <button onClick={() => setMobileOpen(true)} className="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
-          <span className="block w-6 h-px bg-white" />
-          <span className="block w-6 h-px bg-white" />
-          <span className="block w-6 h-px bg-white" />
-        </button>
+        {/* Mobile: location + hamburger */}
+        <div className="md:hidden flex items-center gap-4">
+          {currentLocation && (
+            <a href={`/${currentLocation.slug}`} className="font-heading text-xs uppercase tracking-widest text-white/60">
+              {currentLocation.name}
+            </a>
+          )}
+          <button onClick={() => setMobileOpen(true)} className="flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+            <span className="block w-6 h-px bg-white" />
+            <span className="block w-6 h-px bg-white" />
+            <span className="block w-6 h-px bg-white" />
+          </button>
+        </div>
       </div>
 
     </nav>
