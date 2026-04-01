@@ -44,12 +44,12 @@ export default function Programs({ programs, locations, locationSlug }: Programs
           <div className="w-16 h-px bg-black mt-6" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayPrograms.map(program => (
+        <div className="flex flex-wrap justify-center gap-6">
+          {displayPrograms.map((program) => (
             <a
               key={`${program.location}-${program.slug}`}
               href={locationSlug ? `/${locationSlug}/programs/${program.slug}` : '#'}
-              className="group relative overflow-hidden aspect-[4/3] block"
+              className="group relative overflow-hidden aspect-[4/3] block w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
             >
               <ScrollRevealImage src={program.image} alt={program.name} className="w-full h-full object-cover group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition-colors" />
