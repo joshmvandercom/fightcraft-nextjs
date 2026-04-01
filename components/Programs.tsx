@@ -36,7 +36,7 @@ export default function Programs({ programs, locations, locationSlug }: Programs
   }
 
   return (
-    <section id="programs" className="bg-white text-black py-24 px-6">
+    <section id="programs" className="bg-neutral-100 text-black py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
           <h2 className="font-heading text-5xl md:text-7xl uppercase font-bold tracking-tight text-black">

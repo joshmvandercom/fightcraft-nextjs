@@ -77,6 +77,28 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="bg-white text-black py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="font-heading text-5xl md:text-7xl uppercase font-bold tracking-tight text-black">Meet Your Alter Ego</h2>
+            <div className="w-16 h-px bg-black mt-6 mx-auto" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { num: '01', title: 'Get Better', body: 'Every class is an opportunity to improve. Our structured curriculum ensures consistent progress regardless of where you start.' },
+              { num: '02', title: 'Get Tired', body: 'Push your limits with workouts that challenge your body and mind. Leave every session knowing you gave it everything.' },
+              { num: '03', title: 'Have Fun', body: 'Training should be something you look forward to. Our community makes every class an experience, not just a workout.' },
+            ].map(card => (
+              <div key={card.num} className="border border-black/10 p-8">
+                <p className="font-heading text-xs uppercase tracking-widest text-black/50 mb-3">{card.num}</p>
+                <h3 className="font-heading text-2xl uppercase font-bold tracking-tight text-black mb-4">{card.title}</h3>
+                <p className="text-sm text-black/60 leading-relaxed">{card.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Programs programs={programs} locations={locations} />
       <Locations locations={locations} />
       <LeadCapture />
