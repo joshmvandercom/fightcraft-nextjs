@@ -2,12 +2,9 @@ import type { Location } from '@/lib/content'
 
 interface LocationCardProps {
   location: Location
-  linked?: boolean
 }
 
-export default function LocationCard({ location: loc, linked = false }: LocationCardProps) {
-  const href = linked ? `/${loc.slug}` : '#contact'
-
+export default function LocationCard({ location: loc }: LocationCardProps) {
   return (
     <div
       className="location-card border-[4px] border-white transition-all duration-300 h-full"
@@ -31,7 +28,7 @@ export default function LocationCard({ location: loc, linked = false }: Location
           </div>
         </div>
 
-        <a href={href} className="mt-auto block w-full py-4 bg-white text-black text-center font-heading text-base font-bold uppercase tracking-widest hover:bg-white/90 transition-colors">
+        <a href={`/${loc.slug}`} className="mt-auto block w-full py-4 bg-white text-black text-center font-heading text-base font-bold uppercase tracking-widest hover:bg-white/90 transition-colors">
           Explore Location &rarr;
         </a>
       </div>

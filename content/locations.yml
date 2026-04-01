@@ -16,6 +16,7 @@ locations:
       - Kickboxing
       - Muay Thai
       - Brazilian Jiu Jitsu
+      - No Gi Jiu Jitsu
       - Kids Martial Arts
       - Mixed Martial Arts
 
@@ -23,10 +24,10 @@ locations:
     name: Merced
     label: null
     status: open
-    address: TBD
+    address: 2844 G St
     city: Merced
     state: CA
-    zip: "95340"
+    zip: "95430"
     lat: 37.3022
     lng: -120.4829
     phone: null

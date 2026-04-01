@@ -1,16 +1,18 @@
 programs:
+  # ─── SAN JOSE ───────────────────────────────────────────
+
   - slug: kickboxing
     name: Kickboxing
     image: /images/home/kickboxing.jpg
     short_description: "High-energy striking that builds power, endurance, and confidence."
-    locations: [san-jose, merced, brevard]
+    location: san-jose
     header_title: "Kickboxing"
-    header_subtitle: "Get a full-body workout without the traditional gym routine"
-    primary_title: "Discover Your Best Self at Our Premier Kickboxing Program"
-    primary_text_1: "Elevate your fitness game beyond the mundane with FightCraft's Premier Kickboxing Classes. Guided by world-class instructors, step into a space where you can unleash your inner champion. Say goodbye to dull gym routines as you power through challenging exercises, striking heavy bags in the high-energy ambiance of our vibrant community."
-    primary_text_2: "Sign up for our Kickboxing Classes and experience a workout revolution that not only boosts your stamina but also fortifies your strength, accelerates weight loss, and empowers you with the confidence to face life's unexpected twists."
+    header_subtitle: "San Jose's premier kickboxing program"
+    primary_title: "Discover Your Best Self at San Jose's Premier Kickboxing Academy"
+    primary_text_1: "Elevate your fitness game beyond the mundane with FightCraft San Jose's Premier Kickboxing Classes. Guided by world-class instructors in the heart of San Carlos Street, step into a space where you can unleash your inner champion. Say goodbye to dull gym routines as you power through challenging exercises, striking heavy bags in the high-energy ambiance of our vibrant South Bay community."
+    primary_text_2: "Sign up for our Kickboxing Classes and experience a workout revolution that not only boosts your stamina but also fortifies your strength, accelerates weight loss, and empowers you with the confidence to face life's unexpected twists. Ready to make a change? Visit our San Jose location or fill out the quick form below to learn more."
     callout_title: "Unlock Your Potential Through Kickboxing"
-    callout_text: "Here at FightCraft, our mission revolves around setting you up for success. Tailored to fit every fitness level — from gym newbies hoping for an effective workout and weight loss, to professional athletes seeking peak performance — our Kickboxing Classes are the fast track to achieving your goals."
+    callout_text: "At FightCraft San Jose, our mission revolves around setting you up for success. Tailored to fit every fitness level — from Silicon Valley professionals hoping for an effective workout, to competitive athletes seeking peak performance — our Kickboxing Classes are the fast track to achieving your goals. Our seasoned coaches bring decades of combined experience to every session."
     bullets:
       - "Shed pounds through high-energy routines"
       - "Melt work stress with every punch"
@@ -23,34 +25,34 @@ programs:
     name: Muay Thai
     image: /images/home/muay-thai.webp
     short_description: "The Art of 8 Limbs. Master strikes using fists, elbows, knees, and shins."
-    locations: [san-jose, merced, brevard]
+    location: san-jose
     header_title: "Muay Thai"
-    header_subtitle: "Get a full-body workout without the traditional gym routine"
-    primary_title: "Unlock Your True Potential at Our Leading Muay Thai Program"
-    primary_text_1: "Revolutionize your fitness routine with FightCraft's Elite Muay Thai Program, also known as the Art of 8 Limbs. Under the expert guidance of our world-class instructors, you'll be striking pads and heavy bags, channeling stress into every powerful move. Engage all eight limbs in a holistic workout that takes you beyond the ordinary."
-    primary_text_2: "Muay Thai is a game-changer for busy students and professionals, offering a unique way to channel stress into powerful strikes. As you engage all eight limbs, you'll sharpen mental acuity essential for work and academics. It's not just a workout; it's a lifestyle shift designed to help you excel in all areas of life."
-    callout_title: "What We Do"
-    callout_text: "Whether you're seeking enhanced fitness, participating in sport fighting, aiming for weight loss, or simply embracing a new hobby, we've got you covered. Our highly attentive instructors are skilled in tailoring training programs to meet diverse needs."
+    header_subtitle: "San Jose's elite Muay Thai training"
+    primary_title: "Unlock Your True Potential at San Jose's Leading Muay Thai Academy"
+    primary_text_1: "Revolutionize your fitness routine with FightCraft San Jose's Elite Muay Thai Program, also known as the Art of 8 Limbs. Under the expert guidance of our world-class instructors, you'll be striking pads and heavy bags, channeling stress into every powerful move. Engage all eight limbs in a holistic workout that takes you beyond the ordinary gym experience."
+    primary_text_2: "Muay Thai at our San Jose academy is a game-changer for busy students and professionals across the South Bay, offering a unique way to channel stress into powerful strikes. As you engage all eight limbs, you'll sharpen the mental acuity essential for work and academics. It's not just a workout — it's a lifestyle shift designed to help you excel in all areas of life."
+    callout_title: "What Sets Our Muay Thai Apart"
+    callout_text: "Whether you're seeking enhanced fitness, participating in sport fighting, aiming for weight loss, or simply embracing a new hobby in San Jose, we've got you covered. Our highly attentive instructors are skilled in tailoring training programs to meet diverse needs, from complete beginners to seasoned competitors preparing for their next fight."
     bullets:
       - "Shed pounds through high-energy routines"
-      - "Melt work stress with every punch"
+      - "Melt work stress with every strike"
       - "Elevate fighting skills to professional levels"
       - "Boost metabolism and torch calories"
-      - "Master advanced techniques for competition"
+      - "Master the Art of 8 Limbs"
       - "Build resilience in a supportive community"
 
   - slug: brazilian-jiu-jitsu
     name: Brazilian Jiu Jitsu
     image: /images/home/bjj.webp
     short_description: "The gentle art. Ground-based martial arts focused on technique and leverage."
-    locations: [san-jose]
+    location: san-jose
     header_title: "Brazilian Jiu Jitsu"
-    header_subtitle: "Master the gentle art and unlock your strategic mind"
-    primary_title: "Discover the Chess Match of Martial Arts at Our Premier BJJ Academy"
-    primary_text_1: "Transform your approach to fitness and self-defense with FightCraft's Elite Brazilian Jiu Jitsu Program, known as the Gentle Art. Under the mentorship of our highly skilled instructors, you'll learn to use leverage, timing, and technique to overcome larger, stronger opponents."
-    primary_text_2: "BJJ is perfect for busy professionals and students who want a mental challenge alongside their physical workout. As you learn to solve complex positional puzzles on the mat, you'll develop problem-solving skills that translate directly to work and life challenges."
-    callout_title: "Our Approach"
-    callout_text: "Whether you're looking to improve your fitness, learn practical self-defense, compete in tournaments, or simply challenge yourself mentally, our BJJ program adapts to your goals. Our patient and knowledgeable instructors excel at breaking down complex techniques into manageable steps."
+    header_subtitle: "San Jose's premier BJJ academy"
+    primary_title: "Discover the Chess Match of Martial Arts at San Jose's Premier BJJ Academy"
+    primary_text_1: "Transform your approach to fitness and self-defense with FightCraft San Jose's Elite Brazilian Jiu Jitsu Program, known as the Gentle Art. Under the mentorship of our highly skilled instructors, you'll learn to use leverage, timing, and technique to overcome larger, stronger opponents. This ground-based martial art develops both your body and mind in ways no other discipline can."
+    primary_text_2: "BJJ at FightCraft San Jose is perfect for busy professionals and students who want a mental challenge alongside their physical workout. As you learn to solve complex positional puzzles on the mat, you'll develop problem-solving skills that translate directly to work and life challenges. It's not just about learning to grapple — it's about building unshakeable confidence."
+    callout_title: "Our Approach to BJJ"
+    callout_text: "Whether you're looking to improve your fitness, learn practical self-defense, compete in tournaments, or simply challenge yourself mentally, our San Jose BJJ program adapts to your goals. Our patient and knowledgeable instructors excel at breaking down complex techniques into manageable steps, creating personalized development paths for each student."
     bullets:
       - "Build functional strength and flexibility"
       - "Develop unshakeable mental toughness"
@@ -59,18 +61,38 @@ programs:
       - "Compete in tournaments and test your skills"
       - "Join a supportive brotherhood/sisterhood of practitioners"
 
+  - slug: no-gi-jiu-jitsu
+    name: No Gi Jiu Jitsu
+    image: /images/home/nogi.jpg
+    short_description: "Submission grappling without the traditional gi. Fast-paced and dynamic."
+    location: san-jose
+    header_title: "No Gi Jiu Jitsu"
+    header_subtitle: "Fast-paced submission grappling in San Jose"
+    primary_title: "Experience the Evolution of Grappling at FightCraft San Jose"
+    primary_text_1: "No Gi Jiu Jitsu strips away the traditional uniform and puts the focus squarely on speed, athleticism, and technique. At FightCraft San Jose, our No Gi program develops a modern grappling game built on body control, wrestling transitions, and submission chains. Without the grips of a traditional gi, you'll develop a faster, more fluid approach to ground fighting."
+    primary_text_2: "Whether you're a gi practitioner looking to round out your game, an MMA fighter sharpening your ground skills, or completely new to grappling, our No Gi classes meet you where you are. The pace is higher, the scrambles are real, and the skills transfer directly to self-defense and competition."
+    callout_title: "Why Train No Gi?"
+    callout_text: "No Gi grappling is the fastest-growing segment of Jiu Jitsu and a critical component of modern MMA. At FightCraft San Jose, we teach a curriculum that blends traditional Jiu Jitsu fundamentals with modern leg lock systems, wrestling tie-ups, and dynamic guard passing. Our coaches compete actively and bring cutting-edge techniques to every class."
+    bullets:
+      - "Develop speed and scrambling ability"
+      - "Learn modern leg lock and submission systems"
+      - "Integrate wrestling with Jiu Jitsu"
+      - "Build explosive athleticism on the mat"
+      - "Train skills that transfer to MMA and self-defense"
+      - "Compete in No Gi and submission-only tournaments"
+
   - slug: kids-martial-arts
     name: Kids & Teens
     image: /images/home/kids-kickboxing.jpg
     short_description: "Building confident, disciplined, and respectful young warriors."
-    locations: [san-jose, merced]
+    location: san-jose
     header_title: "Kids & Teens Martial Arts"
-    header_subtitle: "Building confident, disciplined, and respectful young warriors"
-    primary_title: "Give Your Child the Ultimate Advantage at Our Premier Kids Program"
-    primary_text_1: "Empower your child with FightCraft's comprehensive Kids Martial Arts Program, expertly blending Kickboxing and Brazilian Jiu Jitsu techniques designed specifically for young learners. Our certified instructors create a structured yet fun environment where children develop physical coordination, mental focus, and unshakeable self-confidence."
-    primary_text_2: "Our program is specifically designed to help children excel in school and social situations. As they master new techniques and earn belt promotions, kids develop goal-setting abilities, improved focus for homework, and the confidence to stand up to bullies."
+    header_subtitle: "San Jose's top-rated youth martial arts program"
+    primary_title: "Give Your Child the Ultimate Advantage at FightCraft San Jose"
+    primary_text_1: "Empower your child with FightCraft San Jose's comprehensive Kids Martial Arts Program, expertly blending Kickboxing and Brazilian Jiu Jitsu techniques designed specifically for young learners. Our certified instructors create a structured yet fun environment where children develop physical coordination, mental focus, and unshakeable self-confidence."
+    primary_text_2: "Our San Jose program is specifically designed to help children excel in school and social situations. As they master new techniques and earn belt promotions, kids develop goal-setting abilities, improved focus for homework, and the confidence to stand up to bullies. It's more than martial arts — it's building future leaders."
     callout_title: "What Your Child Will Learn"
-    callout_text: "Whether your child is naturally athletic or just starting their fitness journey, our program meets them where they are. Our patient and enthusiastic instructors specialize in working with children, using games, challenges, and positive reinforcement to teach fundamentals."
+    callout_text: "Whether your child is naturally athletic or just starting their fitness journey, our San Jose program meets them where they are. Our patient and enthusiastic instructors specialize in working with children, using games, challenges, and positive reinforcement to teach both Kickboxing and BJJ fundamentals in a safe, encouraging environment."
     bullets:
       - "Build physical fitness and coordination"
       - "Develop focus and concentration for school"
@@ -83,14 +105,14 @@ programs:
     name: Mixed Martial Arts
     image: /images/home/vern.jpeg
     short_description: "Complete combat training across all ranges of fighting."
-    locations: [san-jose]
+    location: san-jose
     header_title: "Mixed Martial Arts"
-    header_subtitle: "Master all aspects of combat in the world's fastest-growing sport"
-    primary_title: "Become a Complete Fighter at Our Elite MMA Academy"
-    primary_text_1: "Elevate your martial arts journey with FightCraft's comprehensive Mixed Martial Arts Program, where striking meets grappling in the most dynamic combat sport on the planet. Our expert instructors will guide you through the integration of Muay Thai, Boxing, Brazilian Jiu Jitsu, and Wrestling techniques that define modern MMA."
-    primary_text_2: "MMA training pushes you beyond the limits of single-discipline martial arts, demanding excellence in striking, clinch work, takedowns, and ground fighting. It's not just about learning to fight; it's about becoming mentally and physically unstoppable."
+    header_subtitle: "San Jose's elite MMA training program"
+    primary_title: "Become a Complete Fighter at FightCraft San Jose's Elite MMA Academy"
+    primary_text_1: "Elevate your martial arts journey with FightCraft San Jose's comprehensive Mixed Martial Arts Program, where striking meets grappling in the most dynamic combat sport on the planet. Our expert instructors, with real competition experience, will guide you through the integration of Muay Thai, Boxing, Brazilian Jiu Jitsu, and Wrestling techniques that define modern MMA."
+    primary_text_2: "MMA training at our San Jose academy pushes you beyond the limits of single-discipline martial arts, demanding excellence in striking, clinch work, takedowns, and ground fighting. As you master transitions between ranges, you'll develop the kind of complete confidence that comes from knowing you can handle yourself in any situation."
     callout_title: "Complete Combat Training"
-    callout_text: "Whether your goal is amateur competition, professional fighting, or simply training at the highest level, our MMA program provides the complete skill set. Our experienced coaches have trained fighters at all levels and understand how to develop well-rounded athletes safely and effectively."
+    callout_text: "Whether your goal is amateur competition, professional fighting, or simply training at the highest level in San Jose, our MMA program provides the complete skill set. Our experienced coaches have trained fighters at all levels and understand how to develop well-rounded athletes safely and effectively through individualized training plans."
     bullets:
       - "Master striking, grappling, and ground fighting"
       - "Develop elite-level cardiovascular fitness"
@@ -98,3 +120,107 @@ programs:
       - "Train with experienced coaches and training partners"
       - "Prepare for amateur or professional competition"
       - "Build unbreakable mental toughness"
+
+  # ─── MERCED ─────────────────────────────────────────────
+
+  - slug: kickboxing
+    name: Kickboxing
+    image: /images/home/kickboxing.jpg
+    short_description: "High-energy striking that builds power, endurance, and confidence."
+    location: merced
+    header_title: "Kickboxing"
+    header_subtitle: "Merced's home for kickboxing training"
+    primary_title: "Transform Your Fitness at Merced's Newest Kickboxing Academy"
+    primary_text_1: "FightCraft Merced brings world-class kickboxing instruction to the Central Valley. Our program combines authentic striking technique with an intense cardio workout, giving you the tools to transform your body and mind. Whether you've never thrown a punch or you're looking to sharpen your skills, our coaches create an environment where progress is inevitable."
+    primary_text_2: "Kickboxing at FightCraft Merced isn't your typical fitness class — it's real technique taught by real coaches. You'll learn proper form, develop timing, and build the kind of functional fitness that makes everyday life easier. Join a growing community of Merced residents who've discovered that training smart beats grinding at a conventional gym."
+    callout_title: "Why Kickboxing in Merced?"
+    callout_text: "The Central Valley deserves access to elite martial arts training, and that's exactly what FightCraft Merced delivers. Our kickboxing program is built on the same curriculum that made FightCraft San Jose one of the top academies in the Bay Area — now adapted for our Merced community. Every class is coached, structured, and designed to get results."
+    bullets:
+      - "Burn calories with real striking technique"
+      - "Relieve stress in a focused environment"
+      - "Learn practical self-defense skills"
+      - "Train with coaches who compete and teach"
+      - "Join the Central Valley's newest fight community"
+      - "All fitness levels welcome from day one"
+
+  - slug: muay-thai
+    name: Muay Thai
+    image: /images/home/muay-thai.webp
+    short_description: "The Art of 8 Limbs. Master strikes using fists, elbows, knees, and shins."
+    location: merced
+    header_title: "Muay Thai"
+    header_subtitle: "Authentic Muay Thai training in Merced"
+    primary_title: "Bring the Art of 8 Limbs to Life at FightCraft Merced"
+    primary_text_1: "FightCraft Merced's Muay Thai program brings authentic Thai boxing to the Central Valley. Known as the Art of 8 Limbs, Muay Thai teaches you to strike with fists, elbows, knees, and shins — creating the most versatile and effective stand-up fighting system in the world. Our Merced instructors break down this ancient art into a structured, progressive curriculum."
+    primary_text_2: "Training Muay Thai in Merced means you don't have to drive to the Bay Area for legitimate instruction. Our program covers everything from basic stance and movement to advanced clinch work and combinations. Whether you want to compete or just want the best workout of your life, FightCraft Merced has a place for you on the mat."
+    callout_title: "Muay Thai for the Central Valley"
+    callout_text: "Our Merced Muay Thai program is coached by instructors trained under the FightCraft system — the same methodology that has produced competitive fighters and transformed everyday people across Northern California. Classes are structured with warm-ups, technical drilling, pad work, and conditioning so you leave every session better than you arrived."
+    bullets:
+      - "Master all 8 weapons of Muay Thai"
+      - "Develop devastating clinch technique"
+      - "Build cardio that outlasts any opponent"
+      - "Train authentic Thai boxing in Merced"
+      - "Progress from beginner to advanced at your pace"
+      - "Connect with a growing fight community"
+
+  - slug: kids-martial-arts
+    name: Teens Kickboxing
+    image: /images/home/kids-kickboxing.jpg
+    short_description: "Channel teen energy into confidence, discipline, and real skills."
+    location: merced
+    header_title: "Teens Kickboxing"
+    header_subtitle: "Merced's premier teen martial arts program"
+    primary_title: "Transform Teen Energy into Confidence at FightCraft Merced"
+    primary_text_1: "FightCraft Merced's Teens Kickboxing Program is specifically designed for the unique needs and energy of teenagers in the Central Valley. Our experienced instructors understand the challenges teens face and create a supportive environment where they can build real skills while connecting with peers who share their interests."
+    primary_text_2: "Through high-energy pad work, technique training, and fitness challenges, your teen will develop physical strength, mental toughness, and the confidence to handle whatever life throws their way. This isn't daycare with gloves — it's a real martial arts program that earns your teen's respect and keeps them coming back."
+    callout_title: "More Than Just a Workout"
+    callout_text: "Our Merced teen program is designed around the realities of teen life — school stress, social pressures, and the need for positive outlets. As they master powerful strikes and improve their fitness, teens find a healthy way to manage stress and build the kind of confidence that helps in school, social situations, and beyond."
+    bullets:
+      - "Get in incredible physical shape"
+      - "Learn practical self-defense techniques"
+      - "Build confidence for school and social situations"
+      - "Relieve stress in a healthy, positive way"
+      - "Connect with like-minded peers in Merced"
+      - "Develop discipline and mental toughness"
+
+  # ─── BREVARD ────────────────────────────────────────────
+
+  - slug: kickboxing
+    name: Kickboxing
+    image: /images/home/kickboxing.jpg
+    short_description: "High-energy striking that builds power, endurance, and confidence."
+    location: brevard
+    header_title: "Kickboxing"
+    header_subtitle: "Brevard's premier kickboxing academy"
+    primary_title: "Discover a New You at Brevard's Premier Kickboxing Academy"
+    primary_text_1: "FightCraft Brevard brings elite kickboxing instruction to Western North Carolina. Nestled on King Street, our academy offers the same world-class training methodology that built FightCraft's reputation in California — now available in the Blue Ridge Mountains. Whether you're an outdoor enthusiast looking for a new challenge or a complete beginner ready for change, our coaches will meet you where you are."
+    primary_text_2: "Kickboxing at FightCraft Brevard is designed for the WNC lifestyle. Our classes deliver a full-body workout that complements your hiking, biking, and mountain adventures while teaching you real combat technique. Experience the community and camaraderie that only a boutique martial arts academy can offer."
+    callout_title: "World-Class Training in the Mountains"
+    callout_text: "Brevard and the surrounding communities of Hendersonville, Asheville, and the Blue Ridge region now have access to legitimate kickboxing instruction. FightCraft Brevard's program is built on structured progression — you'll see measurable improvement week over week, guided by coaches who genuinely invest in your development."
+    bullets:
+      - "Full-body workout that complements mountain life"
+      - "Learn real kickboxing technique from day one"
+      - "Train in Brevard's only boutique MMA academy"
+      - "Relieve stress and build unshakeable confidence"
+      - "Join a tight-knit Western NC fight community"
+      - "All experience levels welcome"
+
+  - slug: muay-thai
+    name: Muay Thai
+    image: /images/home/muay-thai.webp
+    short_description: "The Art of 8 Limbs. Master strikes using fists, elbows, knees, and shins."
+    location: brevard
+    header_title: "Muay Thai"
+    header_subtitle: "Authentic Muay Thai in Western North Carolina"
+    primary_title: "Master the Art of 8 Limbs at FightCraft Brevard"
+    primary_text_1: "FightCraft Brevard's Muay Thai program is the only authentic Thai boxing instruction in Western North Carolina. The Art of 8 Limbs teaches you to use your entire body as a weapon — fists, elbows, knees, and shins working in concert. Our Brevard coaches deliver this ancient art with modern training methods in a welcoming, structured environment."
+    primary_text_2: "Whether you're coming from a boxing background, cross-training from another sport, or stepping onto the mat for the very first time, Muay Thai at FightCraft Brevard will challenge and reward you. The mountain community here trains hard, supports each other, and celebrates every breakthrough together."
+    callout_title: "The Only Muay Thai in WNC"
+    callout_text: "Until FightCraft arrived in Brevard, serious Muay Thai training meant a long drive to Charlotte or Asheville. Now, residents of Brevard, Hendersonville, Pisgah Forest, and the surrounding areas have access to the same level of instruction found in major metropolitan academies — right here on King Street."
+    bullets:
+      - "The only authentic Muay Thai program in WNC"
+      - "Master strikes with all 8 limbs"
+      - "Build combat fitness in the Blue Ridge"
+      - "Train under experienced, competition-tested coaches"
+      - "Structured progression for all skill levels"
+      - "Be part of something new in Western North Carolina"

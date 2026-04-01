@@ -25,7 +25,7 @@ export default function Nav({ locations, programs }: NavProps) {
     const loc = locations.find(l => l.slug === slug)
     if (!loc) return
     setCurrentLocation(loc)
-    setLocationPrograms(programs.filter(p => p.locations.includes(slug)))
+    setLocationPrograms(programs.filter(p => p.location === slug))
     localStorage.setItem('fightcraft_location', slug)
   }, [locations, programs])
 

@@ -1,9 +1,19 @@
+import CTAButton from './CTAButton'
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
-        <img src="/images/home/kickboxing.jpg" alt="" className="w-full h-full object-cover grayscale" />
-        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 scale-150">
+          <iframe
+            src="https://www.youtube.com/embed/iimq3DGVEJE?autoplay=1&mute=1&loop=1&playlist=iimq3DGVEJE&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1"
+            allow="autoplay"
+            className="w-full h-full pointer-events-none grayscale"
+            style={{ border: 0 }}
+            title="Background video"
+          />
+        </div>
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
@@ -18,9 +28,9 @@ export default function Hero() {
           Learn modern martial arts — for every level, at a gym near you.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-          <a href="#contact" className="inline-block px-10 py-4 bg-white text-black font-heading text-sm uppercase tracking-widest hover:bg-white/90 transition-colors">
-            Try a Free Class
-          </a>
+          <CTAButton className="inline-block px-10 py-4 bg-white text-black font-heading text-sm uppercase tracking-widest hover:bg-white/90 transition-colors cursor-pointer">
+            Request More Information
+          </CTAButton>
           <a href="/locations" className="inline-block px-10 py-4 border border-white/40 text-white font-heading text-sm uppercase tracking-widest hover:border-white transition-colors">
             Find a Gym
           </a>

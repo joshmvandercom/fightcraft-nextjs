@@ -44,10 +44,10 @@ export default function Home() {
         </div>
       </section>
 
-      <Locations locations={locations} linked />
+      <Locations locations={locations} />
       <Programs programs={programs} locations={locations} />
-      <Testimonials testimonials={testimonials} />
       <LeadCapture />
+      <Testimonials testimonials={testimonials} />
     </>
   )
 }

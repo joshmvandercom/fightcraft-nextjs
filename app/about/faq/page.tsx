@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import PageHero from '@/components/PageHero'
 import Accordion from '@/components/Accordion'
 import LeadCapture from '@/components/LeadCapture'
-import { getFaqs } from '@/lib/content'
+import Testimonials from '@/components/Testimonials'
+import { getFaqs, getTestimonials } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'FAQ | FightCraft',
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 
 export default function FAQPage() {
   const faqs = getFaqs()
+  const testimonials = getTestimonials()
 
   return (
     <>
@@ -29,6 +31,7 @@ export default function FAQPage() {
       </section>
 
       <LeadCapture />
+      <Testimonials testimonials={testimonials} />
     </>
   )
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import LeadModal from '@/components/LeadModal'
 import { getLocations, getPrograms } from '@/lib/content'
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav locations={locations} programs={programs} />
         <main>{children}</main>
         <Footer locations={locations} />
+        <LeadModal />
       </body>
     </html>
   )

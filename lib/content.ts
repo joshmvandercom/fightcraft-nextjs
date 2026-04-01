@@ -28,7 +28,7 @@ export interface Program {
   name: string
   image: string
   short_description: string
-  locations: string[]
+  location: string
   header_title: string
   header_subtitle: string
   primary_title: string
@@ -75,4 +75,19 @@ export function getTestimonials(): Testimonial[] {
 
 export function getFaqs(): FAQ[] {
   return load('faqs.yml').faqs
+}
+
+export interface ScheduleClass {
+  time: string
+  name: string
+}
+
+export interface ScheduleDay {
+  day: string
+  classes: ScheduleClass[]
+}
+
+export function getSchedule(locationSlug: string): ScheduleDay[] {
+  const data = load('schedules.yml').schedules
+  return data[locationSlug] || []
 }

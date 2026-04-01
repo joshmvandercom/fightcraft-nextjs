@@ -4,6 +4,7 @@ import PageHero from '@/components/PageHero'
 import Testimonials from '@/components/Testimonials'
 import LeadCapture from '@/components/LeadCapture'
 import SetLocation from './SetLocation'
+import CTAButton from '@/components/CTAButton'
 import { getLocations, getPrograms, getTestimonials } from '@/lib/content'
 
 export function generateStaticParams() {
@@ -28,7 +29,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
 
   const testimonials = getTestimonials()
   const allPrograms = getPrograms()
-  const locationPrograms = allPrograms.filter(p => p.locations.includes(slug))
+  const locationPrograms = allPrograms.filter(p => p.location === slug)
 
   return (
     <>
@@ -59,12 +60,9 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
               <p className="text-lg text-black/60 leading-relaxed mb-8">
                 FightCraft stands apart because of our personalized approach and commitment to your growth. We offer a supportive community that elevates your training across a variety of martial arts disciplines.
               </p>
-              <a
-                href="#contact"
-                className="inline-block px-10 py-4 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors"
-              >
+              <CTAButton className="inline-block px-10 py-4 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors cursor-pointer">
                 Request More Information
-              </a>
+              </CTAButton>
             </div>
           </div>
 
@@ -138,8 +136,8 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
         </section>
       )}
 
-      <Testimonials testimonials={testimonials} />
       <LeadCapture selectedLocation={location.slug} />
+      <Testimonials testimonials={testimonials} />
     </>
   )
 }

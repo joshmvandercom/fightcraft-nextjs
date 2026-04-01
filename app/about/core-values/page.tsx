@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import PageHero from '@/components/PageHero'
 import Values from '@/components/Values'
 import LeadCapture from '@/components/LeadCapture'
-import { getCoreValues } from '@/lib/content'
+import Testimonials from '@/components/Testimonials'
+import { getCoreValues, getTestimonials } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Core Values | FightCraft',
@@ -11,12 +12,14 @@ export const metadata: Metadata = {
 
 export default function CoreValuesPage() {
   const values = getCoreValues()
+  const testimonials = getTestimonials()
 
   return (
     <>
       <PageHero title="Our Values" subtitle="What We Stand For" image="/images/home/bjj.webp" />
       <Values values={values} layout="full" />
       <LeadCapture />
+      <Testimonials testimonials={testimonials} />
     </>
   )
 }

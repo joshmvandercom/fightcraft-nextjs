@@ -4,6 +4,7 @@ import PageHero from '@/components/PageHero'
 import Testimonials from '@/components/Testimonials'
 import LeadCapture from '@/components/LeadCapture'
 import SetLocation from '../../SetLocation'
+import CTAButton from '@/components/CTAButton'
 import { getLocations, getPrograms, getTestimonials } from '@/lib/content'
 
 export function generateStaticParams() {
@@ -13,7 +14,7 @@ export function generateStaticParams() {
 
   locations.forEach(loc => {
     programs
-      .filter(p => p.locations.includes(loc.slug))
+      .filter(p => p.location === loc.slug)
       .forEach(p => {
         paths.push({ slug: loc.slug, program: p.slug })
       })
@@ -46,22 +47,57 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
       <SetLocation slug={slug} />
       <PageHero title={program.header_title} subtitle={program.header_subtitle} image={program.image} tall />
 
-      <section className="bg-white text-black py-24 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-5xl uppercase font-bold tracking-tight text-black mb-8">{program.primary_title}</h2>
-          <p className="text-black/60 leading-relaxed mb-6">{program.primary_text_1}</p>
-          <p className="text-black/60 leading-relaxed">{program.primary_text_2}</p>
+      {/* Primary content — title + two-column body + CTA */}
+      <section className="bg-neutral-100 text-black py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl uppercase font-bold tracking-tight text-black mb-12 text-center max-w-5xl mx-auto">
+            {program.primary_title}
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+            <p className="text-lg text-black/60 leading-relaxed">
+              {program.primary_text_1}
+            </p>
+            <p className="text-lg text-black/60 leading-relaxed">
+              {program.primary_text_2}
+            </p>
+          </div>
+
+          <div className="flex justify-center">
+            <CTAButton className="inline-flex items-center gap-3 px-10 py-4 bg-black text-white font-heading text-base font-bold uppercase tracking-widest hover:bg-black/80 transition-colors cursor-pointer">
+              <span>&rarr;</span>
+              Request More Information
+            </CTAButton>
+          </div>
         </div>
       </section>
 
-      <section className="bg-black text-white py-24 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-heading text-3xl md:text-5xl uppercase font-bold tracking-tight mb-8">{program.callout_title}</h2>
-          <p className="text-white/60 leading-relaxed">{program.callout_text}</p>
+      {/* Callout — image with overlapping card */}
+      <section className="bg-white text-black py-24 px-6">
+        <div className="max-w-6xl mx-auto relative">
+          {/* Image — takes up ~60% width */}
+          <div className="w-full lg:w-[60%]">
+            <div className="aspect-[4/3]">
+              <img
+                src={program.image}
+                alt={program.name}
+                className="w-full h-full object-cover grayscale"
+              />
+            </div>
+          </div>
+
+          {/* Overlapping card */}
+          <div className="relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[50%] mt-[-3rem] lg:mt-0 mx-6 lg:mx-0">
+            <div className="bg-black text-white p-10 md:p-14">
+              <h2 className="font-heading text-2xl md:text-4xl uppercase font-bold tracking-tight mb-6">{program.callout_title}</h2>
+              <p className="text-base text-white/60 leading-relaxed">{program.callout_text}</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="bg-white text-black py-24 px-6">
+      {/* Bullets */}
+      <section className="bg-neutral-100 text-black py-24 px-6">
         <div className="max-w-4xl mx-auto">
           <h3 className="font-heading text-2xl uppercase font-bold tracking-tight text-black mb-8">What You&apos;ll Get</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -82,8 +118,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      <Testimonials testimonials={testimonials} />
       <LeadCapture selectedLocation={location.slug} />
+      <Testimonials testimonials={testimonials} />
     </>
   )
 }

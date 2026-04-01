@@ -6,10 +6,9 @@ import LocationCard from './LocationCard'
 
 interface LocationsProps {
   locations: Location[]
-  linked?: boolean
 }
 
-export default function Locations({ locations, linked = false }: LocationsProps) {
+export default function Locations({ locations }: LocationsProps) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       const slug = localStorage.getItem('fightcraft_location')
@@ -17,8 +16,6 @@ export default function Locations({ locations, linked = false }: LocationsProps)
       const card = document.querySelector(`[data-slug="${slug}"]`)
       if (card) {
         card.classList.add('border-white', '!opacity-100')
-        const badge = card.querySelector('.nearest-badge')
-        badge?.classList.remove('hidden')
       }
     }, 1000)
     return () => clearTimeout(timeout)
@@ -37,7 +34,7 @@ export default function Locations({ locations, linked = false }: LocationsProps)
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {locations.map(loc => (
-            <LocationCard key={loc.slug} location={loc} linked={linked} />
+            <LocationCard key={loc.slug} location={loc} />
           ))}
         </div>
       </div>

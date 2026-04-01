@@ -7,12 +7,31 @@ interface ProgramsProps {
 }
 
 export default function Programs({ programs, locations, locationSlug }: ProgramsProps) {
-  const filtered = locationSlug
-    ? programs.filter(p => p.locations.includes(locationSlug))
-    : programs
-
   const locationNames: Record<string, string> = {}
   locations.forEach(loc => { locationNames[loc.slug] = loc.name })
+
+  let displayPrograms: Program[]
+
+  if (locationSlug) {
+    displayPrograms = programs.filter(p => p.location === locationSlug)
+  } else {
+    // Deduplicate by slug for the global view — show one card per program type
+    const seen = new Set<string>()
+    displayPrograms = programs.filter(p => {
+      if (seen.has(p.slug)) return false
+      seen.add(p.slug)
+      return true
+    })
+  }
+
+  // For global view, collect which locations offer each program
+  const programLocations: Record<string, string[]> = {}
+  if (!locationSlug) {
+    programs.forEach(p => {
+      if (!programLocations[p.slug]) programLocations[p.slug] = []
+      programLocations[p.slug].push(p.location)
+    })
+  }
 
   return (
     <section id="programs" className="bg-white text-black py-24 px-6">
@@ -25,9 +44,9 @@ export default function Programs({ programs, locations, locationSlug }: Programs
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map(program => (
+          {displayPrograms.map(program => (
             <a
-              key={program.slug}
+              key={`${program.location}-${program.slug}`}
               href={locationSlug ? `/${locationSlug}/programs/${program.slug}` : '#'}
               className="group relative overflow-hidden aspect-[4/3] block"
             >
@@ -36,10 +55,10 @@ export default function Programs({ programs, locations, locationSlug }: Programs
               <div className="absolute inset-0 p-6 flex flex-col justify-end">
                 <h3 className="font-heading text-3xl uppercase font-bold tracking-tight text-white mb-2">{program.name}</h3>
                 <p className="text-sm text-white/70 mb-4 max-w-xs">{program.short_description}</p>
-                {!locationSlug && (
+                {!locationSlug && programLocations[program.slug] && (
                   <div className="flex gap-2">
-                    {program.locations.map(slug => (
-                      <span key={slug} className="text-[10px] text-white/50 uppercase tracking-widest">{locationNames[slug] || slug}</span>
+                    {programLocations[program.slug].map(locSlug => (
+                      <span key={locSlug} className="text-[10px] text-white/50 uppercase tracking-widest">{locationNames[locSlug] || locSlug}</span>
                     ))}
                   </div>
                 )}

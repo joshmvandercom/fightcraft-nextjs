@@ -1,0 +1,190 @@
+schedules:
+  san-jose:
+    - day: Monday
+      classes:
+        - time: "6:00am"
+          name: "Jiu-Jitsu - Gi All Levels"
+        - time: "8:00am"
+          name: "Kickboxing Fundamentals"
+        - time: "9:00am"
+          name: "Wall Work for MMA"
+        - time: "10:00am"
+          name: "Striking for MMA"
+        - time: "11:00am"
+          name: "Kickboxing Fundamentals"
+        - time: "4:15pm"
+          name: "Kids Kickboxing"
+        - time: "5:15pm"
+          name: "Kickboxing Intermediate"
+        - time: "6:15pm"
+          name: "Kickboxing Fundamentals"
+        - time: "7:15pm"
+          name: "Jiu-Jitsu - Gi All Levels"
+    - day: Tuesday
+      classes:
+        - time: "6:00am"
+          name: "Jiu-Jitsu - No Gi All Levels"
+        - time: "7:00am"
+          name: "Kickboxing Intermediate"
+        - time: "4:15pm"
+          name: "Kids Jiu-Jitsu Gi"
+        - time: "5:15pm"
+          name: "Wrestling"
+        - time: "5:15pm"
+          name: "Kickboxing Intermediate"
+        - time: "6:15pm"
+          name: "Kickboxing Fundamentals"
+        - time: "7:15pm"
+          name: "Muay Thai Pads"
+    - day: Wednesday
+      classes:
+        - time: "6:00am"
+          name: "Jiu-Jitsu - Gi All Levels"
+        - time: "8:00am"
+          name: "Kickboxing Fundamentals"
+        - time: "9:00am"
+          name: "Wrestling"
+        - time: "10:00am"
+          name: "Striking for MMA"
+        - time: "11:00am"
+          name: "Kickboxing Fundamentals"
+        - time: "4:15pm"
+          name: "Kids Kickboxing"
+        - time: "5:15pm"
+          name: "Sparring Drills"
+        - time: "6:15pm"
+          name: "Kickboxing Fundamentals"
+        - time: "7:15pm"
+          name: "Jiu-Jitsu - Gi All Levels"
+    - day: Thursday
+      classes:
+        - time: "6:00am"
+          name: "Jiu-Jitsu - No Gi All Levels"
+        - time: "7:00am"
+          name: "Kickboxing Intermediate"
+        - time: "4:15pm"
+          name: "Kids Jiu-Jitsu Gi"
+        - time: "5:15pm"
+          name: "Jiu-Jitsu - No Gi All Levels"
+        - time: "5:15pm"
+          name: "Kickboxing Intermediate"
+        - time: "6:15pm"
+          name: "Kickboxing Fundamentals"
+        - time: "7:15pm"
+          name: "Muay Thai Pads"
+    - day: Friday
+      classes:
+        - time: "8:00am"
+          name: "Sparring Class"
+        - time: "5:15pm"
+          name: "Jiu-Jitsu - No Gi All Levels"
+        - time: "6:15pm"
+          name: "Sparring Class"
+    - day: Saturday
+      classes:
+        - time: "9:00am"
+          name: "Kickboxing All Levels"
+        - time: "10:00am"
+          name: "Jiu-Jitsu - No Gi All Levels"
+        - time: "11:00am"
+          name: "Fight Team"
+    - day: Sunday
+      classes:
+        - time: "9:00am"
+          name: "Muay Thai Pads"
+        - time: "10:00am"
+          name: "Open Mat"
+
+  merced:
+    - day: Monday
+      classes:
+        - time: "8:00am"
+          name: "Fundamentals Kickboxing"
+        - time: "5:00pm"
+          name: "Teens Kickboxing"
+        - time: "6:00pm"
+          name: "Fundamentals Kickboxing"
+    - day: Tuesday
+      classes:
+        - time: "8:00am"
+          name: "Fundamentals Kickboxing"
+        - time: "5:00pm"
+          name: "Teens Kickboxing"
+        - time: "6:00pm"
+          name: "Fundamentals Kickboxing"
+        - time: "7:00pm"
+          name: "Muay Thai (Clinch + Pads)"
+    - day: Wednesday
+      classes:
+        - time: "8:00am"
+          name: "Fundamentals Kickboxing"
+        - time: "5:00pm"
+          name: "Teens Kickboxing"
+        - time: "6:00pm"
+          name: "Fundamentals Kickboxing"
+    - day: Thursday
+      classes:
+        - time: "8:00am"
+          name: "Fundamentals Kickboxing"
+        - time: "5:00pm"
+          name: "Teens Kickboxing"
+        - time: "6:00pm"
+          name: "Fundamentals Kickboxing"
+        - time: "7:00pm"
+          name: "Fight Team Practice (Invite Only)"
+    - day: Friday
+      classes:
+        - time: "8:00am"
+          name: "Fundamentals Kickboxing"
+        - time: "9:00am"
+          name: "Sparring Drills"
+        - time: "5:15pm"
+          name: "Fundamentals Kickboxing"
+        - time: "6:15pm"
+          name: "Sparring Drills"
+    - day: Saturday
+      classes:
+        - time: "9:00am"
+          name: "Fundamentals Kickboxing"
+
+  brevard:
+    - day: Monday
+      classes:
+        - time: "4:15pm"
+          name: "Kids Jiu Jitsu"
+        - time: "5:30pm"
+          name: "Jiu Jitsu (Foundations)"
+        - time: "6:30pm"
+          name: "Kickboxing (All Levels)"
+    - day: Tuesday
+      classes:
+        - time: "12:00pm"
+          name: "Jiu Jitsu (All Levels)"
+        - time: "5:30pm"
+          name: "Kickboxing (Foundations)"
+        - time: "6:30pm"
+          name: "Jiu Jitsu (All Levels)"
+    - day: Wednesday
+      classes:
+        - time: "4:15pm"
+          name: "Kids Jiu Jitsu"
+        - time: "5:30pm"
+          name: "Jiu Jitsu (Foundations)"
+        - time: "6:30pm"
+          name: "Striking (All Levels)"
+    - day: Thursday
+      classes:
+        - time: "12:00pm"
+          name: "Jiu Jitsu (All Levels)"
+        - time: "5:30pm"
+          name: "Kickboxing (Foundations)"
+        - time: "6:30pm"
+          name: "Jiu Jitsu (All Levels)"
+    - day: Friday
+      classes:
+        - time: "6:00pm"
+          name: "Open Mat (Jiu Jitsu and Kickboxing)"
+    - day: Sunday
+      classes:
+        - time: "1:00pm"
+          name: "MMA Session"

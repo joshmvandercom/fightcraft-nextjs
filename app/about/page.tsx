@@ -64,8 +64,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Testimonials testimonials={testimonials} />
       <LeadCapture />
+      <Testimonials testimonials={testimonials} />
     </>
   )
 }
