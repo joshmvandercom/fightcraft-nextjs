@@ -19,7 +19,8 @@ export default function LocationsPage() {
           {locations.map(loc => (
             <div key={loc.slug} className="border-[4px] border-black h-full">
               <div className="p-8 flex flex-col h-full">
-                <h3 className="font-display text-6xl uppercase tracking-tight text-black mb-2">{loc.name}</h3>
+                <h3 className="font-display text-6xl uppercase tracking-tight text-black mb-1">{loc.name}</h3>
+                <p className="font-heading text-sm uppercase tracking-[0.2em] text-black/50 mb-4">{loc.city}, {loc.state}</p>
 
                 <div className="w-10 h-px bg-black mb-6" />
 

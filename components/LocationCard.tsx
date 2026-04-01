@@ -13,7 +13,8 @@ export default function LocationCard({ location: loc }: LocationCardProps) {
       data-slug={loc.slug}
     >
       <div className="p-8 flex flex-col h-full">
-        <h3 className="font-display text-6xl uppercase tracking-tight mb-2">{loc.name}</h3>
+        <h3 className="font-display text-6xl uppercase tracking-tight mb-1">{loc.name}</h3>
+        <p className="font-heading text-sm uppercase tracking-[0.2em] text-white/50 mb-4">{loc.city}, {loc.state}</p>
 
         <div className="w-10 h-px bg-white mb-6" />
 

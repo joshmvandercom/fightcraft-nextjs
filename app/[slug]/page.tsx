@@ -128,7 +128,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
             )}
             <div>
               <p className="font-heading text-xs uppercase tracking-widest text-black/50 mb-3">Email</p>
-              <a href={`mailto:${location.email}`} className="text-black/70 hover:text-black transition-colors">{location.email}</a>
+              <a href={`mailto:${location.contact_email}`} className="text-black/70 hover:text-black transition-colors">{location.contact_email}</a>
             </div>
             {location.instagram && (
               <div>
