@@ -27,13 +27,10 @@ export default function Hero() {
         <p className="text-white/70 mt-6 max-w-xl mx-auto text-base md:text-lg leading-relaxed">
           Learn modern martial arts — for every level, at a gym near you.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+        <div className="mt-10">
           <CTAButton className="inline-block px-10 py-4 bg-white text-black font-heading text-sm uppercase tracking-widest hover:bg-white/90 transition-colors cursor-pointer">
             Request More Information
           </CTAButton>
-          <a href="/locations" className="inline-block px-10 py-4 border border-white/40 text-white font-heading text-sm uppercase tracking-widest hover:border-white transition-colors">
-            Find a Gym
-          </a>
         </div>
       </div>
 

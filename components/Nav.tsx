@@ -93,6 +93,7 @@ export default function Nav({ locations, programs }: NavProps) {
   }, [locations, updateContext])
 
   return (
+    <>
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${scrolled ? 'bg-black/90 backdrop-blur-sm' : ''}`}>
       <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
         {/* Logo */}
@@ -109,7 +110,7 @@ export default function Nav({ locations, programs }: NavProps) {
           <div className="relative" ref={aboutRef}>
             <button
               onClick={() => { setAboutOpen(!aboutOpen); setContextOpen(false) }}
-              className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors flex items-center gap-1"
+              className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors flex items-center gap-2"
             >
               About
               <svg className={`w-3 h-3 transition-transform ${aboutOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +123,6 @@ export default function Nav({ locations, programs }: NavProps) {
                 <a href="/about/faq" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">FAQ</a>
                 <a href="/about/reviews" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Reviews</a>
                 <a href="/about/core-values" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Core Values</a>
-                <a href="/first-timers" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">First Timers</a>
               </div>
             )}
           </div>
@@ -138,7 +138,7 @@ export default function Nav({ locations, programs }: NavProps) {
               <div className="relative" ref={contextRef}>
                 <button
                   onClick={() => { setContextOpen(!contextOpen); setAboutOpen(false) }}
-                  className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors flex items-center gap-1"
+                  className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors flex items-center gap-2"
                 >
                   Programs
                   <svg className={`w-3 h-3 transition-transform ${contextOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,28 +206,45 @@ export default function Nav({ locations, programs }: NavProps) {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-black z-40 flex flex-col items-start px-10 pt-24 pb-10 gap-6 overflow-y-auto transition-transform duration-300 md:hidden ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+    </nav>
+
+    {/* Mobile Menu — outside nav to avoid stacking context issues */}
+    {mobileOpen && (
+      <div className="fixed inset-0 w-screen h-screen bg-black z-[999] flex flex-col items-start px-10 pt-24 pb-10 gap-6 overflow-y-auto md:hidden">
+        <a href="/" className="absolute top-5 left-6">
+          <img src="/images/fc-white-initials.svg" alt="FightCraft" className="h-10 brightness-0 invert" />
+        </a>
         <button onClick={() => setMobileOpen(false)} className="absolute top-6 right-6 p-2" aria-label="Close menu">
           <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        <a href="/" onClick={() => setMobileOpen(false)} className="font-heading text-3xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Home</a>
-        <a href="/about" onClick={() => setMobileOpen(false)} className="font-heading text-3xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">About</a>
+        <a href="/" onClick={() => setMobileOpen(false)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Home</a>
+        <a href="/about" onClick={() => setMobileOpen(false)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">About</a>
         <div className="pl-6 flex flex-col gap-3">
           <a href="/about/faq" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">FAQ</a>
           <a href="/about/reviews" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">Reviews</a>
           <a href="/about/core-values" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">Core Values</a>
-          <a href="/first-timers" onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">First Timers</a>
         </div>
-        <a href="/locations" onClick={() => setMobileOpen(false)} className="font-heading text-3xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Locations</a>
+        <a href="/locations" onClick={() => setMobileOpen(false)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Locations</a>
 
+        {/* Location switcher */}
         {currentLocation && (
           <div className="mt-4 pt-6 border-t border-white/20 w-full">
-            <p className="font-heading text-xs uppercase tracking-widest text-white/50 mb-4">{currentLocation.name}</p>
-            <div className="flex flex-col gap-3 pl-2">
+            <p className="font-heading text-[10px] uppercase tracking-[0.2em] text-white/40 mb-3">Your Location</p>
+            <select
+              value={currentLocation.slug}
+              onChange={e => updateContext(e.target.value)}
+              className="w-full px-4 pr-10 py-3 mb-6 bg-white/10 text-white font-heading text-sm uppercase tracking-widest border-0 focus:outline-none focus:ring-1 focus:ring-white/30 appearance-none"
+              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '16px' }}
+            >
+              {locations.map(loc => (
+                <option key={loc.slug} value={loc.slug} className="bg-black">{loc.name}</option>
+              ))}
+            </select>
+
+            <div className="flex flex-col gap-3">
               {locationPrograms.map(p => (
                 <a key={p.slug} href={`/${currentLocation.slug}/programs/${p.slug}`} onClick={() => setMobileOpen(false)} className="font-heading text-lg uppercase tracking-widest text-white/50 hover:text-white transition-colors">
                   {p.name}
@@ -238,6 +255,7 @@ export default function Nav({ locations, programs }: NavProps) {
           </div>
         )}
       </div>
-    </nav>
+    )}
+    </>
   )
 }
