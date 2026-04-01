@@ -23,7 +23,7 @@ export default function Home() {
           <div>
             <h2 className="font-heading text-5xl md:text-6xl uppercase font-bold tracking-tight text-black mb-6">All Levels Welcome</h2>
             <p className="text-lg text-black/60 leading-relaxed">
-              At FightCraft, we offer authentic combat training suitable for all levels — from seasoned athletes to complete beginners. Our mission is to equip you with the expert guidance, motivational mentors, and focused accountability you need to excel.
+              At FightCraft, we offer authentic combat training suitable for all levels. From seasoned athletes to complete beginners. Our mission is to equip you with the expert guidance, motivational mentors, and focused accountability you need to excel.
             </p>
           </div>
         </div>

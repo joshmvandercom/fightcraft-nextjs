@@ -56,7 +56,7 @@ export default function FirstTimersPage() {
             We Get It. Walking Into a Martial Arts Gym for the First Time Can Be Intimidating.
           </h2>
           <p className="text-lg text-black/60 leading-relaxed mb-6">
-            Most of our members felt the same way before they started. No ego at the door. No deep end. Just a room full of regular people — parents, professionals, students — who decided to do something different with their time.
+            Most of our members felt the same way before they started. No ego at the door. No deep end. Just a room full of regular people. Parents, professionals, students, who decided to do something different with their time.
           </p>
           <p className="text-lg text-black/60 leading-relaxed">
             Show up with an open mind and we&apos;ll take care of the rest.
@@ -112,7 +112,7 @@ export default function FirstTimersPage() {
             </div>
             <div>
               <h3 className="font-heading text-lg uppercase font-bold tracking-tight mb-3">For striking classes</h3>
-              <p className="text-white/60 leading-relaxed">Comfortable shorts and a t-shirt. We provide gloves, wraps, and any equipment you need — free of charge.</p>
+              <p className="text-white/60 leading-relaxed">Comfortable shorts and a t-shirt. We provide gloves, wraps, and any equipment you need. Free of charge.</p>
             </div>
             <div>
               <h3 className="font-heading text-lg uppercase font-bold tracking-tight mb-3">For Jiu Jitsu</h3>
