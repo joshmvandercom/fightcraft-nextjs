@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { setLead } from '@/lib/lead'
 
 interface LeadFormProps {
   selectedLocation?: string
@@ -23,7 +24,7 @@ export default function LeadForm({ selectedLocation, variant = 'dark', onSuccess
 
     const form = e.currentTarget
     const data = {
-      first_name: (form.elements.namedItem('first_name') as HTMLInputElement).value,
+      name: (form.elements.namedItem('name') as HTMLInputElement).value,
       email: (form.elements.namedItem('email') as HTMLInputElement).value,
       phone: (form.elements.namedItem('phone') as HTMLInputElement).value,
       location: (form.elements.namedItem('location') as HTMLSelectElement).value,
@@ -38,6 +39,7 @@ export default function LeadForm({ selectedLocation, variant = 'dark', onSuccess
       })
 
       if (res.ok) {
+        setLead({ name: data.name, email: data.email, phone: data.phone, location: data.location })
         onSuccess?.()
         router.push('/next-steps')
         return
@@ -87,7 +89,7 @@ export default function LeadForm({ selectedLocation, variant = 'dark', onSuccess
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input type="text" name="first_name" placeholder="First Name" required className={inputClass} />
+        <input type="text" name="name" placeholder="First Name" required className={inputClass} />
         <input type="email" name="email" placeholder="Email" required className={inputClass} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

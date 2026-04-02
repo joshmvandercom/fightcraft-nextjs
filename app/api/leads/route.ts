@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { notifySlack } from '@/lib/slack'
 
 const WEBHOOKS: Record<string, string | undefined> = {
   'san-jose': process.env.WEBHOOK_SAN_JOSE,
@@ -49,7 +50,7 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json()
-  const { first_name, email, phone, location, website } = body
+  const { name, email, phone, location, website } = body
 
   // Honeypot check
   if (website) {
@@ -57,7 +58,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Validation
-  if (!first_name || !email || !location) {
+  if (!name || !email || !location) {
     return NextResponse.json(
       { error: 'Name, email, and location are required.' },
       { status: 400 }
@@ -74,13 +75,13 @@ export async function POST(request: NextRequest) {
 
   // GHL webhook payload
   const payload = {
-    first_name,
+    name,
     email,
     phone: phone || '',
     location,
     source: 'fightcraft-web',
-    firstName: first_name,
-    name: first_name,
+    firstName: name,
+    first_name: name,
   }
 
   const isLive = process.env.WEBHOOKS_LIVE === 'true'
@@ -88,6 +89,7 @@ export async function POST(request: NextRequest) {
   if (!isLive) {
     console.log('[DRY RUN] Lead received:', JSON.stringify(payload, null, 2))
     console.log('[DRY RUN] Would POST to:', webhookUrl)
+    await notifySlack(`New Lead: ${name} (${email}) | Phone: ${phone || 'n/a'} | Location: ${location}`)
     return NextResponse.json({ success: true })
   }
 
@@ -106,6 +108,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    await notifySlack(`New Lead: ${name} (${email}) | Phone: ${phone || 'n/a'} | Location: ${location}`)
     return NextResponse.json({ success: true })
   } catch (err) {
     console.error('Webhook error:', err)

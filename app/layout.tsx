@@ -1,9 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
-import LeadModal from '@/components/LeadModal'
-import { getLocations, getPrograms } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'FightCraft | Premier Martial Arts',
@@ -33,9 +29,6 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const locations = getLocations()
-  const programs = getPrograms()
-
   return (
     <html lang="en">
       <head>
@@ -45,10 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/timmons.woff2" as="font" type="font/woff2" crossOrigin="" />
       </head>
       <body className="bg-black text-white">
-        <Nav locations={locations} programs={programs} />
-        <main>{children}</main>
-        <Footer locations={locations} />
-        <LeadModal />
+        {children}
       </body>
     </html>
   )

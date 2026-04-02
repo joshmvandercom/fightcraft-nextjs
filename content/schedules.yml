@@ -16,6 +16,7 @@ schedules:
           name: "Kids Kickboxing"
         - time: "5:15pm"
           name: "Kickboxing Intermediate"
+          bookable: false
         - time: "6:15pm"
           name: "Kickboxing Fundamentals"
         - time: "7:15pm"
@@ -26,12 +27,14 @@ schedules:
           name: "Jiu-Jitsu - No Gi All Levels"
         - time: "7:00am"
           name: "Kickboxing Intermediate"
+          bookable: false
         - time: "4:15pm"
           name: "Kids Jiu-Jitsu Gi"
         - time: "5:15pm"
           name: "Wrestling"
         - time: "5:15pm"
           name: "Kickboxing Intermediate"
+          bookable: false
         - time: "6:15pm"
           name: "Kickboxing Fundamentals"
         - time: "7:15pm"
@@ -52,6 +55,7 @@ schedules:
           name: "Kids Kickboxing"
         - time: "5:15pm"
           name: "Sparring Drills"
+          bookable: false
         - time: "6:15pm"
           name: "Kickboxing Fundamentals"
         - time: "7:15pm"
@@ -62,12 +66,14 @@ schedules:
           name: "Jiu-Jitsu - No Gi All Levels"
         - time: "7:00am"
           name: "Kickboxing Intermediate"
+          bookable: false
         - time: "4:15pm"
           name: "Kids Jiu-Jitsu Gi"
         - time: "5:15pm"
           name: "Jiu-Jitsu - No Gi All Levels"
         - time: "5:15pm"
           name: "Kickboxing Intermediate"
+          bookable: false
         - time: "6:15pm"
           name: "Kickboxing Fundamentals"
         - time: "7:15pm"
@@ -76,10 +82,12 @@ schedules:
       classes:
         - time: "8:00am"
           name: "Sparring Class"
+          bookable: false
         - time: "5:15pm"
           name: "Jiu-Jitsu - No Gi All Levels"
         - time: "6:15pm"
           name: "Sparring Class"
+          bookable: false
     - day: Saturday
       classes:
         - time: "9:00am"
@@ -88,6 +96,7 @@ schedules:
           name: "Jiu-Jitsu - No Gi All Levels"
         - time: "11:00am"
           name: "Fight Team"
+          bookable: false
     - day: Sunday
       classes:
         - time: "9:00am"
@@ -132,16 +141,19 @@ schedules:
           name: "Fundamentals Kickboxing"
         - time: "7:00pm"
           name: "Fight Team Practice (Invite Only)"
+          bookable: false
     - day: Friday
       classes:
         - time: "8:00am"
           name: "Fundamentals Kickboxing"
         - time: "9:00am"
           name: "Sparring Drills"
+          bookable: false
         - time: "5:15pm"
           name: "Fundamentals Kickboxing"
         - time: "6:15pm"
           name: "Sparring Drills"
+          bookable: false
     - day: Saturday
       classes:
         - time: "9:00am"

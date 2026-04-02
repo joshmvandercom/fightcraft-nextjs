@@ -1,0 +1,301 @@
+'use client'
+
+import { useSearchParams, useParams } from 'next/navigation'
+import { Suspense } from 'react'
+import RequireLead from '@/components/RequireLead'
+import { isQualified } from '@/lib/qualify'
+
+function buildStory(m: string, e: string, c: string, o: string, v: string, r: string): string[] {
+  const lines: string[] = []
+
+  // Open loop
+  lines.push("Hey.")
+  lines.push("")
+  lines.push("At the bottom of this page you're going to be able to book your first class.")
+  lines.push("")
+  lines.push("But first I want to tell you something.")
+  lines.push("")
+  lines.push("")
+
+  // Motivation opener
+  if (m === 'A') {
+    lines.push("Most people don't talk about why they start training.")
+    lines.push("")
+    lines.push("They say \"fitness\" or \"something new.\"")
+    lines.push("")
+    lines.push("But you were honest.")
+    lines.push("")
+    lines.push("You want to feel safe. For real.")
+    lines.push("")
+    lines.push("That's one of the most respected reasons anyone walks through our door.")
+  } else if (m === 'B') {
+    lines.push("People come to us for all kinds of reasons.")
+    lines.push("")
+    lines.push("But yours is different.")
+    lines.push("")
+    lines.push("You're not really here for the workout.")
+    lines.push("")
+    lines.push("You're here because you know there's a sharper version of you on the other side of this.")
+    lines.push("")
+    lines.push("More focused. More present. More dialed in.")
+    lines.push("")
+    lines.push("The mat has a way of doing that to people.")
+  } else if (m === 'C') {
+    lines.push("I'll be honest.")
+    lines.push("")
+    lines.push("I've heard this one a thousand times.")
+    lines.push("")
+    lines.push("\"I'm bored at the gym.\"")
+    lines.push("")
+    lines.push("\"I need something that doesn't feel like a chore.\"")
+    lines.push("")
+    lines.push("You're in good company.")
+    lines.push("")
+    lines.push("Most of our members said the exact same thing before they started.")
+  } else {
+    lines.push("You want to compete.")
+    lines.push("")
+    lines.push("Most people don't have that in them.")
+    lines.push("")
+    lines.push("You do.")
+    lines.push("")
+    lines.push("That changes everything about how we approach your training.")
+  }
+
+  lines.push("")
+  lines.push("")
+
+  // Experience woven in
+  if (e === 'A') {
+    lines.push("Now here's the part where most people get nervous.")
+    lines.push("")
+    lines.push("\"I've never done this before.\"")
+    lines.push("")
+    lines.push("Neither had anyone else on day one.")
+    lines.push("")
+    lines.push("Including me.")
+    lines.push("")
+    lines.push("A blank slate isn't a disadvantage. It's an advantage.")
+    lines.push("")
+    lines.push("No bad habits. No ego. Just potential.")
+  } else if (e === 'B') {
+    lines.push("You've tried this before.")
+    lines.push("")
+    lines.push("Something about it stuck with you.")
+    lines.push("")
+    lines.push("That little voice that keeps saying \"I should go back\"?")
+    lines.push("")
+    lines.push("Listen to it.")
+  } else if (e === 'C') {
+    lines.push("You already know what good training feels like.")
+    lines.push("")
+    lines.push("That drive home after a hard session where everything just feels... right.")
+    lines.push("")
+    lines.push("You're not starting over.")
+    lines.push("")
+    lines.push("You're picking up where you left off. With better coaching this time.")
+  } else {
+    lines.push("You're already training.")
+    lines.push("")
+    lines.push("And you're looking for more.")
+    lines.push("")
+    lines.push("That tells me everything I need to know about you.")
+  }
+
+  lines.push("")
+  lines.push("")
+
+  // Address objection casually
+  lines.push("I know what you might be thinking.")
+  lines.push("")
+
+  if (o === 'B') {
+    lines.push("\"I don't know anyone there.\"")
+    lines.push("")
+    lines.push("You will by the end of your first class.")
+    lines.push("")
+    lines.push("That's not marketing. That's just how this place works.")
+  } else if (o === 'C') {
+    lines.push("\"I should get in shape first.\"")
+    lines.push("")
+    lines.push("No. You shouldn't.")
+    lines.push("")
+    lines.push("That's like warming up before the warm-up.")
+    lines.push("")
+    lines.push("Just come in. We'll handle the rest.")
+  } else if (o === 'A') {
+    lines.push("\"When am I going to fit this in?\"")
+    lines.push("")
+    lines.push("We run classes every day. Morning to night.")
+    lines.push("")
+    lines.push("You need one hour. One slot. That's it.")
+  } else if (o === 'D') {
+    lines.push("\"Is it worth the investment?\"")
+    lines.push("")
+    lines.push("No contracts. No commitment. Month to month.")
+    lines.push("")
+    lines.push("Try it and decide for yourself.")
+  } else {
+    lines.push("Actually you said nothing was holding you back.")
+    lines.push("")
+    lines.push("Good. Then there's nothing else to say except...")
+  }
+
+  lines.push("")
+  lines.push("")
+
+  // Commitment
+  if (c === 'A' || c === 'B') {
+    lines.push("Two to three sessions a week.")
+    lines.push("")
+    lines.push("That's the number.")
+    lines.push("")
+    lines.push("Not five. Not every day. Just two or three.")
+    lines.push("")
+    lines.push("That's where technique sticks.")
+    lines.push("")
+    lines.push("That's where your body starts to change.")
+    lines.push("")
+    lines.push("That's where it stops being \"something you're trying\" and becomes part of who you are.")
+  } else {
+    lines.push("Start with whatever you can.")
+    lines.push("")
+    lines.push("Once a week. Twice. Doesn't matter.")
+    lines.push("")
+    lines.push("The people who last aren't the ones who go hardest at the beginning.")
+    lines.push("")
+    lines.push("They're the ones who keep showing up.")
+  }
+
+  lines.push("")
+  lines.push("")
+
+  // Vision
+  if (v === 'A') {
+    lines.push("Here's what's going to happen.")
+    lines.push("")
+    lines.push("A few months in, someone's going to tell you that you seem different.")
+    lines.push("")
+    lines.push("They won't be able to explain it.")
+    lines.push("")
+    lines.push("But you'll know exactly what changed.")
+  } else if (v === 'B') {
+    lines.push("Here's what nobody tells you about martial arts.")
+    lines.push("")
+    lines.push("The workout gets you in the door.")
+    lines.push("")
+    lines.push("The people keep you coming back.")
+    lines.push("")
+    lines.push("Some of the best friendships you'll ever have are about to start on this mat.")
+  } else if (v === 'C') {
+    lines.push("Here's what's waiting for you.")
+    lines.push("")
+    lines.push("A belt. A tournament. Something real.")
+    lines.push("")
+    lines.push("Something you can point to and say...")
+    lines.push("")
+    lines.push("\"I did that.\"")
+    lines.push("")
+    lines.push("We'll be in your corner when that day comes. Literally.")
+  } else {
+    lines.push("Here's what's going to happen.")
+    lines.push("")
+    lines.push("Someone at work is going to ask what you've been doing.")
+    lines.push("")
+    lines.push("You'll look different. Move different.")
+    lines.push("")
+    lines.push("And you won't have been on some program.")
+    lines.push("")
+    lines.push("You'll have just been training.")
+  }
+
+  lines.push("")
+  lines.push("")
+
+  // Close the loop
+  lines.push("Remember what I said at the top?")
+  lines.push("")
+
+  if (r === 'A') {
+    lines.push("You're ready now.")
+    lines.push("")
+    lines.push("So here it is.")
+  } else if (r === 'B') {
+    lines.push("You said you need a couple weeks.")
+    lines.push("")
+    lines.push("That's fine. But go ahead and book now so it's real.")
+    lines.push("")
+    lines.push("Pick a date that works. We'll be ready.")
+  } else if (r === 'C') {
+    lines.push("You've got travel coming up.")
+    lines.push("")
+    lines.push("Book it now anyway. Pick a date after you're back.")
+    lines.push("")
+    lines.push("That way when you land, it's already on the calendar.")
+  } else {
+    lines.push("You're still thinking about it.")
+    lines.push("")
+    lines.push("That's okay. But sometimes the best way to decide...")
+    lines.push("")
+    lines.push("...is to just put it on the calendar and see how it feels.")
+  }
+
+  return lines
+}
+
+function QuizResults() {
+  const searchParams = useSearchParams()
+  const params = useParams()
+  const slug = params.slug as string
+
+  const m = searchParams.get('m') || 'A'
+  const e = searchParams.get('e') || 'A'
+  const c = searchParams.get('c') || 'A'
+  const o = searchParams.get('o') || 'A'
+  const v = searchParams.get('v') || 'A'
+  const r = searchParams.get('r') || 'A'
+
+  const story = buildStory(m, e, c, o, v, r)
+  const locationName = slug === 'san-jose' ? 'San Jose' : slug === 'merced' ? 'Merced' : slug === 'brevard' ? 'Brevard' : slug
+  const qualified = isQualified({ c, o, r })
+  const qpStr = new URLSearchParams(Object.fromEntries(searchParams.entries())).toString()
+
+  return (
+    <div className="min-h-screen bg-black text-white flex flex-col px-6 py-8">
+      <div className="max-w-xl w-full mx-auto flex items-center justify-between mb-16">
+        <a href="/">
+          <img src="/images/fc-white-initials.svg" alt="FightCraft" className="h-10 brightness-0 invert" />
+        </a>
+        <p className="font-heading text-xs uppercase tracking-widest text-white/40">Your Profile</p>
+      </div>
+
+      <div className="max-w-xl w-full mx-auto flex-1">
+        <div className="mb-16">
+          {story.map((line, i) => {
+            if (line === '') return <div key={i} className="h-4" />
+            return <p key={i} className="text-base text-white/70 leading-relaxed">{line}</p>
+          })}
+        </div>
+
+        <div className="mt-4">
+          <a
+            href={qualified ? `/${slug}/quiz/book?${qpStr}` : `/${slug}/quiz/call?${qpStr}`}
+            className="inline-block w-full max-w-sm py-4 bg-white text-black text-center font-heading text-base font-bold uppercase tracking-widest hover:bg-white/90 transition-colors"
+          >
+            {qualified ? "Let's Do This" : "Book Your Free Orientation"}
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function CompletePage() {
+  return (
+    <RequireLead>
+      <Suspense fallback={<div className="min-h-screen bg-black" />}>
+        <QuizResults />
+      </Suspense>
+    </RequireLead>
+  )
+}

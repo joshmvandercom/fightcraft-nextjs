@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { setLead } from '@/lib/lead'
 
 function Stars() {
   return (
@@ -18,6 +19,9 @@ function Stars() {
 export default function QuickForm() {
   const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [location, setLocation] = useState('san-jose')
 
   useEffect(() => {
@@ -25,18 +29,12 @@ export default function QuickForm() {
     if (saved) setLocation(saved)
   }, [])
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!name || !email) return
     setSubmitting(true)
 
-    const form = e.currentTarget
-    const data = {
-      first_name: (form.elements.namedItem('first_name') as HTMLInputElement).value,
-      email: (form.elements.namedItem('email') as HTMLInputElement).value,
-      phone: (form.elements.namedItem('phone') as HTMLInputElement).value,
-      location: (form.elements.namedItem('location') as HTMLSelectElement).value,
-      website: (form.elements.namedItem('website') as HTMLInputElement).value,
-    }
+    const data = { name: name, email, phone, location, website: '' }
 
     try {
       const res = await fetch('/api/leads', {
@@ -45,6 +43,7 @@ export default function QuickForm() {
         body: JSON.stringify(data),
       })
       if (res.ok) {
+        setLead({ name: name, email, phone, location })
         router.push('/next-steps')
         return
       }
@@ -52,43 +51,41 @@ export default function QuickForm() {
     setSubmitting(false)
   }
 
+  const inputDesktop = "flex-1 px-4 py-3 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30"
+  const inputMobile = "px-3 py-2.5 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30"
+  const selectStyle = { backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(0,0,0,0.3)' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 10px center', backgroundSize: '14px' }
+
   return (
     <div className="bg-neutral-100 py-4 px-6">
       <div className="max-w-5xl mx-auto">
-        <form onSubmit={handleSubmit} className="mb-3">
-          {/* Desktop: single row. Mobile: 2-col grid */}
-          <div className="hidden md:flex gap-3 items-center">
-            <input type="text" name="first_name" placeholder="Name" required className="flex-1 px-4 py-3 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30" />
-            <input type="email" name="email" placeholder="Email" required className="flex-1 px-4 py-3 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30" />
-            <input type="tel" name="phone" placeholder="Phone" className="flex-1 px-4 py-3 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30" />
-            <select name="location" value={location} onChange={e => setLocation(e.target.value)} className="w-auto px-4 py-3 bg-white text-black text-sm border border-black/10 focus:outline-none focus:border-black/30 appearance-none pr-10" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(0,0,0,0.3)' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 10px center', backgroundSize: '14px' }}>
-              <option value="san-jose">San Jose</option>
-              <option value="merced">Merced</option>
-              <option value="brevard">Brevard</option>
-            </select>
-            <button type="submit" disabled={submitting} className="px-8 py-3 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors disabled:opacity-50 whitespace-nowrap">
-              {submitting ? '...' : 'Get Started'}
-            </button>
-          </div>
+        {/* Desktop */}
+        <form onSubmit={handleSubmit} className="hidden md:flex gap-3 items-center mb-3">
+          <input type="text" placeholder="Name" required value={name} onChange={e => setName(e.target.value)} className={inputDesktop} />
+          <input type="email" placeholder="Email" required value={email} onChange={e => setEmail(e.target.value)} className={inputDesktop} />
+          <input type="tel" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} className={inputDesktop} />
+          <select value={location} onChange={e => setLocation(e.target.value)} className="w-auto px-4 py-3 bg-white text-black text-sm border border-black/10 focus:outline-none focus:border-black/30 appearance-none pr-10" style={selectStyle}>
+            <option value="san-jose">San Jose</option>
+            <option value="merced">Merced</option>
+            <option value="brevard">Brevard</option>
+          </select>
+          <button type="submit" disabled={submitting} className="px-8 py-3 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors disabled:opacity-50 whitespace-nowrap">
+            {submitting ? '...' : 'Get Started'}
+          </button>
+        </form>
 
-          {/* Mobile: compact 2-col grid */}
-          <div className="md:hidden grid grid-cols-2 gap-2">
-            <input type="text" name="first_name" placeholder="Name" required className="px-3 py-2.5 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30" />
-            <input type="email" name="email" placeholder="Email" required className="px-3 py-2.5 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30" />
-            <input type="tel" name="phone" placeholder="Phone" className="px-3 py-2.5 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30" />
-            <select name="location" value={location} onChange={e => setLocation(e.target.value)} className="px-3 py-2.5 bg-white text-black text-sm border border-black/10 focus:outline-none focus:border-black/30 appearance-none pr-8" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(0,0,0,0.3)' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 8px center', backgroundSize: '12px' }}>
-              <option value="san-jose">San Jose</option>
-              <option value="merced">Merced</option>
-              <option value="brevard">Brevard</option>
-            </select>
-            <button type="submit" disabled={submitting} className="col-span-2 py-2.5 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors disabled:opacity-50">
-              {submitting ? '...' : 'Get Started'}
-            </button>
-          </div>
-
-          <div className="asdf">
-            <input type="text" name="website" tabIndex={-1} autoComplete="off" />
-          </div>
+        {/* Mobile */}
+        <form onSubmit={handleSubmit} className="md:hidden grid grid-cols-2 gap-2 mb-3">
+          <input type="text" placeholder="Name" required value={name} onChange={e => setName(e.target.value)} className={inputMobile} />
+          <input type="email" placeholder="Email" required value={email} onChange={e => setEmail(e.target.value)} className={inputMobile} />
+          <input type="tel" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} className={inputMobile} />
+          <select value={location} onChange={e => setLocation(e.target.value)} className={`${inputMobile} appearance-none pr-8`} style={{ ...selectStyle, backgroundPosition: 'right 8px center', backgroundSize: '12px' }}>
+            <option value="san-jose">San Jose</option>
+            <option value="merced">Merced</option>
+            <option value="brevard">Brevard</option>
+          </select>
+          <button type="submit" disabled={submitting} className="col-span-2 py-2.5 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors disabled:opacity-50">
+            {submitting ? '...' : 'Get Started'}
+          </button>
         </form>
 
         {/* Social proof - desktop */}

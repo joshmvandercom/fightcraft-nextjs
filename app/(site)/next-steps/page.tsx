@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import PageHero from '@/components/PageHero'
+import QuizRedirect from './QuizRedirect'
 
 export const metadata: Metadata = {
   title: 'Thank You | FightCraft',
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 export default function NextStepsPage() {
   return (
     <>
+      <QuizRedirect />
       <PageHero title="Thank You" subtitle="We got your info" />
 
       <section className="bg-white text-black py-24 px-6">

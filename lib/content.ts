@@ -86,6 +86,7 @@ export function getFaqs(): FAQ[] {
 export interface ScheduleClass {
   time: string
   name: string
+  bookable?: boolean
 }
 
 export interface ScheduleDay {
