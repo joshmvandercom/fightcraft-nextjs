@@ -8,6 +8,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'event and email required' }, { status: 400 })
   }
 
+  if (process.env.SUPPRESS_ANALYTICS === 'true') {
+    console.log('[ANALYTICS SUPPRESSED]', event, email, properties)
+    return NextResponse.json({ success: true })
+  }
+
   const apiKey = process.env.AMPLITUDE_SECRET_KEY
   if (!apiKey || apiKey === 'your-amplitude-server-secret-key') {
     console.log('[AMPLITUDE DRY RUN]', event, email, properties)

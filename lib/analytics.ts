@@ -6,6 +6,7 @@ let initialized = false
 
 export function initAnalytics() {
   if (initialized) return
+  if (process.env.NEXT_PUBLIC_SUPPRESS_ANALYTICS === 'true') return
   const key = process.env.NEXT_PUBLIC_AMPLITUDE_KEY
   if (!key || key === 'your-amplitude-browser-api-key') return
 
