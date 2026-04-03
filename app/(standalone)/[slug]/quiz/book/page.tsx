@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams, useRouter } from 'next/navigation'
+import { Suspense } from 'react'
 import RequireLead from '@/components/RequireLead'
 
 interface ScheduleClass {
@@ -17,9 +18,13 @@ interface ScheduleDay {
 
 function BookContent() {
   const params = useParams()
+  const searchParams = useSearchParams()
   const slug = params.slug as string
+  const programParam = searchParams.get('p') || ''
+  const defaultCategory = PROGRAM_TO_CATEGORY[programParam] || 'all'
+  const router = useRouter()
   const [schedule, setSchedule] = useState<ScheduleDay[]>([])
-  const [filter, setFilter] = useState<string>('all')
+  const [filter, setFilter] = useState<string>(defaultCategory)
   const [selectedClass, setSelectedClass] = useState<DatedClass | null>(null)
   const [booked, setBooked] = useState(false)
   const [booking, setBooking] = useState(false)
@@ -82,7 +87,15 @@ function BookContent() {
         a.download = 'fightcraft-class.ics'
         a.click()
         URL.revokeObjectURL(url)
-        setBooked(true)
+
+        // Redirect to confirmed page
+        const qp = new URLSearchParams({
+          class: selectedClass.name,
+          day: `${selectedClass.dayName}, ${selectedClass.dateStr}`,
+          time: selectedClass.time,
+        })
+        router.push(`/${slug}/quiz/class-confirmed?${qp.toString()}`)
+        return
       }
     } catch {}
     setBooking(false)
@@ -298,10 +311,25 @@ function getCategory(className: string): string {
   return 'Other'
 }
 
+// Map quiz program value → booking filter category
+const PROGRAM_TO_CATEGORY: Record<string, string> = {
+  kickboxing: 'Kickboxing',
+  muay_thai: 'Muay Thai',
+  brazilian_jiu_jitsu: 'Jiu Jitsu',
+  no_gi_jiu_jitsu: 'Jiu Jitsu',
+  mixed_martial_arts: 'MMA',
+  wrestling: 'MMA',
+  kids_martial_arts: 'Kids & Teens',
+  'kids_and_teens': 'Kids & Teens',
+  teens_kickboxing: 'Kids & Teens',
+}
+
 export default function BookPage() {
   return (
     <RequireLead>
-      <BookContent />
+      <Suspense fallback={<div className="min-h-screen bg-black" />}>
+        <BookContent />
+      </Suspense>
     </RequireLead>
   )
 }

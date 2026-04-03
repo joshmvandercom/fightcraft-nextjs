@@ -5,61 +5,83 @@ import { Suspense } from 'react'
 import RequireLead from '@/components/RequireLead'
 import { isQualified } from '@/lib/qualify'
 
-function buildStory(m: string, e: string, c: string, o: string, v: string, r: string): string[] {
+function buildStory(p: string, e: string, c: string, o: string, v: string, r: string): string[] {
   const lines: string[] = []
 
   // Open loop
   lines.push("Hey.")
   lines.push("")
-  lines.push("At the bottom of this page you're going to be able to book your first class.")
+  lines.push("At the bottom of this page you're going to be able to take the next step.")
   lines.push("")
   lines.push("But first I want to tell you something.")
   lines.push("")
   lines.push("")
 
-  // Motivation opener
-  if (m === 'A') {
-    lines.push("Most people don't talk about why they start training.")
+  // Program opener
+  if (p.includes('kickboxing')) {
+    lines.push("Kickboxing.")
     lines.push("")
-    lines.push("They say \"fitness\" or \"something new.\"")
+    lines.push("Good choice.")
     lines.push("")
-    lines.push("But you were honest.")
+    lines.push("It's where most of our members start.")
     lines.push("")
-    lines.push("You want to feel safe. For real.")
+    lines.push("There's something about hitting pads that just resets your whole day.")
     lines.push("")
-    lines.push("That's one of the most respected reasons anyone walks through our door.")
-  } else if (m === 'B') {
-    lines.push("People come to us for all kinds of reasons.")
+    lines.push("The stress goes somewhere. Your body wakes up. And you walk out feeling like a completely different person.")
+  } else if (p.includes('muay_thai')) {
+    lines.push("Muay Thai.")
     lines.push("")
-    lines.push("But yours is different.")
+    lines.push("The Art of 8 Limbs.")
     lines.push("")
-    lines.push("You're not really here for the workout.")
+    lines.push("Fists. Elbows. Knees. Shins. All working together.")
     lines.push("")
-    lines.push("You're here because you know there's a sharper version of you on the other side of this.")
+    lines.push("It's the most complete striking system in the world.")
     lines.push("")
-    lines.push("More focused. More present. More dialed in.")
+    lines.push("And it builds a kind of toughness that carries over into everything else you do.")
+  } else if (p.includes('jiu_jitsu') || p.includes('bjj')) {
+    lines.push("Jiu Jitsu.")
     lines.push("")
-    lines.push("The mat has a way of doing that to people.")
-  } else if (m === 'C') {
-    lines.push("I'll be honest.")
+    lines.push("The gentle art.")
     lines.push("")
-    lines.push("I've heard this one a thousand times.")
+    lines.push("Don't let the name fool you. It's chess with your body.")
     lines.push("")
-    lines.push("\"I'm bored at the gym.\"")
+    lines.push("Every roll is a puzzle. Every class teaches you something new about yourself.")
     lines.push("")
-    lines.push("\"I need something that doesn't feel like a chore.\"")
+    lines.push("It's the one martial art where a smaller person can control a bigger one. Technique over strength. Always.")
+  } else if (p.includes('mma') || p.includes('mixed_martial_arts')) {
+    lines.push("MMA.")
     lines.push("")
-    lines.push("You're in good company.")
+    lines.push("The complete package.")
     lines.push("")
-    lines.push("Most of our members said the exact same thing before they started.")
+    lines.push("Striking. Grappling. Wall work. Transitions.")
+    lines.push("")
+    lines.push("Most martial arts teach you one thing. MMA teaches you everything.")
+    lines.push("")
+    lines.push("It's the most demanding and the most rewarding training you'll ever do.")
+  } else if (p.includes('kids') || p.includes('teens')) {
+    lines.push("You're looking into training for a young person in your life.")
+    lines.push("")
+    lines.push("That's one of the best decisions you can make for them.")
+    lines.push("")
+    lines.push("Confidence. Discipline. Focus. Real friendships.")
+    lines.push("")
+    lines.push("The kind of things that no app or after-school program can teach.")
+  } else if (p.includes('wrestling')) {
+    lines.push("Wrestling.")
+    lines.push("")
+    lines.push("The foundation of every great fighter.")
+    lines.push("")
+    lines.push("Takedowns. Control. The ability to dictate where the fight happens.")
+    lines.push("")
+    lines.push("It's the hardest martial art to train. And the most rewarding.")
   } else {
-    lines.push("You want to compete.")
+    lines.push("You're not sure which program yet.")
     lines.push("")
-    lines.push("Most people don't have that in them.")
+    lines.push("That's actually fine.")
     lines.push("")
-    lines.push("You do.")
+    lines.push("Most people who walk through our door don't know either.")
     lines.push("")
-    lines.push("That changes everything about how we approach your training.")
+    lines.push("That's what we're here for. To help you figure it out.")
   }
 
   lines.push("")
@@ -248,16 +270,16 @@ function QuizResults() {
   const params = useParams()
   const slug = params.slug as string
 
-  const m = searchParams.get('m') || 'A'
+  const p = searchParams.get('p') || 'explore'
   const e = searchParams.get('e') || 'A'
   const c = searchParams.get('c') || 'A'
   const o = searchParams.get('o') || 'A'
   const v = searchParams.get('v') || 'A'
   const r = searchParams.get('r') || 'A'
 
-  const story = buildStory(m, e, c, o, v, r)
+  const story = buildStory(p, e, c, o, v, r)
   const locationName = slug === 'san-jose' ? 'San Jose' : slug === 'merced' ? 'Merced' : slug === 'brevard' ? 'Brevard' : slug
-  const qualified = isQualified({ c, o, r })
+  const qualified = isQualified({ p, e, c, o, r })
   const qpStr = new URLSearchParams(Object.fromEntries(searchParams.entries())).toString()
 
   return (

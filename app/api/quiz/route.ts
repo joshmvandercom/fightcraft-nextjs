@@ -91,7 +91,7 @@ const DISPLAY_LABELS: Record<string, Record<string, string>> = {
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
-  const { location, email, name, m, e, c, o, v, r } = body
+  const { location, email, name, p, e, c, o, v, r } = body
 
   if (!location) {
     return NextResponse.json({ error: 'Location required' }, { status: 400 })
@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
     source: 'fightcraft-quiz',
     location,
     // Stable keys for automations - these never change
-    quiz_motivation: STABLE_KEYS.motivation[m] || m,
+    quiz_program: p || 'unknown',
     quiz_experience: STABLE_KEYS.experience[e] || e,
     quiz_commitment: STABLE_KEYS.commitment[c] || c,
     quiz_objection: STABLE_KEYS.objection[o] || o,
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
     quiz_readiness: STABLE_KEYS.readiness[r] || r,
     tags: [
       'quiz-completed',
-      `motivation:${STABLE_KEYS.motivation[m] || m}`,
+      `program:${p || 'unknown'}`,
       `experience:${STABLE_KEYS.experience[e] || e}`,
       `commitment:${STABLE_KEYS.commitment[c] || c}`,
       `objection:${STABLE_KEYS.objection[o] || o}`,
@@ -139,7 +139,7 @@ export async function POST(request: NextRequest) {
 
   await notifySlack(
     `Quiz Completed: ${name || 'Unknown'} (${email || 'no email'}) | Location: ${location}\n` +
-    `Motivation: ${DISPLAY_LABELS.motivation[m] || m}\n` +
+    `Program Interest: ${p || 'unknown'}\n` +
     `Experience: ${DISPLAY_LABELS.experience[e] || e}\n` +
     `Commitment: ${DISPLAY_LABELS.commitment[c] || c}\n` +
     `Objection: ${DISPLAY_LABELS.objection[o] || o}\n` +

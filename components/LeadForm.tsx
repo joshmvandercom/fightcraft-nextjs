@@ -76,31 +76,18 @@ export default function LeadForm({ selectedLocation, variant = 'dark', onSuccess
     ? 'w-full px-4 py-3 bg-transparent border border-white/30 text-white placeholder-white/30 font-heading text-sm uppercase tracking-wider focus:border-white focus:outline-none transition-colors'
     : 'w-full px-4 py-3 bg-transparent border border-black/30 text-black placeholder-black/30 font-heading text-sm uppercase tracking-wider focus:border-black focus:outline-none transition-colors'
 
-  const selectClass = variant === 'dark'
-    ? 'w-full px-4 py-3 bg-transparent border border-white/30 text-white font-heading text-sm uppercase tracking-wider focus:border-white focus:outline-none transition-colors'
-    : 'w-full px-4 py-3 bg-transparent border border-black/30 text-black font-heading text-sm uppercase tracking-wider focus:border-black focus:outline-none transition-colors'
-
   const buttonClass = variant === 'dark'
     ? 'w-full py-4 bg-white text-black font-heading text-base font-bold uppercase tracking-widest hover:bg-white/90 transition-colors disabled:opacity-50'
     : 'w-full py-4 bg-black text-white font-heading text-base font-bold uppercase tracking-widest hover:bg-black/80 transition-colors disabled:opacity-50'
 
-  const optionBg = variant === 'dark' ? 'bg-black' : 'bg-white'
-
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input type="text" name="name" placeholder="First Name" required className={inputClass} />
-        <input type="email" name="email" placeholder="Email" required className={inputClass} />
+        <input type="text" name="name" placeholder="Full Name" required className={inputClass} />
+        <input type="email" name="email" placeholder="Your Best Email" required className={inputClass} />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input type="tel" name="phone" placeholder="Phone" className={inputClass} />
-        <select name="location" value={location} onChange={e => setLocation(e.target.value)} className={selectClass}>
-          <option value="" className={optionBg}>Select Location</option>
-          <option value="san-jose" className={optionBg}>San Jose</option>
-          <option value="merced" className={optionBg}>Merced</option>
-          <option value="brevard" className={optionBg}>Brevard</option>
-        </select>
-      </div>
+      <input type="tel" name="phone" placeholder="Your Mobile Phone" className={inputClass} />
+      <input type="hidden" name="location" value={location} />
 
       <div className="asdf">
         <input type="text" name="website" tabIndex={-1} autoComplete="off" />

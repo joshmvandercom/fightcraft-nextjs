@@ -1,17 +1,19 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
-import { getLead, setLead } from '@/lib/lead'
+import { useParams, useRouter } from 'next/navigation'
+import { setLead } from '@/lib/lead'
 
-export default function LeadModal() {
-  const router = useRouter()
+export default function BeginnerModal() {
   const [open, setOpen] = useState(false)
   const [exitTriggered, setExitTriggered] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  const params = useParams()
+  const router = useRouter()
+  const slug = params.slug as string
 
   const openModal = useCallback(() => setOpen(true), [])
   const closeModal = useCallback(() => {
@@ -21,12 +23,12 @@ export default function LeadModal() {
 
   useEffect(() => {
     const handler = () => openModal()
-    window.addEventListener('open-lead-modal', handler)
+    window.addEventListener('open-beginner-modal', handler)
 
     const exitHandler = (e: MouseEvent) => {
       if (e.clientY <= 0 && !exitTriggered) {
         setExitTriggered(true)
-        if (!sessionStorage.getItem('lead_modal_dismissed') && !getLead()) {
+        if (!sessionStorage.getItem('lead_modal_dismissed')) {
           openModal()
         }
       }
@@ -39,7 +41,7 @@ export default function LeadModal() {
     document.addEventListener('keydown', escHandler)
 
     return () => {
-      window.removeEventListener('open-lead-modal', handler)
+      window.removeEventListener('open-beginner-modal', handler)
       document.removeEventListener('mouseout', exitHandler)
       document.removeEventListener('keydown', escHandler)
     }
@@ -47,11 +49,10 @@ export default function LeadModal() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!name || !email) return
+    if (!name || !phone || !email) return
     setSubmitting(true)
 
-    const location = localStorage.getItem('fightcraft_location') || 'san-jose'
-    const data = { name, email, phone, location, website: '' }
+    const data = { name, email, phone, location: slug, website: '' }
 
     try {
       const res = await fetch('/api/leads', {
@@ -60,9 +61,9 @@ export default function LeadModal() {
         body: JSON.stringify(data),
       })
       if (res.ok) {
-        setLead({ name, email, phone, location })
+        setLead({ name, email, phone, location: slug })
         closeModal()
-        router.push('/next-steps')
+        router.push(`/${slug}/quiz?p=kickboxing`)
         return
       }
     } catch {}
@@ -75,7 +76,8 @@ export default function LeadModal() {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeModal} />
 
-      <div className="relative bg-white text-black w-full max-w-md rounded-xl shadow-2xl">
+      <div className="relative w-full max-w-md">
+        {/* Close button */}
         <button
           onClick={(e) => { e.stopPropagation(); closeModal() }}
           className="absolute -top-3 -right-3 w-8 h-8 bg-black rounded-full flex items-center justify-center text-white hover:bg-black/80 transition-colors z-20"
@@ -85,11 +87,19 @@ export default function LeadModal() {
           </svg>
         </button>
 
+        <div className="bg-white text-black rounded-xl shadow-2xl overflow-hidden">
+        {/* Progress bar */}
+        <div className="relative h-10 bg-neutral-100">
+          <div className="absolute inset-0 bg-red-400" style={{
+            width: '85%',
+            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.15) 10px, rgba(255,255,255,0.15) 20px)',
+          }} />
+          <p className="relative z-10 text-center text-sm text-white font-medium leading-10">Almost done...</p>
+        </div>
+
+        {/* Form */}
         <div className="p-8">
-          <h2 className="text-2xl font-bold mb-2">Get Started</h2>
-          <p className="text-sm text-black/50 mb-6">
-            Drop your info and we&apos;ll reach out with everything you need to get started.
-          </p>
+          <h2 className="text-2xl font-bold mb-6">Complete your profile</h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
@@ -133,7 +143,7 @@ export default function LeadModal() {
               disabled={submitting}
               className="w-full py-4 bg-black text-white font-heading text-lg font-bold uppercase tracking-widest rounded-lg hover:bg-black/80 transition-colors disabled:opacity-50"
             >
-              {submitting ? 'Sending...' : 'Get Started'}
+              {submitting ? 'Sending...' : 'Go to Step Two'}
             </button>
           </form>
 
@@ -141,6 +151,7 @@ export default function LeadModal() {
           <p className="text-center mt-2">
             <a href="/privacy-policy" className="text-sm text-black underline">Privacy Policy</a>
           </p>
+        </div>
         </div>
       </div>
     </div>

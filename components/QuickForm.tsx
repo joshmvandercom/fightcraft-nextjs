@@ -53,21 +53,16 @@ export default function QuickForm() {
 
   const inputDesktop = "flex-1 px-4 py-3 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30"
   const inputMobile = "px-3 py-2.5 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30"
-  const selectStyle = { backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(0,0,0,0.3)' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 10px center', backgroundSize: '14px' }
 
   return (
     <div className="bg-neutral-100 py-4 px-6">
       <div className="max-w-5xl mx-auto">
         {/* Desktop */}
         <form onSubmit={handleSubmit} className="hidden md:flex gap-3 items-center mb-3">
-          <input type="text" placeholder="Name" required value={name} onChange={e => setName(e.target.value)} className={inputDesktop} />
-          <input type="email" placeholder="Email" required value={email} onChange={e => setEmail(e.target.value)} className={inputDesktop} />
-          <input type="tel" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} className={inputDesktop} />
-          <select value={location} onChange={e => setLocation(e.target.value)} className="w-auto px-4 py-3 bg-white text-black text-sm border border-black/10 focus:outline-none focus:border-black/30 appearance-none pr-10" style={selectStyle}>
-            <option value="san-jose">San Jose</option>
-            <option value="merced">Merced</option>
-            <option value="brevard">Brevard</option>
-          </select>
+          <input type="text" placeholder="Full Name" required value={name} onChange={e => setName(e.target.value)} className={inputDesktop} />
+          <input type="email" placeholder="Your Best Email" required value={email} onChange={e => setEmail(e.target.value)} className={inputDesktop} />
+          <input type="tel" placeholder="Your Mobile Phone" value={phone} onChange={e => setPhone(e.target.value)} className={inputDesktop} />
+          <input type="hidden" value={location} />
           <button type="submit" disabled={submitting} className="px-8 py-3 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors disabled:opacity-50 whitespace-nowrap">
             {submitting ? '...' : 'Get Started'}
           </button>
@@ -75,14 +70,10 @@ export default function QuickForm() {
 
         {/* Mobile */}
         <form onSubmit={handleSubmit} className="md:hidden grid grid-cols-2 gap-2 mb-3">
-          <input type="text" placeholder="Name" required value={name} onChange={e => setName(e.target.value)} className={inputMobile} />
-          <input type="email" placeholder="Email" required value={email} onChange={e => setEmail(e.target.value)} className={inputMobile} />
-          <input type="tel" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} className={inputMobile} />
-          <select value={location} onChange={e => setLocation(e.target.value)} className={`${inputMobile} appearance-none pr-8`} style={{ ...selectStyle, backgroundPosition: 'right 8px center', backgroundSize: '12px' }}>
-            <option value="san-jose">San Jose</option>
-            <option value="merced">Merced</option>
-            <option value="brevard">Brevard</option>
-          </select>
+          <input type="text" placeholder="Full Name" required value={name} onChange={e => setName(e.target.value)} className={inputMobile} />
+          <input type="email" placeholder="Your Best Email" required value={email} onChange={e => setEmail(e.target.value)} className={inputMobile} />
+          <input type="tel" placeholder="Your Mobile Phone" value={phone} onChange={e => setPhone(e.target.value)} className={`${inputMobile} col-span-2`} />
+          <input type="hidden" value={location} />
           <button type="submit" disabled={submitting} className="col-span-2 py-2.5 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors disabled:opacity-50">
             {submitting ? '...' : 'Get Started'}
           </button>
