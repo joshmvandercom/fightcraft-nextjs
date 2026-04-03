@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { getLead } from '@/lib/lead'
 
 // Locations that use the quiz flow
-const QUIZ_LOCATIONS = ['san-jose']
+const QUIZ_LOCATIONS = ['san-jose', 'merced', 'brevard']
 
 export default function QuizRedirect() {
   const router = useRouter()
