@@ -3,6 +3,7 @@
 import { useParams, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { useEffect, useState } from 'react'
+import { track } from '@/lib/analytics'
 import { getLead } from '@/lib/lead'
 
 function ClassConfirmedContent() {
@@ -19,6 +20,7 @@ function ClassConfirmedContent() {
   useEffect(() => {
     const lead = getLead()
     if (lead?.name) setFirstName(lead.name.split(' ')[0])
+    track('booking_completed', { location: slug, type: 'class', class_name: className, day, time, booking_type: 'self' })
   }, [])
 
   return (

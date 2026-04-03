@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { getLead, setLead } from '@/lib/lead'
+import { identify, track } from '@/lib/analytics'
 
 export default function LeadModal() {
   const router = useRouter()
@@ -61,6 +62,8 @@ export default function LeadModal() {
       })
       if (res.ok) {
         setLead({ name, email, phone, location })
+        identify(email, { name, location })
+        track('lead_created', { location, lead_source: 'website' })
         closeModal()
         router.push('/next-steps')
         return

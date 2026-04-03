@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json()
-  const { name, email, phone, location, website } = body
+  const { name, email, phone, location, website, lead_source } = body
 
   // Honeypot check
   if (website) {
@@ -75,6 +75,7 @@ export async function POST(request: NextRequest) {
     phone: phone || '',
     location,
     source: 'fightcraft-web',
+    lead_source: lead_source || 'website',
     firstName: name,
     first_name: name,
   }

@@ -3,6 +3,7 @@
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { setLead } from '@/lib/lead'
+import { identify, track } from '@/lib/analytics'
 
 interface OfferData {
   offer: {
@@ -58,7 +59,7 @@ function OfferModal({ slug, programValue, offer, onClose }: { slug: string; prog
     if (!name || !phone || !email) return
     setSubmitting(true)
 
-    const data = { name, email, phone, location: slug, website: '' }
+    const data = { name, email, phone, location: slug, website: '', lead_source: 'meta' }
     try {
       const res = await fetch('/api/leads', {
         method: 'POST',
@@ -67,6 +68,8 @@ function OfferModal({ slug, programValue, offer, onClose }: { slug: string; prog
       })
       if (res.ok) {
         setLead({ name, email, phone, location: slug })
+        identify(email, { name, location: slug })
+        track('lead_created', { location: slug, lead_source: 'meta' })
         onClose()
         if (offer === 'beginner') {
           router.push(`/${slug}/quiz?p=${programValue}`)

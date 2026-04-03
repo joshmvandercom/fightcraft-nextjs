@@ -46,7 +46,29 @@ export default function LandingPagesIndex() {
                 )
               })}
 
-              {/* Standalone pages */}
+              {/* Booking pages (GHL calendar embeds) */}
+              <div>
+                <h3 className="font-heading text-sm uppercase tracking-widest text-black/40 mb-2">Booking Pages</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                  {programSlugs.map(progSlug => {
+                    const prog = getProgramConfig(progSlug)
+                    if (!prog) return null
+                    const url = `/${loc.slug}/quiz/book?p=${prog.slug_value}`
+                    return (
+                      <a key={progSlug} href={url} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                        <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Book {prog.display_name}</p>
+                        <p className="text-[10px] text-black/40">{url}</p>
+                      </a>
+                    )
+                  })}
+                  <a href={`/${loc.slug}/quiz/call`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Orientation Call</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/quiz/call</p>
+                  </a>
+                </div>
+              </div>
+
+              {/* Other standalone pages */}
               <div>
                 <h3 className="font-heading text-sm uppercase tracking-widest text-black/40 mb-2">Other</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
@@ -57,6 +79,10 @@ export default function LandingPagesIndex() {
                   <a href={`/${loc.slug}/quiz`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
                     <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Quiz</p>
                     <p className="text-[10px] text-black/40">/{loc.slug}/quiz</p>
+                  </a>
+                  <a href={`/${loc.slug}/quiz/complete?p=kickboxing&e=A&c=A&o=A&v=A&r=A`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Quiz Complete (Sample)</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/quiz/complete</p>
                   </a>
                 </div>
               </div>

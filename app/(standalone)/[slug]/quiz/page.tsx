@@ -4,6 +4,8 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import RequireLead from '@/components/RequireLead'
 import { getLead } from '@/lib/lead'
+import { track } from '@/lib/analytics'
+import { resolveAnswer } from '@/lib/quiz-keys'
 
 interface Option {
   letter: string
@@ -111,13 +113,21 @@ export default function QuizPage() {
         const programs: string[] = data.programs || []
         const letters = 'ABCDEFGHIJKLMNOP'
 
-        const programOptions: Option[] = programs.map((name: string, i: number) => ({
-          letter: letters[i],
-          title: name,
-          description: '',
-          affirmation: PROGRAM_AFFIRMATIONS[name.toLowerCase()] || `Great choice. ${name} is one of our most popular programs. Let's find the right path for you.`,
-          value: name.toLowerCase().replace(/\s+/g, '_').replace(/&/g, 'and'),
-        }))
+        // Programs that map to the same quiz_program value
+        const PROGRAM_VALUE_OVERRIDES: Record<string, string> = {
+          'muay_thai': 'kickboxing',
+        }
+
+        const programOptions: Option[] = programs.map((name: string, i: number) => {
+          const rawValue = name.toLowerCase().replace(/\s+/g, '_').replace(/&/g, 'and')
+          return {
+            letter: letters[i],
+            title: name,
+            description: '',
+            affirmation: PROGRAM_AFFIRMATIONS[name.toLowerCase()] || `Great choice. ${name} is one of our most popular programs. Let's find the right path for you.`,
+            value: PROGRAM_VALUE_OVERRIDES[rawValue] || rawValue,
+          }
+        })
 
         programOptions.push({
           letter: letters[programs.length],
@@ -149,6 +159,7 @@ export default function QuizPage() {
           }
           setSteps([q1, ...STATIC_STEPS])
           setCurrentStep(1)
+          track('quiz_started', { location: slug, program: presetProgram })
         } else {
           const q1: Step = {
             question: "What brought you here?",
@@ -156,6 +167,7 @@ export default function QuizPage() {
             options: programOptions,
           }
           setSteps([q1, ...STATIC_STEPS])
+          track('quiz_started', { location: slug })
         }
       })
   }, [slug])
@@ -181,6 +193,8 @@ export default function QuizPage() {
         o: a[3] || '', v: a[4] || '', r: a[5] || '',
       })
 
+      track('quiz_completed', { location: slug, program: programValue })
+
       // Send quiz data to GHL + Slack
       const lead = getLead()
       fetch('/api/quiz', {
@@ -190,6 +204,7 @@ export default function QuizPage() {
           location: slug,
           email: lead?.email || '',
           name: lead?.name || '',
+          phone: lead?.phone || '',
           p: programValue, e: a[1] || '', c: a[2] || '',
           o: a[3] || '', v: a[4] || '', r: a[5] || '',
         }),
@@ -200,10 +215,36 @@ export default function QuizPage() {
   }, [currentStep, totalSteps, slug, router])
 
   function selectOption(letter: string) {
-    answersRef.current = { ...answersRef.current, [currentStep]: letter }
+    const updatedAnswers = { ...answersRef.current, [currentStep]: letter }
+    answersRef.current = updatedAnswers
     setAnswers(prev => ({ ...prev, [currentStep]: letter }))
     setShowAffirmation(true)
     setAutoProgress(0)
+
+    // Track in Amplitude
+    const stepNames = ['program', 'experience', 'commitment', 'objection', 'vision', 'readiness']
+    const resolvedValue = currentStep === 0 ? (programValuesRef.current[letter] || letter) : resolveAnswer(currentStep, letter)
+    track('quiz_step_answered', { location: slug, step: stepNames[currentStep], answer: resolvedValue })
+
+    // Fire quiz progress webhook
+    const lead = getLead()
+    fetch('/api/quiz-progress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        location: slug,
+        email: lead?.email || '',
+        name: lead?.name || '',
+        phone: lead?.phone || '',
+        step: currentStep,
+        answer: currentStep === 0 ? (programValuesRef.current[letter] || letter) : letter,
+        answers: Object.fromEntries(
+          Object.entries(updatedAnswers).map(([k, v]) =>
+            [k, k === '0' ? (programValuesRef.current[v] || v) : v]
+          )
+        ),
+      }),
+    }).catch(() => {})
 
     if (timerRef.current) clearTimeout(timerRef.current)
     if (intervalRef.current) clearInterval(intervalRef.current)

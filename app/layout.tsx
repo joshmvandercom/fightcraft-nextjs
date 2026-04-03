@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import AnalyticsProvider from '@/components/AnalyticsProvider'
 
 export const metadata: Metadata = {
   title: 'FightCraft | Premier Martial Arts',
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/timmons.woff2" as="font" type="font/woff2" crossOrigin="" />
       </head>
       <body className="bg-black text-white">
+        <AnalyticsProvider />
         {children}
       </body>
     </html>

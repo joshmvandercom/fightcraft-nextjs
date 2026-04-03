@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { setLead } from '@/lib/lead'
+import { identify, track } from '@/lib/analytics'
 
 export default function BeginnerModal() {
   const [open, setOpen] = useState(false)
@@ -52,7 +53,7 @@ export default function BeginnerModal() {
     if (!name || !phone || !email) return
     setSubmitting(true)
 
-    const data = { name, email, phone, location: slug, website: '' }
+    const data = { name, email, phone, location: slug, website: '', lead_source: 'meta' }
 
     try {
       const res = await fetch('/api/leads', {
@@ -62,6 +63,8 @@ export default function BeginnerModal() {
       })
       if (res.ok) {
         setLead({ name, email, phone, location: slug })
+        identify(email, { name, location: slug })
+        track('lead_created', { location: slug, lead_source: 'meta' })
         closeModal()
         router.push(`/${slug}/quiz?p=kickboxing`)
         return

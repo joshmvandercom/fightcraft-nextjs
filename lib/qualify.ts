@@ -7,9 +7,8 @@
 // r = readiness (A-D)
 
 // Location-specific: programs that require orientation for beginners
-const BEGINNER_ORIENTATION_REQUIRED: Record<string, string[]> = {
-  'san-jose': ['kickboxing'],
-}
+// Currently disabled - all beginners book directly
+const BEGINNER_ORIENTATION_REQUIRED: Record<string, string[]> = {}
 
 export function isQualified(answers: { p: string; e: string; c: string; o: string; r: string }, location?: string): boolean {
   // Check if this specific program at this location requires beginner orientation
