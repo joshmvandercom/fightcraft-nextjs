@@ -6,14 +6,22 @@
 // v = vision (A-D)
 // r = readiness (A-D)
 
-export function isQualified(answers: { p: string; e: string; c: string; o: string; r: string }): boolean {
-  // All beginners go to orientation call regardless of program
-  if (answers.e === 'A') return false
+// Location-specific: programs that require orientation for beginners
+const BEGINNER_ORIENTATION_REQUIRED: Record<string, string[]> = {
+  'san-jose': ['kickboxing'],
+}
 
-  // "Not sure" on program → orientation call
+export function isQualified(answers: { p: string; e: string; c: string; o: string; r: string }, location?: string): boolean {
+  // Check if this specific program at this location requires beginner orientation
+  if (answers.e === 'A' && location) {
+    const programs = BEGINNER_ORIENTATION_REQUIRED[location] || []
+    if (programs.includes(answers.p)) return false
+  }
+
+  // "Not sure" on program always goes to orientation
   if (answers.p === 'explore') return false
 
-  // Still exploring readiness → always a call
+  // Still exploring readiness always goes to call
   if (answers.r === 'D') return false
 
   // Count flags for remaining answers

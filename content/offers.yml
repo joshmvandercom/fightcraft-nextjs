@@ -1,0 +1,64 @@
+offers:
+  beginner:
+    headline_template: "Beginner Friendly<br/>{program} Program"
+    subtitle: "For working professionals, no experience required."
+    coach_intro: "Hey, Coach {coach} here."
+    body_line_1: "We're opening **9 spots** for [working professionals](/) who want"
+    body_line_2: "***structured training*** in a fun and safe environment."
+    cta_title: "Build a routine that challenges you."
+    cta_subtitle: "Train in a way that challenges the body and *frees the mind*."
+    button_text: "Book Free Consultation"
+    button_sub: "Limited space available"
+    footer_note: "No experience necessary."
+    quiz_skip_program: true
+    quiz_preset_experience: null
+
+  free-pass:
+    headline_template: "Unlock Your Free<br/>{program} Pass"
+    subtitle: "Your first class is on us. No strings attached."
+    coach_intro: "Hey, Coach {coach} here."
+    body_line_1: "We're inviting **a small group** of [motivated people](/) to"
+    body_line_2: "***experience a real class*** before committing to anything."
+    cta_title: "See what it's actually like."
+    cta_subtitle: "One class. No pressure. Just show up and train."
+    button_text: "Claim Your Free Pass"
+    button_sub: "Limited availability"
+    footer_note: "No experience necessary."
+    quiz_skip_program: true
+    quiz_preset_experience: null
+
+programs:
+  kickboxing:
+    display_name: "Kickboxing"
+    image: "/images/home/kickboxing.jpg"
+    slug_value: "kickboxing"
+
+  muay-thai:
+    display_name: "Muay Thai"
+    image: "/images/home/muay-thai.webp"
+    slug_value: "muay_thai"
+
+  brazilian-jiu-jitsu:
+    display_name: "Brazilian Jiu Jitsu"
+    image: "/images/home/bjj.webp"
+    slug_value: "brazilian_jiu_jitsu"
+
+  no-gi-jiu-jitsu:
+    display_name: "No Gi Jiu Jitsu"
+    image: "/images/home/nogi.jpg"
+    slug_value: "no_gi_jiu_jitsu"
+
+  mixed-martial-arts:
+    display_name: "Mixed Martial Arts"
+    image: "/images/home/vern.jpeg"
+    slug_value: "mixed_martial_arts"
+
+  kids-martial-arts:
+    display_name: "Kids Martial Arts"
+    image: "/images/home/kids-kickboxing.jpg"
+    slug_value: "kids_martial_arts"
+
+  wrestling:
+    display_name: "Wrestling"
+    image: "/images/home/wrestling.jpg"
+    slug_value: "wrestling"

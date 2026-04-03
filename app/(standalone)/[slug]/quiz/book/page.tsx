@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useSearchParams, useRouter } from 'next/navigation'
 import { Suspense } from 'react'
 import RequireLead from '@/components/RequireLead'
+import { getLead } from '@/lib/lead'
 
 interface ScheduleClass {
   time: string
@@ -75,6 +76,7 @@ function BookContent() {
           date: selectedClass.date.toISOString(),
           time: selectedClass.time,
           className: selectedClass.name,
+          ...(() => { const l = getLead(); return l ? { name: l.name, email: l.email, phone: l.phone } : {} })(),
         }),
       })
 

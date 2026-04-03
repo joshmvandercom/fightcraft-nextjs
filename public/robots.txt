@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+Disallow: /landing-pages
+Disallow: /*/quiz
+Disallow: /*/beginner-kickboxing
+Disallow: /*/beginner
+Disallow: /*/free-pass
+
 Sitemap: https://fightcraft.com/sitemap.xml

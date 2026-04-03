@@ -66,14 +66,9 @@ export async function POST(request: NextRequest) {
   }
 
   const webhookUrl = WEBHOOKS[location]
-  if (!webhookUrl) {
-    return NextResponse.json(
-      { error: 'Invalid location.' },
-      { status: 400 }
-    )
-  }
+  const isLive = process.env.WEBHOOKS_LIVE === 'true'
+  const webhookReady = webhookUrl && !webhookUrl.includes('example.com') && !webhookUrl.includes('placeholder')
 
-  // GHL webhook payload
   const payload = {
     name,
     email,
@@ -84,37 +79,24 @@ export async function POST(request: NextRequest) {
     first_name: name,
   }
 
-  const isLive = process.env.WEBHOOKS_LIVE === 'true'
-
-  if (!isLive) {
-    console.log('[DRY RUN] Lead received:', JSON.stringify(payload, null, 2))
-    console.log('[DRY RUN] Would POST to:', webhookUrl)
-    await notifySlack(`New Lead: ${name} (${email}) | Phone: ${phone || 'n/a'} | Location: ${location}`)
-    return NextResponse.json({ success: true })
-  }
-
-  try {
-    const res = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-
-    if (!res.ok) {
-      console.error(`Webhook failed for ${location}: ${res.status}`)
-      return NextResponse.json(
-        { error: 'Something went wrong. Please try again.' },
-        { status: 502 }
-      )
+  if (isLive && webhookReady) {
+    try {
+      const res = await fetch(webhookUrl!, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) {
+        console.error(`Webhook failed for ${location}: ${res.status}`)
+      }
+    } catch (err) {
+      console.error('Webhook error:', err)
     }
-
-    await notifySlack(`New Lead: ${name} (${email}) | Phone: ${phone || 'n/a'} | Location: ${location}`)
-    return NextResponse.json({ success: true })
-  } catch (err) {
-    console.error('Webhook error:', err)
-    return NextResponse.json(
-      { error: 'Something went wrong. Please try again.' },
-      { status: 500 }
-    )
+  } else if (!webhookReady) {
+    console.log(`[NO WEBHOOK] Lead for ${location}, Slack only:`, JSON.stringify(payload, null, 2))
   }
+
+  // Always send Slack regardless of webhook status
+  await notifySlack(`New Lead: ${name} (${email}) | Phone: ${phone || 'n/a'} | Location: ${location}`, location)
+  return NextResponse.json({ success: true })
 }

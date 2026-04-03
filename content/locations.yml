@@ -13,6 +13,7 @@ locations:
     email: friends@fightcraft.com
     instagram: "@fightcraftsj"
     contact_email: friends@fightcraft.com
+    owner: Josh
     programs:
       - Kickboxing
       - Muay Thai
@@ -36,6 +37,7 @@ locations:
     email: friends@fightcraft.com
     instagram: "@fightcraft.merced"
     contact_email: patrick@fightcraft.com
+    owner: Patrick
     programs:
       - Kickboxing
       - Muay Thai
@@ -55,6 +57,7 @@ locations:
     email: friends@fightcraft.com
     instagram: "@fightcraftbrevard"
     contact_email: ricky@fightcraft.com
+    owner: Ricky
     programs:
       - Kickboxing
       - Muay Thai

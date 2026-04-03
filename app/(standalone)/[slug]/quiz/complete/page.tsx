@@ -279,7 +279,7 @@ function QuizResults() {
 
   const story = buildStory(p, e, c, o, v, r)
   const locationName = slug === 'san-jose' ? 'San Jose' : slug === 'merced' ? 'Merced' : slug === 'brevard' ? 'Brevard' : slug
-  const qualified = isQualified({ p, e, c, o, r })
+  const qualified = isQualified({ p, e, c, o, r }, slug)
   const qpStr = new URLSearchParams(Object.fromEntries(searchParams.entries())).toString()
 
   return (

@@ -99,6 +99,7 @@ export async function POST(request: NextRequest) {
 
   const webhookUrl = WEBHOOKS[location]
   const isLive = process.env.WEBHOOKS_LIVE === 'true'
+  const webhookReady = webhookUrl && !webhookUrl.includes('example.com') && !webhookUrl.includes('placeholder')
 
   const payload = {
     email: email || '',
@@ -123,9 +124,9 @@ export async function POST(request: NextRequest) {
     ],
   }
 
-  if (isLive && webhookUrl) {
+  if (isLive && webhookReady) {
     try {
-      await fetch(webhookUrl, {
+      await fetch(webhookUrl!, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -144,7 +145,8 @@ export async function POST(request: NextRequest) {
     `Commitment: ${DISPLAY_LABELS.commitment[c] || c}\n` +
     `Objection: ${DISPLAY_LABELS.objection[o] || o}\n` +
     `Vision: ${DISPLAY_LABELS.vision[v] || v}\n` +
-    `Readiness: ${DISPLAY_LABELS.readiness[r] || r}`
+    `Readiness: ${DISPLAY_LABELS.readiness[r] || r}`,
+    location
   )
 
   return NextResponse.json({ success: true })
