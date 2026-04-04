@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { notifySlack } from '@/lib/slack'
+import { prisma } from '@/lib/db'
 
 const WEBHOOKS: Record<string, string | undefined> = {
   'san-jose': process.env.WEBHOOK_SAN_JOSE,
@@ -65,6 +66,23 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  // Create lead in database first so we have the SID for GHL
+  let sid = ''
+  try {
+    const lead = await prisma.lead.create({
+      data: {
+        name,
+        email,
+        phone: phone || '',
+        location,
+        source: lead_source || 'website',
+      },
+    })
+    sid = lead.sid
+  } catch (err) {
+    console.error('DB lead creation failed:', err)
+  }
+
   const webhookUrl = WEBHOOKS[location]
   const isLive = process.env.WEBHOOKS_LIVE === 'true'
   const webhookReady = webhookUrl && !webhookUrl.includes('example.com') && !webhookUrl.includes('placeholder')
@@ -78,6 +96,7 @@ export async function POST(request: NextRequest) {
     lead_source: lead_source || 'website',
     firstName: name,
     first_name: name,
+    sid,
   }
 
   if (isLive && webhookReady) {
@@ -99,5 +118,6 @@ export async function POST(request: NextRequest) {
 
   // Always send Slack regardless of webhook status
   await notifySlack(`New Lead: ${name} (${email}) | Phone: ${phone || 'n/a'} | Location: ${location}`, location)
-  return NextResponse.json({ success: true })
+
+  return NextResponse.json({ success: true, sid })
 }

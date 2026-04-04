@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start"
   },
   "keywords": [],
@@ -13,11 +13,15 @@
   "license": "ISC",
   "dependencies": {
     "@amplitude/analytics-browser": "^2.36.9",
+    "@prisma/adapter-pg": "^7.6.0",
+    "@prisma/client": "^7.6.0",
     "@tailwindcss/postcss": "^4.2.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "next": "^16.2.1",
+    "pg": "^8.20.0",
     "postcss": "^8.5.8",
+    "prisma": "^7.6.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "stripe": "^22.0.0",
@@ -26,6 +30,8 @@
     "yaml": "^2.8.3"
   },
   "devDependencies": {
-    "@types/node": "25.5.0"
+    "@types/node": "25.5.0",
+    "dotenv": "^17.4.0",
+    "tsx": "^4.21.0"
   }
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { getLead } from '@/lib/lead'
+import { getLeadWithSid } from '@/lib/lead'
 
 export default function RequireLead({ children }: { children: React.ReactNode }) {
   const [checked, setChecked] = useState(false)
@@ -12,13 +12,14 @@ export default function RequireLead({ children }: { children: React.ReactNode })
   const slug = params.slug as string
 
   useEffect(() => {
-    const lead = getLead()
-    if (lead) {
-      setHasLead(true)
-    } else {
-      router.replace(`/${slug}`)
-    }
-    setChecked(true)
+    getLeadWithSid().then(lead => {
+      if (lead) {
+        setHasLead(true)
+      } else {
+        router.replace(`/${slug}`)
+      }
+      setChecked(true)
+    })
   }, [router, slug])
 
   if (!checked || !hasLead) {

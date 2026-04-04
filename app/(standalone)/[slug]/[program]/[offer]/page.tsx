@@ -3,6 +3,7 @@
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { setLead } from '@/lib/lead'
+import { setSidCookie } from '@/lib/sid'
 import { identify, track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
 
@@ -68,6 +69,8 @@ function OfferModal({ slug, programValue, offer, onClose }: { slug: string; prog
         body: JSON.stringify(data),
       })
       if (res.ok) {
+        const json = await res.json()
+        if (json.sid) setSidCookie(json.sid)
         setLead({ name, email, phone, location: slug })
         identify(email, { name, location: slug })
         track('lead_created', { location: slug, lead_source: 'meta' })

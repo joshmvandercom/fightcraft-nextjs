@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { setLead } from '@/lib/lead'
+import { setSidCookie } from '@/lib/sid'
 import { identify, track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
 
@@ -41,6 +42,8 @@ export default function LeadForm({ selectedLocation, variant = 'dark', onSuccess
       })
 
       if (res.ok) {
+        const json = await res.json()
+        if (json.sid) setSidCookie(json.sid)
         setLead({ name: data.name, email: data.email, phone: data.phone, location: data.location })
         identify(data.email, { name: data.name, location: data.location })
         track('lead_created', { location: data.location, lead_source: 'website' })

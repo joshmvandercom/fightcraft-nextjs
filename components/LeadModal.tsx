@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { getLead, setLead } from '@/lib/lead'
+import { setSidCookie } from '@/lib/sid'
 import { identify, track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
 
@@ -62,6 +63,8 @@ export default function LeadModal() {
         body: JSON.stringify(data),
       })
       if (res.ok) {
+        const json = await res.json()
+        if (json.sid) setSidCookie(json.sid)
         setLead({ name, email, phone, location })
         identify(email, { name, location })
         track('lead_created', { location, lead_source: 'website' })

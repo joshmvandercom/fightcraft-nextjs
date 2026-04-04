@@ -1,3 +1,5 @@
+import { getSid, getLeadBySid } from '@/lib/sid'
+
 export interface Lead {
   name: string
   email: string
@@ -22,4 +24,17 @@ export function setLead(lead: Lead) {
 
 export function clearLead() {
   localStorage.removeItem('fightcraft_lead')
+}
+
+export async function getLeadWithSid(): Promise<Lead | null> {
+  if (typeof window === 'undefined') return null
+  const sid = getSid()
+  if (sid) {
+    const lead = await getLeadBySid(sid)
+    if (lead) {
+      setLead(lead)
+      return lead
+    }
+  }
+  return getLead()
 }
