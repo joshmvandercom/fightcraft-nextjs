@@ -1,6 +1,7 @@
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import LeadModal from '@/components/LeadModal'
+import PromoBanner from '@/components/PromoBanner'
 import { getLocations, getPrograms } from '@/lib/content'
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -13,6 +14,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <main>{children}</main>
       <Footer locations={locations} />
       <LeadModal />
+      <PromoBanner />
     </>
   )
 }
