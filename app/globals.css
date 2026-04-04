@@ -45,3 +45,12 @@ body {
   background-size: 200% auto;
   animation: shimmer 1.5s ease-in-out 0.3s 1 forwards;
 }
+
+@keyframes flash-color {
+  0% { background-color: #ef4444; color: #fff; }
+  70% { background-color: #ef4444; color: #fff; }
+  100% { background-color: #fff; color: #000; }
+}
+.flash-to-white {
+  animation: flash-color 1.2s ease-out 0.1s 1 forwards;
+}

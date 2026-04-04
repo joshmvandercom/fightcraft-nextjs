@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getLead, setLead } from "@/lib/lead";
 import { setSidCookie } from "@/lib/sid";
 import { identify, track } from "@/lib/analytics";
@@ -86,6 +86,9 @@ export default function StartPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [exitTriggered, setExitTriggered] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [stickyVisible, setStickyVisible] = useState(false);
+  const [stickyFlashed, setStickyFlashed] = useState(false);
+  const heroCTARef = useRef<HTMLDivElement>(null);
   const [name, setName] = useState(() => {
     if (typeof window === "undefined") return "";
     return getLead()?.name || "";
@@ -127,6 +130,23 @@ export default function StartPage() {
     document.addEventListener("mouseout", handler);
     return () => document.removeEventListener("mouseout", handler);
   }, [exitTriggered, slug]);
+
+  useEffect(() => {
+    if (!heroCTARef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setStickyVisible(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(heroCTARef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (stickyVisible && !stickyFlashed) {
+      const timer = setTimeout(() => setStickyFlashed(true), 1200);
+      return () => clearTimeout(timer);
+    }
+  }, [stickyVisible, stickyFlashed]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -223,7 +243,9 @@ export default function StartPage() {
             <span className="text-white font-bold">$33</span>.
           </p>
 
-          <CTAButton onClick={() => setModalOpen(true)} />
+          <div ref={heroCTARef}>
+            <CTAButton onClick={() => setModalOpen(true)} />
+          </div>
 
           <div className="flex justify-center mt-8">
             <div className="flex flex-col items-center gap-2">
@@ -608,14 +630,17 @@ export default function StartPage() {
         </p>
       </div>
 
-      {/* Sticky mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-black/95 backdrop-blur-sm border-t border-white/10 px-4 py-3">
-        <button
-          onClick={() => setModalOpen(true)}
-          className="w-full py-3 bg-white text-black font-heading text-sm uppercase tracking-widest font-bold rounded-lg"
-        >
-          Start Today for $33
-        </button>
+      {/* Sticky CTA - slides up when hero CTA scrolls out */}
+      <div className={`fixed bottom-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-t border-white/10 px-4 py-4 transition-transform duration-300 ${stickyVisible ? 'translate-y-0' : 'translate-y-full'}`}>
+        <div className="max-w-lg mx-auto">
+          <button
+            onClick={() => setModalOpen(true)}
+            className={`w-full py-4 font-heading text-base uppercase tracking-widest font-bold rounded-lg transition-all duration-700 ${stickyVisible && !stickyFlashed ? 'bg-red-500 text-white' : 'bg-white text-black hover:bg-white/90'}`}
+          >
+            Start Today for $33
+          </button>
+          <p className={`text-center text-xs text-white/40 mt-2 transition-opacity duration-1000 ${stickyVisible ? 'opacity-100' : 'opacity-0'}`}>50% off for 3 months. Every class included.</p>
+        </div>
       </div>
 
       {/* Modal */}
