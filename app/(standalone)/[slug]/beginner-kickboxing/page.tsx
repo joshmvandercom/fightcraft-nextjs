@@ -73,13 +73,13 @@ export default function BeginnerOfferPage() {
   });
 
   useEffect(() => {
-    if (firstName) return;
-    import("@/lib/lead").then(({ getLeadWithSid }) => {
+    import("@/lib/lead").then(({ getLeadWithSid, hasSidParam }) => {
+      if (!hasSidParam() && firstName) return;
       getLeadWithSid().then((lead) => {
         if (lead?.name) setFirstName(lead.name.split(" ")[0]);
       });
     });
-  }, [firstName]);
+  }, []);
 
   function openModal() {
     window.dispatchEvent(new Event("open-beginner-modal"));
@@ -101,15 +101,10 @@ export default function BeginnerOfferPage() {
         <div className="relative z-10 px-4">
           <div className="max-w-3xl mx-auto text-center pt-4 md:pt-6 pb-4">
             <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl uppercase font-bold tracking-tight text-white mb-1 leading-[1.1]">
-              Beginner Friendly
-              <br />
-              Kickboxing Program
+              {firstName ? <><span className="shimmer-once bg-[linear-gradient(90deg,#ef4444_0%,#f97316_40%,#fff_50%,#f97316_60%,#ef4444_100%)] bg-clip-text text-transparent">{firstName}</span>, ready to start kickboxing?</> : <>Beginner Friendly<br />Kickboxing Program</>}
             </h1>
             <p className="text-base md:text-xl text-white/80">
-              {firstName
-                ? <>{`Made for you, `}<span className="shimmer-once bg-[linear-gradient(90deg,#ef4444_0%,#f97316_40%,#fff_50%,#f97316_60%,#ef4444_100%)] bg-clip-text text-transparent font-bold">{firstName}</span>. No experience required.</>
-                : "For working professionals, no experience required."
-              }
+              For working professionals, no experience required.
             </p>
           </div>
 

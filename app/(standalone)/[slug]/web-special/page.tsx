@@ -76,8 +76,8 @@ export default function WebSpecialPage() {
   const firstName = name ? name.split(' ')[0] : ''
 
   useEffect(() => {
-    if (name) return
-    import('@/lib/lead').then(({ getLeadWithSid }) => {
+    import('@/lib/lead').then(({ getLeadWithSid, hasSidParam }) => {
+      if (!hasSidParam() && name) return
       getLeadWithSid().then(lead => {
         if (lead) {
           setName(lead.name)
@@ -86,7 +86,7 @@ export default function WebSpecialPage() {
         }
       })
     })
-  }, [name])
+  }, [])
 
   useEffect(() => {
     track('page_view', { location: slug, page: 'web-special', lead_source: 'meta' })
@@ -153,9 +153,9 @@ export default function WebSpecialPage() {
         <div className="absolute top-0 left-0 right-0 h-[65%] bg-black" />
         <div className="relative z-10 px-4">
           <div className="max-w-3xl mx-auto text-center pt-6 md:pt-8 pb-4">
-            <p className="font-heading text-sm uppercase tracking-widest text-white/50 mb-3">{firstName ? <><span className="shimmer-once bg-[linear-gradient(90deg,#ef4444_0%,#f97316_40%,#fff_50%,#f97316_60%,#ef4444_100%)] bg-clip-text text-transparent">{firstName}</span>, this is for you</> : 'Web Exclusive'}</p>
+            <p className="font-heading text-sm uppercase tracking-widest text-white/50 mb-3">Web Exclusive</p>
             <h1 className="font-heading text-4xl md:text-6xl uppercase font-bold tracking-tight text-white mb-3 leading-[1.1]">
-              Your First Month<br />of Unlimited Training
+              {firstName ? <><span className="shimmer-once bg-[linear-gradient(90deg,#ef4444_0%,#f97316_40%,#fff_50%,#f97316_60%,#ef4444_100%)] bg-clip-text text-transparent">{firstName}</span>, ready for your first month of unlimited training?</> : <>Your First Month<br />of Unlimited Training</>}
             </h1>
             <div className="flex items-center justify-center gap-3 mb-2">
               <span className="text-white/40 line-through text-2xl">$199</span>
@@ -218,16 +218,16 @@ export default function WebSpecialPage() {
       {/* Coach section */}
       <div className="bg-black text-white py-16 md:pb-[calc(4rem+224px)] px-4">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-lg mb-6">A note from Coach {loc.owner}</p>
+          <p className="text-lg mb-6">{firstName ? `Hey ${firstName}, Coach ${loc.owner} here.` : `A note from Coach ${loc.owner}`}</p>
 
           <div className="text-left space-y-4 text-white/70 mb-8">
             <p>I started FightCraft because I believe everyone deserves access to real martial arts training.</p>
             <p>Not the watered-down cardio kickboxing at your local gym. Not the intimidating fight club where beginners get thrown to the wolves.</p>
             <p>Something in between. <span className="text-white">Structured. Supportive. Challenging.</span></p>
             <p>The kind of place where a complete beginner can walk in on Monday and feel like they belong by Wednesday.</p>
-            <p>This $97 offer exists because I want to remove every barrier between you and that first month on the mat. If you give us 30 days, I promise you&apos;ll feel different.</p>
+            <p>{firstName ? `${firstName}, this` : 'This'} $97 offer exists because I want to remove every barrier between you and that first month on the mat. If you give us 30 days, I promise you&apos;ll feel different.</p>
             <p>Not just physically. The way you carry yourself. The way you handle stress. The way you show up.</p>
-            <p className="text-white font-medium">Come see for yourself.</p>
+            <p className="text-white font-medium">{firstName ? `${firstName}, come see for yourself.` : 'Come see for yourself.'}</p>
           </div>
 
           <p className="text-white/40 text-sm">Coach {loc.owner}, FightCraft {loc.name}</p>
@@ -328,9 +328,9 @@ export default function WebSpecialPage() {
       <div className="bg-black text-white py-16 px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="font-heading text-3xl md:text-4xl uppercase font-bold tracking-tight mb-4">
-            30 Days. Every Class. $97.
+            {firstName ? `${firstName}, Your Spot Is Waiting.` : '30 Days. Every Class. $97.'}
           </h2>
-          <p className="text-white/60 mb-2">No contract. No catch. No experience required.</p>
+          <p className="text-white/60 mb-2">{firstName ? '30 days. Every class. $97.' : 'No contract. No catch. No experience required.'}</p>
           <p className="text-white/50 text-sm mb-8">This offer is only available online and expires {deadline}.</p>
 
           <CTAButton onClick={() => setModalOpen(true)} />

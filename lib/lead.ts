@@ -38,3 +38,8 @@ export async function getLeadWithSid(): Promise<Lead | null> {
   }
   return getLead()
 }
+
+export function hasSidParam(): boolean {
+  if (typeof window === 'undefined') return false
+  return new URL(window.location.href).searchParams.has('sid')
+}

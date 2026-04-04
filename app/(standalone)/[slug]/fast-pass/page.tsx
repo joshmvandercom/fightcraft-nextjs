@@ -76,8 +76,8 @@ export default function FastPassPage() {
   const firstName = name ? name.split(' ')[0] : ''
 
   useEffect(() => {
-    if (name) return
-    import('@/lib/lead').then(({ getLeadWithSid }) => {
+    import('@/lib/lead').then(({ getLeadWithSid, hasSidParam }) => {
+      if (!hasSidParam() && name) return
       getLeadWithSid().then(lead => {
         if (lead) {
           setName(lead.name)
@@ -86,7 +86,7 @@ export default function FastPassPage() {
         }
       })
     })
-  }, [name])
+  }, [])
 
   useEffect(() => {
     track('page_view', { location: slug, page: 'fast-pass', lead_source: 'meta' })
@@ -152,9 +152,9 @@ export default function FastPassPage() {
         <div className="absolute top-0 left-0 right-0 h-[65%] bg-black" />
         <div className="relative z-10 px-4">
           <div className="max-w-3xl mx-auto text-center pt-6 md:pt-8 pb-4">
-            <p className="font-heading text-sm uppercase tracking-widest text-white/50 mb-3">{firstName ? <><span className="shimmer-once bg-[linear-gradient(90deg,#ef4444_0%,#f97316_40%,#fff_50%,#f97316_60%,#ef4444_100%)] bg-clip-text text-transparent">{firstName}</span>, ready to save $307?</> : '90-Day Fast Pass'}</p>
+            <p className="font-heading text-sm uppercase tracking-widest text-white/50 mb-3">90-Day Fast Pass</p>
             <h1 className="font-heading text-4xl md:text-6xl uppercase font-bold tracking-tight text-white mb-3 leading-[1.1]">
-              Save $307 on Your<br />Membership
+              {firstName ? <><span className="shimmer-once bg-[linear-gradient(90deg,#ef4444_0%,#f97316_40%,#fff_50%,#f97316_60%,#ef4444_100%)] bg-clip-text text-transparent">{firstName}</span>, ready to save $307 on your membership?</> : <>Save $307 on Your<br />Membership</>}
             </h1>
             <p className="text-xl text-white/70">
               with our 90-Day Fast Pass. Pay once. Train everything.
@@ -213,14 +213,14 @@ export default function FastPassPage() {
       {/* Coach section */}
       <div className="bg-black text-white py-16 md:pb-[calc(4rem+224px)] px-4">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-lg mb-6">A note from Coach {loc.owner}</p>
+          <p className="text-lg mb-6">{firstName ? `Hey ${firstName}, Coach ${loc.owner} here.` : `A note from Coach ${loc.owner}`}</p>
 
           <div className="text-left space-y-4 text-white/70 mb-8">
             <p>The 90-Day Fast Pass exists for one reason: <span className="text-white">commitment creates results.</span></p>
             <p>I&apos;ve watched hundreds of people start training. The ones who transform aren&apos;t the most talented. They&apos;re the ones who gave it 90 days without looking back.</p>
             <p>Three months is the threshold. It&apos;s where technique becomes instinct. Where the gym stops being a place you go and starts being part of who you are.</p>
-            <p>This price exists to make that commitment a no-brainer. You&apos;re saving $307 and getting three full months to prove to yourself what you&apos;re capable of.</p>
-            <p className="text-white font-medium">Lock it in. Show up. Everything else takes care of itself.</p>
+            <p>{firstName ? `${firstName}, this` : 'This'} price exists to make that commitment a no-brainer. You&apos;re saving $307 and getting three full months to prove to yourself what you&apos;re capable of.</p>
+            <p className="text-white font-medium">{firstName ? `${firstName}, lock it in.` : 'Lock it in.'} Show up. Everything else takes care of itself.</p>
           </div>
 
           <p className="text-white/40 text-sm">Coach {loc.owner}, FightCraft {loc.name}</p>
@@ -323,9 +323,9 @@ export default function FastPassPage() {
       <div className="bg-black text-white py-16 px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="font-heading text-3xl md:text-4xl uppercase font-bold tracking-tight mb-4">
-            90 Days. Every Class. Unlimited.
+            {firstName ? `${firstName}, Your Spot Is Waiting.` : '90 Days. Every Class. Unlimited.'}
           </h2>
-          <p className="text-white/60 mb-2">One payment. Full access. No contract after.</p>
+          <p className="text-white/60 mb-2">{firstName ? '90 days. Every class. One payment.' : 'One payment. Full access. No contract after.'}</p>
           <p className="text-white/50 text-sm mb-8">This offer is only available online and expires {deadline}.</p>
 
           <CTAButton onClick={() => setModalOpen(true)} />
