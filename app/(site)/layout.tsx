@@ -11,7 +11,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <Nav locations={locations} programs={programs} />
-      <main>{children}</main>
+      <main className="overflow-x-hidden">{children}</main>
       <Footer locations={locations} />
       <LeadModal />
       <PromoBanner />
