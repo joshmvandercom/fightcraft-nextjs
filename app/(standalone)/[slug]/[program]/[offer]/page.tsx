@@ -51,6 +51,7 @@ function getDeadline(): string {
 
 function OfferModal({ slug, programValue, offer, onClose }: { slug: string; programValue: string; offer: string; onClose: () => void }) {
   const router = useRouter()
+  const [pageLoadTime] = useState(() => Date.now())
   const [submitting, setSubmitting] = useState(false)
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -61,7 +62,7 @@ function OfferModal({ slug, programValue, offer, onClose }: { slug: string; prog
     if (!name || !phone || !email) return
     setSubmitting(true)
 
-    const data = { name, email, phone, location: slug, website: '', lead_source: 'meta' }
+    const data = { name, email, phone, location: slug, website: '', lead_source: 'meta', _t: pageLoadTime }
     try {
       const res = await fetch('/api/leads', {
         method: 'POST',

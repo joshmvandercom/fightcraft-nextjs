@@ -2,7 +2,7 @@
 // p = program interest (dynamic per location)
 // e = experience (A-D)
 // c = commitment (A-D)
-// o = objection (A-E)
+// o = objection (A-D)
 // v = vision (A-D)
 // r = readiness (A-D)
 

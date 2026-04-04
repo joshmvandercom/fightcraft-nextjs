@@ -127,40 +127,31 @@ function buildStory(p: string, e: string, c: string, o: string, v: string, r: st
   lines.push("")
   lines.push("")
 
-  // Address objection casually
-  lines.push("I know what you might be thinking.")
-  lines.push("")
-
-  if (o === 'B') {
-    lines.push("\"I don't know anyone there.\"")
-    lines.push("")
-    lines.push("You will by the end of your first class.")
-    lines.push("")
-    lines.push("That's not marketing. That's just how this place works.")
-  } else if (o === 'C') {
-    lines.push("\"I should get in shape first.\"")
-    lines.push("")
-    lines.push("No. You shouldn't.")
-    lines.push("")
-    lines.push("That's like warming up before the warm-up.")
-    lines.push("")
-    lines.push("Just come in. We'll handle the rest.")
-  } else if (o === 'A') {
-    lines.push("\"When am I going to fit this in?\"")
+  // Address what matters to them
+  if (o === 'A') {
+    lines.push("You said fitting training into your schedule matters most.")
     lines.push("")
     lines.push("We run classes every day. Morning to night.")
     lines.push("")
     lines.push("You need one hour. One slot. That's it.")
+  } else if (o === 'B') {
+    lines.push("You said feeling comfortable from day one matters most.")
+    lines.push("")
+    lines.push("Good. Because that's what we do better than anyone.")
+    lines.push("")
+    lines.push("Every person on our mat was new once. By the end of your first class, you'll know people by name.")
+  } else if (o === 'C') {
+    lines.push("You said you want to see real results.")
+    lines.push("")
+    lines.push("You will.")
+    lines.push("")
+    lines.push("Martial arts delivers fitness that a regular gym can't touch. You're so focused on learning that you forget you're working out.")
   } else if (o === 'D') {
-    lines.push("\"Is it worth the investment?\"")
+    lines.push("You said getting the most value matters.")
     lines.push("")
-    lines.push("No contracts. No commitment. Month to month.")
+    lines.push("Our members consistently say this is the best money they spend on themselves each month.")
     lines.push("")
-    lines.push("Try it and decide for yourself.")
-  } else {
-    lines.push("Actually you said nothing was holding you back.")
-    lines.push("")
-    lines.push("Good. Then there's nothing else to say except...")
+    lines.push("Try it and see for yourself.")
   }
 
   lines.push("")

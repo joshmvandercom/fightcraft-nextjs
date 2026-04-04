@@ -8,6 +8,7 @@ import { identify, track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
 
 export default function BeginnerModal() {
+  const [pageLoadTime] = useState(() => Date.now())
   const [open, setOpen] = useState(false)
   const [exitTriggered, setExitTriggered] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -67,7 +68,7 @@ export default function BeginnerModal() {
     if (!name || !phone || !email) return
     setSubmitting(true)
 
-    const data = { name, email, phone, location: slug, website: '', lead_source: 'meta' }
+    const data = { name, email, phone, location: slug, website: '', lead_source: 'meta', _t: pageLoadTime }
 
     try {
       const res = await fetch('/api/leads', {

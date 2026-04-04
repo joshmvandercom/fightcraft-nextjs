@@ -15,6 +15,7 @@ interface LeadFormProps {
 
 export default function LeadForm({ selectedLocation, variant = 'dark', onSuccess }: LeadFormProps) {
   const router = useRouter()
+  const [pageLoadTime] = useState(() => Date.now())
   const [location, setLocation] = useState(selectedLocation || '')
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -32,6 +33,7 @@ export default function LeadForm({ selectedLocation, variant = 'dark', onSuccess
       phone: (form.elements.namedItem('phone') as HTMLInputElement).value,
       location: (form.elements.namedItem('location') as HTMLSelectElement).value,
       website: (form.elements.namedItem('website') as HTMLInputElement).value,
+      _t: pageLoadTime,
     }
 
     try {

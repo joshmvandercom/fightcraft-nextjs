@@ -21,6 +21,7 @@ function Stars() {
 
 export default function QuickForm() {
   const router = useRouter()
+  const [pageLoadTime] = useState(() => Date.now())
   const [submitting, setSubmitting] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -37,7 +38,7 @@ export default function QuickForm() {
     if (!name || !email) return
     setSubmitting(true)
 
-    const data = { name: name, email, phone, location, website: '' }
+    const data = { name: name, email, phone, location, website: '', _t: pageLoadTime }
 
     try {
       const res = await fetch('/api/leads', {

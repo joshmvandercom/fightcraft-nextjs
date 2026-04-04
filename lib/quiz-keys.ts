@@ -17,7 +17,6 @@ export const STABLE_KEYS: Record<string, Record<string, string>> = {
     B: 'intimidation',
     C: 'fitness_first',
     D: 'cost',
-    E: 'none',
   },
   vision: {
     A: 'confidence',
@@ -48,11 +47,10 @@ export const DISPLAY_LABELS: Record<string, Record<string, string>> = {
     D: 'Not sure yet',
   },
   objection: {
-    A: 'Time',
-    B: 'Intimidation',
-    C: 'Physical readiness',
-    D: 'Cost',
-    E: 'Nothing - ready to go',
+    A: 'Fits my schedule',
+    B: 'Feeling comfortable',
+    C: 'Physical results',
+    D: 'Best value',
   },
   vision: {
     A: 'Confidence',

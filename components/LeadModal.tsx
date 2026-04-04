@@ -9,6 +9,7 @@ import { metaPixelTrack } from '@/components/MetaPixel'
 
 export default function LeadModal() {
   const router = useRouter()
+  const [pageLoadTime] = useState(() => Date.now())
   const [open, setOpen] = useState(false)
   const [exitTriggered, setExitTriggered] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -54,7 +55,7 @@ export default function LeadModal() {
     setSubmitting(true)
 
     const location = localStorage.getItem('fightcraft_location') || 'san-jose'
-    const data = { name, email, phone, location, website: '' }
+    const data = { name, email, phone, location, website: '', _t: pageLoadTime }
 
     try {
       const res = await fetch('/api/leads', {

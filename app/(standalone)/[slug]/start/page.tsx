@@ -83,6 +83,7 @@ export default function StartPage() {
   const slug = params.slug as string;
   const loc = LOCATION_DATA[slug] || LOCATION_DATA["san-jose"];
 
+  const [pageLoadTime] = useState(() => Date.now());
   const [modalOpen, setModalOpen] = useState(false);
   const [exitTriggered, setExitTriggered] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -160,6 +161,7 @@ export default function StartPage() {
       location: slug,
       website: "",
       lead_source: "meta",
+      _t: pageLoadTime,
     };
     try {
       const res = await fetch("/api/leads", {

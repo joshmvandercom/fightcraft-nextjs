@@ -51,6 +51,7 @@ export default function GearPage() {
   })
   const firstName = name ? name.split(' ')[0] : ''
 
+  const [pageLoadTime] = useState(() => Date.now())
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOffer, setModalOffer] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -85,7 +86,7 @@ export default function GearPage() {
     setProcessing(offer)
 
     if (!getLead()) {
-      const data = { name, email, phone, location: slug, website: '', lead_source: 'gear' }
+      const data = { name, email, phone, location: slug, website: '', lead_source: 'gear', _t: pageLoadTime }
       try {
         const res = await fetch('/api/leads', {
           method: 'POST',

@@ -58,6 +58,7 @@ export default function FastPassPage() {
   const loc = LOCATION_DATA[slug] || LOCATION_DATA['san-jose']
   const deadline = getDeadline()
 
+  const [pageLoadTime] = useState(() => Date.now())
   const [modalOpen, setModalOpen] = useState(false)
   const [exitTriggered, setExitTriggered] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -108,7 +109,7 @@ export default function FastPassPage() {
     if (!name || !phone || !email) return
     setSubmitting(true)
 
-    const data = { name, email, phone, location: slug, website: '', lead_source: 'meta' }
+    const data = { name, email, phone, location: slug, website: '', lead_source: 'meta', _t: pageLoadTime }
     try {
       const res = await fetch('/api/leads', {
         method: 'POST',

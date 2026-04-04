@@ -56,14 +56,13 @@ const STATIC_STEPS: Step[] = [
     ],
   },
   {
-    question: "What's the real thing standing in your way?",
-    subtitle: "Every person who's ever trained has faced one of these. Which one is yours?",
+    question: "What matters most to you right now?",
+    subtitle: "Helps us understand what to focus on when we talk.",
     options: [
-      { letter: 'A', title: 'Time', description: 'I want to train but fitting it in feels impossible', affirmation: "We hear this more than anything. That's exactly why we offer classes from early morning to late evening, every day of the week. We'll find a slot that works." },
-      { letter: 'B', title: "Intimidation", description: "It feels like a world I'm not sure I belong in yet", affirmation: "That feeling is completely normal and it disappears faster than you'd think. Every single person on our mat felt it on day one. Within a week, you'll wonder why you waited." },
-      { letter: 'C', title: "Physical readiness", description: "I want to get fit first before I start", affirmation: "Here's the truth: you don't get in shape to start training. You start training to get in shape. Our classes meet you where you are." },
-      { letter: 'D', title: "Cost", description: "I'm concerned about the investment", affirmation: "We get it. We offer flexible options and there's no long-term contract. Most members tell us it's the best money they spend each month." },
-      { letter: 'E', title: "Nothing", description: "I'm ready to go", affirmation: "That's the energy. Let's not waste another day." },
+      { letter: 'A', title: 'Finding something that fits my schedule', description: 'I need training that works around my life', affirmation: "We run classes every day from early morning to late evening. We'll find a slot that works for you." },
+      { letter: 'B', title: "Feeling comfortable from day one", description: "I want to know I'll be welcomed and supported", affirmation: "Every single person on our mat felt that way on day one. Our coaches walk you through everything. Within a week, you'll wonder why you waited." },
+      { letter: 'C', title: "Seeing real physical results", description: "I want training that actually changes how I look and feel", affirmation: "Martial arts delivers fitness that a regular gym can't touch. You're so focused on learning that you forget you're working out." },
+      { letter: 'D', title: "Getting the most value for my money", description: "I want to make sure this is worth it", affirmation: "Our members consistently say this is the best investment they make in themselves each month. We'll make sure you feel the same way." },
     ],
   },
   {
