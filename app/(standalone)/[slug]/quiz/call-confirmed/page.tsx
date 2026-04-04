@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { getLead } from '@/lib/lead'
 import { track } from '@/lib/analytics'
+import { metaPixelTrack } from '@/components/MetaPixel'
 
 export default function CallConfirmedPage() {
   const params = useParams()
@@ -17,6 +18,7 @@ export default function CallConfirmedPage() {
       setFirstName(lead.name.split(' ')[0])
     }
     track('booking_completed', { location: slug, booking_type: 'self', type: 'call' })
+    metaPixelTrack('Schedule')
   }, [])
 
   return (

@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { setLead } from '@/lib/lead'
 import { identify, track } from '@/lib/analytics'
+import { metaPixelTrack } from '@/components/MetaPixel'
 
 interface OfferData {
   offer: {
@@ -70,6 +71,7 @@ function OfferModal({ slug, programValue, offer, onClose }: { slug: string; prog
         setLead({ name, email, phone, location: slug })
         identify(email, { name, location: slug })
         track('lead_created', { location: slug, lead_source: 'meta' })
+        metaPixelTrack('Lead')
         onClose()
         if (offer === 'beginner') {
           router.push(`/${slug}/quiz?p=${programValue}`)

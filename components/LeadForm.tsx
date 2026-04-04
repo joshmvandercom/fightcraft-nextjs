@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { setLead } from '@/lib/lead'
 import { identify, track } from '@/lib/analytics'
+import { metaPixelTrack } from '@/components/MetaPixel'
 
 interface LeadFormProps {
   selectedLocation?: string
@@ -43,6 +44,7 @@ export default function LeadForm({ selectedLocation, variant = 'dark', onSuccess
         setLead({ name: data.name, email: data.email, phone: data.phone, location: data.location })
         identify(data.email, { name: data.name, location: data.location })
         track('lead_created', { location: data.location, lead_source: 'website' })
+        metaPixelTrack('Lead')
         onSuccess?.()
         router.push('/next-steps')
         return

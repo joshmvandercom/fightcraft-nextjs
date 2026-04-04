@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import AnalyticsProvider from '@/components/AnalyticsProvider'
+import MetaPixel from '@/components/MetaPixel'
 
 export const metadata: Metadata = {
   title: 'FightCraft | Premier Martial Arts',
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-black text-white">
         <AnalyticsProvider />
+        <MetaPixel />
         {children}
       </body>
     </html>

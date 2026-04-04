@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { setLead } from '@/lib/lead'
 import { identify, track } from '@/lib/analytics'
+import { metaPixelTrack } from '@/components/MetaPixel'
 
 function Stars() {
   return (
@@ -47,6 +48,7 @@ export default function QuickForm() {
         setLead({ name: name, email, phone, location })
         identify(email, { name, location })
         track('lead_created', { location, lead_source: 'website' })
+        metaPixelTrack('Lead')
         router.push('/next-steps')
         return
       }

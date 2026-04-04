@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { setLead } from '@/lib/lead'
 import { identify, track } from '@/lib/analytics'
+import { metaPixelTrack } from '@/components/MetaPixel'
 
 export default function BeginnerModal() {
   const [open, setOpen] = useState(false)
@@ -65,6 +66,7 @@ export default function BeginnerModal() {
         setLead({ name, email, phone, location: slug })
         identify(email, { name, location: slug })
         track('lead_created', { location: slug, lead_source: 'meta' })
+        metaPixelTrack('Lead')
         closeModal()
         router.push(`/${slug}/quiz?p=kickboxing`)
         return

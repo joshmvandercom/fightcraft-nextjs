@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { setLead } from '@/lib/lead'
 import { identify, track } from '@/lib/analytics'
+import { metaPixelTrack } from '@/components/MetaPixel'
 import { useRouter } from 'next/navigation'
 
 const LOCATION_DATA: Record<string, { name: string; address: string; city: string; state: string; zip: string; owner: string }> = {
@@ -94,6 +95,7 @@ export default function FastPassPage() {
         setLead({ name, email, phone, location: slug })
         identify(email, { name, location: slug })
         track('lead_created', { location: slug, lead_source: 'meta', offer: 'fast-pass-499' })
+        metaPixelTrack('Lead')
 
         const checkoutRes = await fetch('/api/checkout', {
           method: 'POST',

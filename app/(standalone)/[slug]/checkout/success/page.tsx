@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { getLead } from '@/lib/lead'
 import { track } from '@/lib/analytics'
+import { metaPixelTrack } from '@/components/MetaPixel'
 
 export default function WebSpecialSuccessPage() {
   const params = useParams()
@@ -14,7 +15,8 @@ export default function WebSpecialSuccessPage() {
   useEffect(() => {
     const lead = getLead()
     if (lead?.name) setFirstName(lead.name.split(' ')[0])
-    track('purchase_completed', { location: slug, offer: 'web-special-97', amount: 97 })
+    track('purchase_completed', { location: slug })
+    metaPixelTrack('Purchase', { currency: 'USD' })
   }, [slug])
 
   return (
@@ -32,7 +34,7 @@ export default function WebSpecialSuccessPage() {
         </h1>
 
         <div className="space-y-4 mb-12">
-          <p className="text-lg text-white/70">Your $97 first month is confirmed.</p>
+          <p className="text-lg text-white/70">Your membership is confirmed.</p>
           <p className="text-lg text-white/70">You now have unlimited access to every class and every program for 30 days.</p>
         </div>
 

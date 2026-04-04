@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { setLead } from '@/lib/lead'
 import { identify, track } from '@/lib/analytics'
+import { metaPixelTrack } from '@/components/MetaPixel'
 import { useRouter } from 'next/navigation'
 
 const LOCATION_DATA: Record<string, { name: string; address: string; city: string; state: string; zip: string; owner: string; phone: string }> = {
@@ -94,6 +95,7 @@ export default function WebSpecialPage() {
         setLead({ name, email, phone, location: slug })
         identify(email, { name, location: slug })
         track('lead_created', { location: slug, lead_source: 'meta', offer: 'web-special-97' })
+        metaPixelTrack('Lead')
 
         // Create Stripe checkout
         const checkoutRes = await fetch('/api/checkout', {
