@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import AnalyticsProvider from '@/components/AnalyticsProvider'
 import MetaPixel from '@/components/MetaPixel'
 
@@ -40,6 +42,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/timmons.woff2" as="font" type="font/woff2" crossOrigin="" />
       </head>
       <body className="bg-black text-white">
+        <Analytics />
+        <SpeedInsights />
         <AnalyticsProvider />
         <MetaPixel />
         {children}
