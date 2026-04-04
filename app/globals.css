@@ -36,3 +36,12 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+.shimmer-once {
+  background-size: 200% auto;
+  animation: shimmer 1.5s ease-in-out 0.3s 1 forwards;
+}

@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { setLead } from '@/lib/lead'
+import { getLead, setLead } from '@/lib/lead'
 import { setSidCookie } from '@/lib/sid'
 import { identify, track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
@@ -61,9 +61,32 @@ export default function FastPassPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [exitTriggered, setExitTriggered] = useState(false)
   const [submitting, setSubmitting] = useState(false)
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
+  const [name, setName] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    return getLead()?.name || ''
+  })
+  const [phone, setPhone] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    return getLead()?.phone || ''
+  })
+  const [email, setEmail] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    return getLead()?.email || ''
+  })
+  const firstName = name ? name.split(' ')[0] : ''
+
+  useEffect(() => {
+    if (name) return
+    import('@/lib/lead').then(({ getLeadWithSid }) => {
+      getLeadWithSid().then(lead => {
+        if (lead) {
+          setName(lead.name)
+          setEmail(lead.email)
+          setPhone(lead.phone)
+        }
+      })
+    })
+  }, [name])
 
   useEffect(() => {
     track('page_view', { location: slug, page: 'fast-pass', lead_source: 'meta' })
@@ -129,7 +152,7 @@ export default function FastPassPage() {
         <div className="absolute top-0 left-0 right-0 h-[65%] bg-black" />
         <div className="relative z-10 px-4">
           <div className="max-w-3xl mx-auto text-center pt-6 md:pt-8 pb-4">
-            <p className="font-heading text-sm uppercase tracking-widest text-white/50 mb-3">90-Day Fast Pass</p>
+            <p className="font-heading text-sm uppercase tracking-widest text-white/50 mb-3">{firstName ? <><span className="shimmer-once bg-[linear-gradient(90deg,#ef4444_0%,#f97316_40%,#fff_50%,#f97316_60%,#ef4444_100%)] bg-clip-text text-transparent">{firstName}</span>, ready to save $307?</> : '90-Day Fast Pass'}</p>
             <h1 className="font-heading text-4xl md:text-6xl uppercase font-bold tracking-tight text-white mb-3 leading-[1.1]">
               Save $307 on Your<br />Membership
             </h1>

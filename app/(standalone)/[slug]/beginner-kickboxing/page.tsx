@@ -1,6 +1,8 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { getLead } from "@/lib/lead";
 import BeginnerModal from "./BeginnerModal";
 
 const LOCATION_DATA: Record<
@@ -64,6 +66,20 @@ export default function BeginnerOfferPage() {
   const slug = params.slug as string;
   const loc = LOCATION_DATA[slug] || LOCATION_DATA["san-jose"];
   const deadline = getDeadline();
+  const [firstName, setFirstName] = useState(() => {
+    if (typeof window === "undefined") return "";
+    const lead = getLead();
+    return lead?.name ? lead.name.split(" ")[0] : "";
+  });
+
+  useEffect(() => {
+    if (firstName) return;
+    import("@/lib/lead").then(({ getLeadWithSid }) => {
+      getLeadWithSid().then((lead) => {
+        if (lead?.name) setFirstName(lead.name.split(" ")[0]);
+      });
+    });
+  }, [firstName]);
 
   function openModal() {
     window.dispatchEvent(new Event("open-beginner-modal"));
@@ -90,7 +106,10 @@ export default function BeginnerOfferPage() {
               Kickboxing Program
             </h1>
             <p className="text-base md:text-xl text-white/80">
-              For working professionals, no experience required.
+              {firstName
+                ? <>{`Made for you, `}<span className="shimmer-once bg-[linear-gradient(90deg,#ef4444_0%,#f97316_40%,#fff_50%,#f97316_60%,#ef4444_100%)] bg-clip-text text-transparent font-bold">{firstName}</span>. No experience required.</>
+                : "For working professionals, no experience required."
+              }
             </p>
           </div>
 
@@ -107,7 +126,7 @@ export default function BeginnerOfferPage() {
       {/* Body */}
       <div className="text-black pt-4 pb-6 px-4">
         <div className="max-w-xl mx-auto text-center">
-          <p className="text-base mb-3">👋 Hey, Coach Josh here.</p>
+          <p className="text-base mb-3">👋 Hey{firstName ? ` ${firstName}` : ''}, Coach Josh here.</p>
 
           <p className="text-sm mb-1">
             We&apos;re opening <strong>9 spots</strong> for{" "}

@@ -25,6 +25,18 @@ export default function BeginnerModal() {
   }, [])
 
   useEffect(() => {
+    import('@/lib/lead').then(({ getLeadWithSid }) => {
+      getLeadWithSid().then(lead => {
+        if (lead) {
+          setName(lead.name)
+          setEmail(lead.email)
+          setPhone(lead.phone)
+        }
+      })
+    })
+  }, [])
+
+  useEffect(() => {
     const handler = () => openModal()
     window.addEventListener('open-beginner-modal', handler)
 
