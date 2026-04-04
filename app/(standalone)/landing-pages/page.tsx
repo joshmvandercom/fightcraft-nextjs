@@ -80,6 +80,18 @@ export default function LandingPagesIndex() {
                     <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">90-Day Fast Pass ($499)</p>
                     <p className="text-[10px] text-black/40">/{loc.slug}/fast-pass</p>
                   </a>
+                  <a href={`/${loc.slug}/early-riser`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Early Riser ($33)</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/early-riser</p>
+                  </a>
+                  <a href={`/${loc.slug}/start`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Start ($33 / 50% off 3mo)</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/start</p>
+                  </a>
+                  <a href={`/${loc.slug}/gear-kickboxing`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Gear / Beginner Program</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/gear-kickboxing</p>
+                  </a>
                   <a href={`/${loc.slug}/checkout/gear?session_id=dry_run`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
                     <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Gear Upsell</p>
                     <p className="text-[10px] text-black/40">/{loc.slug}/checkout/gear</p>

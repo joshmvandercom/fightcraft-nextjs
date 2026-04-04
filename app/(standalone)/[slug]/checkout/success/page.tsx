@@ -30,25 +30,26 @@ export default function WebSpecialSuccessPage() {
 
       <div className="max-w-xl w-full mx-auto flex-1 flex flex-col justify-center">
         <h1 className="font-heading text-4xl md:text-5xl uppercase font-bold tracking-tight mb-6">
-          Welcome to FightCraft{firstName ? `, ${firstName}` : ''}.
+          {firstName ? `Let's go, ${firstName}.` : "Let's go."}
         </h1>
 
         <div className="space-y-4 mb-12">
-          <p className="text-lg text-white/70">Your membership is confirmed.</p>
-          <p className="text-lg text-white/70">You now have unlimited access to every class and every program for 30 days.</p>
+          <p className="text-lg text-white/70">You're in. Welcome to FightCraft.</p>
+          <p className="text-lg text-white/70">A team member will reach out shortly to help you get started.</p>
         </div>
 
         <div className="border border-white/10 p-8 mb-12">
-          <h2 className="font-heading text-lg uppercase font-bold tracking-tight mb-4">What Happens Next</h2>
+          <h2 className="font-heading text-lg uppercase font-bold tracking-tight mb-4">What to Expect</h2>
           <div className="space-y-3 text-white/60">
-            <p>One of our coaches will reach out within a few hours to help you pick your first class.</p>
-            <p>In the meantime, check out the schedule and start planning your week.</p>
+            <p>One of our coaches will reach out within a few hours to welcome you and answer any questions.</p>
+            <p>We'll help you pick your first class and make sure you feel ready before you walk in.</p>
+            <p>All you need is athletic clothes and water. We handle the rest.</p>
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 mb-12">
-          <a href={`/${slug}/quiz`} className="px-6 py-3 bg-white text-black text-center font-heading text-sm uppercase tracking-widest hover:bg-white/90 transition-colors">
-            Take the Quiz &amp; Book a Class
+          <a href={`/${slug}`} className="px-6 py-3 bg-white text-black text-center font-heading text-sm uppercase tracking-widest hover:bg-white/90 transition-colors">
+            Explore FightCraft {locationName}
           </a>
           <a href={`/${slug}/schedule`} className="px-6 py-3 bg-white/10 text-white text-center font-heading text-sm uppercase tracking-widest hover:bg-white/20 transition-colors">
             View Schedule

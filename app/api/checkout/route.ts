@@ -9,6 +9,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 const OFFER_PRICES: Record<string, string | undefined> = {
   'web-special-97': process.env.STRIPE_PRICE_WEB_SPECIAL,
   'fast-pass-499': process.env.STRIPE_PRICE_FAST_PASS,
+  'early-riser-33': process.env.STRIPE_PRICE_EARLY_RISER,
+  'start-33': process.env.STRIPE_PRICE_EARLY_RISER,
+  'gear-package-249': process.env.STRIPE_PRICE_GEAR_PACKAGE,
+  'beginner-program-499': process.env.STRIPE_PRICE_BEGINNER_PROGRAM,
 }
 
 export async function POST(request: NextRequest) {
