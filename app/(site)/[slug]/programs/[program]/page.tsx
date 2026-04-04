@@ -88,9 +88,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
       </section>
 
       {program.callout_video ? (
-        <div className="bg-black lg:bg-transparent">
-          <div className="relative max-w-5xl mx-auto overflow-visible">
-            <div className="hidden lg:block absolute left-[-50vw] right-[-50vw] top-0 bottom-0 bg-black" />
+        <div className="bg-black overflow-hidden">
+          <div className="relative max-w-5xl mx-auto">
             <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6">
               <div className="py-16 lg:py-24">
                 <h2 className="font-heading text-2xl md:text-3xl uppercase font-bold tracking-tight text-white mb-6">{program.callout_title}</h2>
