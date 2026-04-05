@@ -13,7 +13,7 @@ const CALENDAR_IDS: Record<string, Record<string, string>> = {
     kickboxing: 'NPvYU17XVvlCaXGeMX6K',
     muay_thai: 'NPvYU17XVvlCaXGeMX6K',
     brazilian_jiu_jitsu: '2a7iI1uaxpFmlp8DbSba',
-    no_gi_jiu_jitsu: '2a7iI1uaxpFmlp8DbSba',
+    no_gi_jiu_jitsu: 'OpblHcWIEyGshCL02Psd',
     kids_martial_arts: 'PRSasCkelkKCCZYvB2H3',
     mixed_martial_arts: '75KJ4CeR5rFOji88Z5L7',
     wrestling: 'jVUiSJvvlyT4x1jchvwe',
