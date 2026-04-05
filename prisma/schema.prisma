@@ -11,7 +11,7 @@ model Lead {
   id        String   @id @default(cuid())
   sid       String   @unique @default(cuid())
   name      String
-  email     String
+  email     String   @unique
   phone     String   @default("")
   location  String
   source    String   @default("website")

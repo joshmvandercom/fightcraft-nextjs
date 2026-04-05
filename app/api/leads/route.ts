@@ -102,11 +102,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true })
   }
 
-  // Create lead in database first so we have the SID for GHL
+  // Upsert lead in database — dedup by email, update info if they come back
   let sid = ''
   try {
-    const lead = await prisma.lead.create({
-      data: {
+    const lead = await prisma.lead.upsert({
+      where: { email },
+      update: {
+        name,
+        phone: phone || undefined,
+        location,
+      },
+      create: {
         name,
         email,
         phone: phone || '',
