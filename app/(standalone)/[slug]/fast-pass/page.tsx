@@ -6,7 +6,38 @@ import { getLead, setLead } from '@/lib/lead'
 import { setSidCookie } from '@/lib/sid'
 import { identify, track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
+import { fireFunnelEvent } from '@/lib/funnel'
 import { useRouter } from 'next/navigation'
+
+// Friday 2026-04-10 at midnight (end of Friday, which is Saturday 00:00 local)
+const EXPIRES_AT = new Date('2026-04-11T00:00:00-07:00').getTime()
+
+function Countdown() {
+  const [now, setNow] = useState(() => Date.now())
+
+  useEffect(() => {
+    const interval = setInterval(() => setNow(Date.now()), 1000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const diff = Math.max(0, EXPIRES_AT - now)
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+  const minutes = Math.floor((diff / (1000 * 60)) % 60)
+  const seconds = Math.floor((diff / 1000) % 60)
+
+  if (diff === 0) {
+    return <span>Offer Expired</span>
+  }
+
+  const pad = (n: number) => n.toString().padStart(2, '0')
+
+  return (
+    <span className="tabular-nums">
+      Offer Expires In {days}d {pad(hours)}h {pad(minutes)}m {pad(seconds)}s
+    </span>
+  )
+}
 
 const LOCATION_DATA: Record<string, { name: string; address: string; city: string; state: string; zip: string; owner: string }> = {
   'san-jose': { name: 'San Jose', address: '1825 W. San Carlos St.', city: 'San Jose', state: 'CA', zip: '95128', owner: 'Josh' },
@@ -91,6 +122,7 @@ export default function FastPassPage() {
 
   useEffect(() => {
     track('page_view', { location: slug, page: 'fast-pass', lead_source: 'meta' })
+    fireFunnelEvent('offer_viewed', 'fast-pass-499')
 
     const handler = (e: MouseEvent) => {
       if (e.clientY <= 0 && !exitTriggered) {
@@ -124,6 +156,7 @@ export default function FastPassPage() {
         track('lead_created', { location: slug, lead_source: 'meta', offer: 'fast-pass-499' })
         metaPixelTrack('Lead')
 
+        fireFunnelEvent('checkout_started', 'fast-pass-499')
         const checkoutRes = await fetch('/api/checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -141,10 +174,10 @@ export default function FastPassPage() {
 
   return (
     <div className="flex flex-col bg-white min-h-screen">
-      {/* Urgency banner */}
+      {/* Countdown banner */}
       <div className="bg-red-500 text-white text-center py-2 px-4">
         <p className="font-heading text-xs md:text-sm uppercase tracking-widest font-bold">
-          Only 3 of 10 Fast Passes Remaining
+          <Countdown />
         </p>
       </div>
 
@@ -358,7 +391,7 @@ export default function FastPassPage() {
             </button>
             <div className="bg-white text-black rounded-xl shadow-2xl overflow-hidden">
               <div className="bg-red-500 text-white text-center py-3">
-                <p className="font-heading text-sm uppercase tracking-widest font-bold">Only 3 of 10 Fast Passes Remaining</p>
+                <p className="font-heading text-sm uppercase tracking-widest font-bold"><Countdown /></p>
               </div>
               <div className="p-8">
                 <h2 className="text-xl font-bold mb-2">Lock in your spot</h2>

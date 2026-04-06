@@ -6,6 +6,7 @@ import { getLead, setLead } from '@/lib/lead'
 import { setSidCookie } from '@/lib/sid'
 import { identify, track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
+import { fireFunnelEvent } from '@/lib/funnel'
 import { useRouter } from 'next/navigation'
 
 const LOCATION_DATA: Record<string, { name: string; address: string; city: string; state: string; zip: string; owner: string }> = {
@@ -91,6 +92,7 @@ export default function EarlyRiserPage() {
 
   useEffect(() => {
     track('page_view', { location: slug, page: 'early-riser', lead_source: 'meta' })
+    fireFunnelEvent('offer_viewed', 'early-riser-33')
 
     const handler = (e: MouseEvent) => {
       if (e.clientY <= 0 && !exitTriggered) {
@@ -124,6 +126,7 @@ export default function EarlyRiserPage() {
         track('lead_created', { location: slug, lead_source: 'meta', offer: 'early-riser-33' })
         metaPixelTrack('Lead')
 
+        fireFunnelEvent('checkout_started', 'early-riser-33')
         const checkoutRes = await fetch('/api/checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

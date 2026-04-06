@@ -6,6 +6,7 @@ import { getLead, setLead } from '@/lib/lead'
 import { setSidCookie } from '@/lib/sid'
 import { identify, track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
+import { fireFunnelEvent } from '@/lib/funnel'
 import { useRouter } from 'next/navigation'
 
 const LOCATION_DATA: Record<string, { name: string; address: string; city: string; state: string; zip: string; owner: string; phone: string }> = {
@@ -91,6 +92,7 @@ export default function WebSpecialPage() {
 
   useEffect(() => {
     track('page_view', { location: slug, page: 'web-special', lead_source: 'meta' })
+    fireFunnelEvent('offer_viewed', 'web-special-97')
 
     const handler = (e: MouseEvent) => {
       if (e.clientY <= 0 && !exitTriggered) {
@@ -125,6 +127,7 @@ export default function WebSpecialPage() {
         metaPixelTrack('Lead')
 
         // Create Stripe checkout
+        fireFunnelEvent('checkout_started', 'web-special-97')
         const checkoutRes = await fetch('/api/checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

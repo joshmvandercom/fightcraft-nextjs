@@ -6,6 +6,7 @@ import { getLead, setLead } from '@/lib/lead'
 import { setSidCookie } from '@/lib/sid'
 import { identify, track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
+import { fireFunnelEvent } from '@/lib/funnel'
 import AutoPlayVideo from '@/components/AutoPlayVideo'
 
 const LOCATION_DATA: Record<string, { name: string; address: string; city: string; state: string; zip: string; owner: string }> = {
@@ -71,6 +72,7 @@ export default function GearPage() {
 
   useEffect(() => {
     track('page_view', { location: slug, page: 'gear' })
+    fireFunnelEvent('offer_viewed', 'gear-kickboxing')
   }, [slug])
 
   async function checkout(offer: string) {
@@ -104,6 +106,7 @@ export default function GearPage() {
 
     track('gear_checkout_started', { location: slug, offer })
     metaPixelTrack('InitiateCheckout')
+    fireFunnelEvent('checkout_started', offer)
 
     try {
       const res = await fetch('/api/checkout', {

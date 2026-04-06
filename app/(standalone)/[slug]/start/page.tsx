@@ -6,6 +6,7 @@ import { getLead, setLead } from "@/lib/lead";
 import { setSidCookie } from "@/lib/sid";
 import { identify, track } from "@/lib/analytics";
 import { metaPixelTrack } from "@/components/MetaPixel";
+import { fireFunnelEvent } from "@/lib/funnel";
 import AutoPlayVideo from "@/components/AutoPlayVideo";
 
 const LOCATION_DATA: Record<
@@ -119,6 +120,7 @@ export default function StartPage() {
 
   useEffect(() => {
     track("page_view", { location: slug, page: "start", lead_source: "meta" });
+    fireFunnelEvent("offer_viewed", "start-33");
 
     const handler = (e: MouseEvent) => {
       if (e.clientY <= 0 && !exitTriggered) {
@@ -181,6 +183,7 @@ export default function StartPage() {
         });
         metaPixelTrack("Lead");
 
+        fireFunnelEvent("checkout_started", "start-33");
         const checkoutRes = await fetch("/api/checkout", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
