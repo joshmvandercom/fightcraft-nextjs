@@ -30,6 +30,18 @@ model Lead {
   @@index([appointmentAt])
 }
 
+model WebhookLog {
+  id         String   @id @default(cuid())
+  endpoint   String
+  status     Int
+  error      String?
+  payload    String
+  createdAt  DateTime @default(now())
+
+  @@index([endpoint])
+  @@index([createdAt])
+}
+
 model Intake {
   id                  String   @id @default(cuid())
   leadId              String
