@@ -8,16 +8,44 @@ datasource db {
 }
 
 model Lead {
-  id        String   @id @default(cuid())
-  sid       String   @unique @default(cuid())
-  name      String
-  email     String   @unique
-  phone     String   @default("")
-  location  String
-  source    String   @default("website")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String    @id @default(cuid())
+  sid           String    @unique @default(cuid())
+  name          String
+  email         String    @unique
+  phone         String    @default("")
+  location      String
+  source        String    @default("website")
+  status        String    @default("lead")
+  statusReason  String?
+  notes         String?
+  appointmentAt DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  intakes Intake[]
 
   @@index([email])
   @@index([location])
+  @@index([status])
+  @@index([appointmentAt])
+}
+
+model Intake {
+  id                  String   @id @default(cuid())
+  leadId              String
+  lead                Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  coach               String?
+  dob                 String?
+  emergencyName       String?
+  emergencyPhone      String?
+  goals               String?
+  experience          String?
+  injuries            String?
+  howHeard            String?
+  programInterest     String?
+  availableClasses    String?
+  waiverAccepted      Boolean  @default(false)
+  createdAt           DateTime @default(now())
+
+  @@index([leadId])
 }
