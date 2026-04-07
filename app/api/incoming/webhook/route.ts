@@ -53,26 +53,63 @@ export async function POST(request: NextRequest) {
 
   console.log('[WEBHOOK PAYLOAD]', JSON.stringify(body, null, 2))
 
-  // Try multiple field names for email — GHL can send any of these
-  const rawEmail = (body.contact_email || body.email || body.contactEmail || (body.contact as Record<string, unknown>)?.email) as string | undefined
-  const email = rawEmail?.trim().toLowerCase()
-  if (!email) {
-    await logWebhook(rawBody, 400, `Missing email field. Received keys: ${Object.keys(body).join(', ')}`)
-    return NextResponse.json({ error: 'Missing email field', received_keys: Object.keys(body) }, { status: 400 })
+  // GHL nests mapped fields under customData. Merge with top-level for fallback.
+  const customData = (body.customData as Record<string, unknown>) || {}
+  const data = { ...body, ...customData }
+
+  function pickString(...candidates: unknown[]): string | undefined {
+    for (const c of candidates) {
+      if (typeof c === 'string' && c.trim()) return c.trim()
+    }
+    return undefined
   }
 
-  // Parse appointment time (try multiple field name variants)
+  // Try multiple field names for email
+  const rawEmail = pickString(
+    data.contact_email,
+    data.email,
+    data.contactEmail,
+    (data.contact as Record<string, unknown>)?.email,
+  )
+  const email = rawEmail?.toLowerCase()
+  if (!email) {
+    await logWebhook(rawBody, 400, `Missing email field. Received keys: ${Object.keys(data).join(', ')}`)
+    return NextResponse.json({ error: 'Missing email field', received_keys: Object.keys(data) }, { status: 400 })
+  }
+
+  // Parse appointment time — prefer ISO from calendar.startTime, fall back to customData
   let appointmentAt: Date | null = null
-  const startTime = (body.appointment_start_time || body.startTime || body.start_time || body.appointmentStartTime) as string | undefined
+  const calendar = (data.calendar as Record<string, unknown>) || {}
+  const startTime = pickString(
+    calendar.startTime,
+    data.appointment_start_time,
+    data.startTime,
+    data.start_time,
+    data.appointmentStartTime,
+  )
   if (startTime) {
     const parsed = new Date(startTime)
     if (!isNaN(parsed.getTime())) appointmentAt = parsed
   }
 
   // Build a notes line capturing the appointment context
-  const title = (body.appointment_title || body.title || body.appointmentTitle) as string | undefined
-  const meetingLocation = (body.appointment_meeting_location || body.meeting_location || body.appointmentMeetingLocation || body.location) as string | undefined
-  const apptNotes = (body.appointment_notes || body.appointmentNotes || body.notes) as string | undefined
+  const title = pickString(
+    calendar.calendarName,
+    calendar.title,
+    data.appointment_title,
+    data.title,
+    data.appointmentTitle,
+  )
+  const meetingLocation = pickString(
+    data.appointment_meeting_location,
+    data.meeting_location,
+    data.appointmentMeetingLocation,
+    (data.location as Record<string, unknown>)?.name,
+  )
+  const apptNotes = pickString(
+    data.appointment_notes,
+    data.appointmentNotes,
+  )
 
   const noteParts: string[] = []
   if (title) noteParts.push(title)
@@ -81,18 +118,38 @@ export async function POST(request: NextRequest) {
   const summary = noteParts.join(' · ')
   const newNote = `[${new Date().toISOString()}] Booked: ${summary}${apptNotes ? `\n${apptNotes}` : ''}`
 
-  // Infer location slug from meeting_location if possible
-  function inferLocation(meeting: string | undefined): string {
-    if (!meeting) return 'san-jose'
-    const m = meeting.toLowerCase()
-    if (m.includes('merced')) return 'merced'
-    if (m.includes('brevard')) return 'brevard'
+  // Infer location slug from any string we can find
+  function inferLocation(...candidates: (string | undefined)[]): string {
+    for (const c of candidates) {
+      if (!c) continue
+      const m = c.toLowerCase()
+      if (m.includes('merced')) return 'merced'
+      if (m.includes('brevard')) return 'brevard'
+      if (m.includes('san jose') || m.includes('san-jose') || m.includes('sj')) return 'san-jose'
+    }
     return 'san-jose'
   }
 
-  const contactName = ((body.contact_name || body.name || body.contactName || (body.contact as Record<string, unknown>)?.name) as string) || 'Unknown'
-  const contactPhone = ((body.contact_phone || body.phone || body.contactPhone || (body.contact as Record<string, unknown>)?.phone) as string) || ''
-  const inferredLocation = inferLocation(meetingLocation)
+  const ghlLocation = (data.location as Record<string, unknown>) || {}
+  const contactName = pickString(
+    data.contact_name,
+    data.full_name,
+    data.contactName,
+    (data.contact as Record<string, unknown>)?.name,
+    [pickString(data.first_name), pickString(data.last_name)].filter(Boolean).join(' ') || undefined,
+  ) || 'Unknown'
+  const contactPhone = pickString(
+    data.contact_phone,
+    data.phone,
+    data.contactPhone,
+    (data.contact as Record<string, unknown>)?.phone,
+  ) || ''
+  const inferredLocation = inferLocation(
+    meetingLocation,
+    pickString(ghlLocation.name),
+    pickString(ghlLocation.city),
+    pickString(calendar.calendarName),
+  )
 
   // Look up existing lead
   const existing = await prisma.lead.findFirst({
