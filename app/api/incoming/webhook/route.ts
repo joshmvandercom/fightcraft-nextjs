@@ -77,9 +77,34 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Missing email field', received_keys: Object.keys(data) }, { status: 400 })
   }
 
+  // Resolve IANA timezone for this location
+  const calendar = (data.calendar as Record<string, unknown>) || {}
+  const ghlState = pickString((data.location as Record<string, unknown>)?.state) || ''
+  const ghlCity = pickString((data.location as Record<string, unknown>)?.city) || ''
+  const isEastern = ghlState.toLowerCase() === 'nc' ||
+                    ghlCity.toLowerCase().includes('brevard')
+  const ianaTz = isEastern ? 'America/New_York' : 'America/Los_Angeles'
+
+  // Compute the UTC offset (in minutes) for a given IANA timezone at a given local datetime
+  function offsetForZone(localISO: string, zone: string): string {
+    // Treat localISO as if it were UTC, then ask what time it would be in `zone`.
+    // The diff tells us the zone offset.
+    const asUtc = new Date(`${localISO}Z`)
+    const tzString = asUtc.toLocaleString('en-US', { timeZone: zone, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    // tzString format: "MM/DD/YYYY, HH:MM:SS"
+    const m = tzString.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+):(\d+)/)
+    if (!m) return '+00:00'
+    const tzAsUtc = Date.UTC(+m[3], +m[1] - 1, +m[2], +m[4], +m[5], +m[6])
+    const diffMin = (tzAsUtc - asUtc.getTime()) / 60000
+    const sign = diffMin >= 0 ? '+' : '-'
+    const abs = Math.abs(diffMin)
+    const hh = String(Math.floor(abs / 60)).padStart(2, '0')
+    const mm = String(abs % 60).padStart(2, '0')
+    return `${sign}${hh}:${mm}`
+  }
+
   // Parse appointment time — prefer ISO from calendar.startTime, fall back to customData
   let appointmentAt: Date | null = null
-  const calendar = (data.calendar as Record<string, unknown>) || {}
   const startTime = pickString(
     calendar.startTime,
     data.appointment_start_time,
@@ -88,7 +113,15 @@ export async function POST(request: NextRequest) {
     data.appointmentStartTime,
   )
   if (startTime) {
-    const parsed = new Date(startTime)
+    let normalized = startTime
+    const hasTz = /[zZ]|[+-]\d{2}:?\d{2}$/.test(startTime)
+    if (!hasTz) {
+      // GHL sent a naive datetime. Interpret as local to the gym's IANA zone.
+      const localISO = startTime.includes('T') ? startTime : startTime.replace(' ', 'T')
+      const offset = offsetForZone(localISO, ianaTz)
+      normalized = `${localISO}${offset}`
+    }
+    const parsed = new Date(normalized)
     if (!isNaN(parsed.getTime())) appointmentAt = parsed
   }
 

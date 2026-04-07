@@ -35,14 +35,11 @@ interface Lead {
 
 const COACHES = ['Josh', 'Quinn', 'Veronica', 'David', 'Marissa', 'Troy', 'Matt', 'Jacob', 'Jimmy']
 
-const STATUSES = [
-  { value: 'lead', label: 'Lead', color: 'bg-neutral-200 text-neutral-700' },
-  { value: 'booked', label: 'Booked', color: 'bg-blue-100 text-blue-800' },
-  { value: 'attended', label: 'Attended', color: 'bg-green-100 text-green-800' },
-  { value: 'no_show', label: 'No Show', color: 'bg-amber-100 text-amber-800' },
-  { value: 'rescheduled', label: 'Rescheduled', color: 'bg-purple-100 text-purple-800' },
-  { value: 'won', label: 'Won', color: 'bg-emerald-600 text-white' },
-  { value: 'lost', label: 'Lost', color: 'bg-red-100 text-red-800' },
+const OUTCOMES = [
+  { value: 'no_show', label: 'No Show', color: 'bg-amber-100 text-amber-800 border-amber-300', requiresReason: false },
+  { value: 'rescheduled', label: 'Rescheduled', color: 'bg-purple-100 text-purple-800 border-purple-300', requiresReason: false },
+  { value: 'won', label: 'Won', color: 'bg-emerald-600 text-white border-emerald-700', requiresReason: false },
+  { value: 'lost', label: 'Lost', color: 'bg-red-100 text-red-800 border-red-300', requiresReason: true },
 ]
 
 function timeAgo(date: string): string {
@@ -65,6 +62,9 @@ export default function LeadDetailPage() {
   const [lead, setLead] = useState<Lead | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedCoach, setSelectedCoach] = useState<string>('')
+  const [pendingOutcome, setPendingOutcome] = useState<string>('')
+  const [pendingReason, setPendingReason] = useState<string>('')
+  const [committing, setCommitting] = useState(false)
 
   const fetchLead = useCallback(async () => {
     setLoading(true)
@@ -91,6 +91,15 @@ export default function LeadDetailPage() {
     if (res.ok && lead) {
       setLead({ ...lead, status, statusReason: statusReason || null })
     }
+  }
+
+  async function commitOutcome() {
+    if (!pendingOutcome) return
+    setCommitting(true)
+    await updateStatus(pendingOutcome, pendingReason || undefined)
+    setPendingOutcome('')
+    setPendingReason('')
+    setCommitting(false)
   }
 
   async function updateNotes(notes: string) {
@@ -157,29 +166,68 @@ export default function LeadDetailPage() {
           )}
         </div>
 
-        {/* Status */}
+        {/* Outcome */}
         <div className="mb-10">
-          <h2 className="font-heading text-xs uppercase tracking-widest font-bold text-black/40 mb-3">Status</h2>
-          <div className="flex flex-wrap gap-2">
-            {STATUSES.map(s => (
-              <button
-                key={s.value}
-                onClick={() => {
-                  if (s.value === 'lost') {
-                    const reason = prompt('Why lost?')
-                    if (reason !== null) updateStatus(s.value, reason)
-                  } else {
-                    updateStatus(s.value)
-                  }
-                }}
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-widest ${lead.status === s.value ? `${s.color} ring-2 ring-black ring-offset-2 ring-offset-neutral-50` : `${s.color} opacity-60 hover:opacity-100`}`}
-              >
-                {s.label}
-              </button>
-            ))}
+          <h2 className="font-heading text-xs uppercase tracking-widest font-bold text-black/40 mb-3">Outcome</h2>
+          {lead.status && lead.status !== 'lead' && lead.status !== 'booked' && !pendingOutcome && (
+            <p className="text-sm mb-3">
+              Currently marked as <span className="font-bold">{lead.status.replace('_', ' ')}</span>
+              {lead.statusReason && <span className="text-black/60"> · {lead.statusReason}</span>}
+            </p>
+          )}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {OUTCOMES.map(s => {
+              const isSelected = pendingOutcome ? pendingOutcome === s.value : lead.status === s.value
+              return (
+                <button
+                  key={s.value}
+                  onClick={() => {
+                    setPendingOutcome(s.value)
+                    if (!s.requiresReason) setPendingReason('')
+                  }}
+                  className={`px-4 py-4 text-sm font-bold uppercase tracking-widest border-2 transition-all ${isSelected ? `${s.color}` : 'bg-white text-black border-black/20 hover:border-black/50'}`}
+                >
+                  {s.label}
+                </button>
+              )
+            })}
           </div>
-          {lead.status === 'lost' && lead.statusReason && (
-            <p className="text-sm text-black/60 mt-3">Reason: {lead.statusReason}</p>
+
+          {/* Reason input for lost */}
+          {pendingOutcome === 'lost' && (
+            <div className="mt-4">
+              <label className="block font-heading text-xs uppercase tracking-widest font-bold text-black/40 mb-2">Reason for lost</label>
+              <input
+                type="text"
+                value={pendingReason}
+                onChange={e => setPendingReason(e.target.value)}
+                placeholder="e.g. Said price was too high"
+                className="w-full px-4 py-3 border-2 border-black/20 text-sm focus:border-black focus:outline-none"
+                autoFocus
+              />
+            </div>
+          )}
+
+          {/* Commit bar */}
+          {pendingOutcome && (
+            <div className="mt-4 flex gap-3 items-center">
+              <button
+                onClick={commitOutcome}
+                disabled={committing || (pendingOutcome === 'lost' && !pendingReason)}
+                className="flex-1 py-3 bg-black text-white font-heading text-sm uppercase tracking-widest font-bold disabled:opacity-30"
+              >
+                {committing ? 'Saving...' : `Confirm: ${OUTCOMES.find(o => o.value === pendingOutcome)?.label}`}
+              </button>
+              <button
+                onClick={() => {
+                  setPendingOutcome('')
+                  setPendingReason('')
+                }}
+                className="px-5 py-3 border-2 border-black/20 text-black font-heading text-sm uppercase tracking-widest font-bold hover:border-black"
+              >
+                Cancel
+              </button>
+            </div>
           )}
         </div>
 

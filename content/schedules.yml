@@ -32,9 +32,6 @@ schedules:
           name: "Kids Jiu-Jitsu Gi"
         - time: "5:15pm"
           name: "Wrestling"
-        - time: "5:15pm"
-          name: "Kickboxing Intermediate"
-          bookable: false
         - time: "6:15pm"
           name: "Kickboxing Fundamentals"
         - time: "7:15pm"
@@ -71,9 +68,6 @@ schedules:
           name: "Kids Jiu-Jitsu Gi"
         - time: "5:15pm"
           name: "Jiu-Jitsu - No Gi All Levels"
-        - time: "5:15pm"
-          name: "Kickboxing Intermediate"
-          bookable: false
         - time: "6:15pm"
           name: "Kickboxing Fundamentals"
         - time: "7:15pm"

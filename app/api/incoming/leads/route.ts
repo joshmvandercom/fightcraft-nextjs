@@ -11,23 +11,37 @@ export async function GET(request: NextRequest) {
   const location = url.searchParams.get('location') || 'san-jose'
   const filter = url.searchParams.get('filter') || 'today'
 
+  // Filter window for appointmentAt
   const now = new Date()
-  let since: Date | null = null
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const endOfToday = new Date(startOfToday.getTime() + 24 * 60 * 60 * 1000)
+  const endOfWeek = new Date(startOfToday.getTime() + 7 * 24 * 60 * 60 * 1000)
 
+  let appointmentRange: { gte?: Date; lt?: Date } | undefined
   if (filter === 'today') {
-    since = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    appointmentRange = { gte: startOfToday, lt: endOfToday }
   } else if (filter === 'week') {
-    since = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+    appointmentRange = { gte: startOfToday, lt: endOfWeek }
   } else if (filter === 'month') {
-    since = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000)
+    const endOfMonth = new Date(startOfToday.getTime() + 30 * 24 * 60 * 60 * 1000)
+    appointmentRange = { gte: startOfToday, lt: endOfMonth }
   }
 
-  const where: { location: string; createdAt?: { gte: Date }; status?: string } = { location }
-  if (since) where.createdAt = { gte: since }
+  const where: {
+    location: string
+    appointmentAt?: { gte?: Date; lt?: Date; not?: null }
+  } = { location }
+
+  if (appointmentRange) {
+    where.appointmentAt = appointmentRange
+  } else {
+    // 'all' filter — show every lead with an appointment
+    where.appointmentAt = { not: null }
+  }
 
   const leads = await prisma.lead.findMany({
     where,
-    orderBy: { createdAt: 'desc' },
+    orderBy: { appointmentAt: 'asc' },
     select: {
       id: true,
       sid: true,
@@ -38,6 +52,7 @@ export async function GET(request: NextRequest) {
       status: true,
       statusReason: true,
       notes: true,
+      appointmentAt: true,
       createdAt: true,
       _count: { select: { intakes: true } },
     },

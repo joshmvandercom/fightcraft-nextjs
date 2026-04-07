@@ -13,37 +13,40 @@ interface Lead {
   status: string
   statusReason: string | null
   notes: string | null
+  appointmentAt: string | null
   createdAt: string
   _count: { intakes: number }
 }
 
-const STATUSES = [
-  { value: 'lead', label: 'Lead', color: 'bg-neutral-200 text-neutral-700' },
-  { value: 'booked', label: 'Booked', color: 'bg-blue-100 text-blue-800' },
-  { value: 'attended', label: 'Attended', color: 'bg-green-100 text-green-800' },
-  { value: 'no_show', label: 'No Show', color: 'bg-amber-100 text-amber-800' },
-  { value: 'rescheduled', label: 'Rescheduled', color: 'bg-purple-100 text-purple-800' },
-  { value: 'won', label: 'Won', color: 'bg-emerald-600 text-white' },
-  { value: 'lost', label: 'Lost', color: 'bg-red-100 text-red-800' },
-]
+const LOCATION_TZ: Record<string, string> = {
+  'san-jose': 'America/Los_Angeles',
+  'merced': 'America/Los_Angeles',
+  'brevard': 'America/New_York',
+}
+
+function formatAppointmentTime(iso: string, slug: string): string {
+  const tz = LOCATION_TZ[slug] || 'America/Los_Angeles'
+  return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: tz })
+}
+
+function formatAppointmentDate(iso: string, slug: string): string {
+  const tz = LOCATION_TZ[slug] || 'America/Los_Angeles'
+  return new Date(iso).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: tz })
+}
+
+function extractClassName(notes: string | null): string {
+  if (!notes) return ''
+  // Notes format: [iso] Booked: ClassName · Day, Mon Day, H:MM PM · Location
+  const match = notes.match(/Booked:\s*([^·\n]+?)(?:\s*·|\n|$)/)
+  return match ? match[1].trim() : ''
+}
 
 const FILTERS = [
   { value: 'today', label: 'Today' },
   { value: 'week', label: 'This Week' },
   { value: 'month', label: 'This Month' },
-  { value: 'all', label: 'All Time' },
+  { value: 'all', label: 'All Upcoming' },
 ]
-
-function timeAgo(date: string): string {
-  const ms = Date.now() - new Date(date).getTime()
-  const mins = Math.floor(ms / 60000)
-  if (mins < 1) return 'just now'
-  if (mins < 60) return `${mins}m ago`
-  const hours = Math.floor(mins / 60)
-  if (hours < 24) return `${hours}h ago`
-  const days = Math.floor(hours / 24)
-  return `${days}d ago`
-}
 
 export default function IncomingPage() {
   const params = useParams()
@@ -55,7 +58,6 @@ export default function IncomingPage() {
   const [authError, setAuthError] = useState('')
   const [leads, setLeads] = useState<Lead[]>([])
   const [filter, setFilter] = useState('today')
-  const [statusFilter, setStatusFilter] = useState<string>('all')
   const [loading, setLoading] = useState(false)
 
   const fetchLeads = useCallback(async () => {
@@ -124,12 +126,14 @@ export default function IncomingPage() {
     )
   }
 
-  const filteredLeads = statusFilter === 'all' ? leads : leads.filter(l => l.status === statusFilter)
-
-  const counts = STATUSES.reduce((acc, s) => {
-    acc[s.value] = leads.filter(l => l.status === s.value).length
+  // Group leads by date (in the gym's local timezone)
+  const grouped = leads.reduce((acc, lead) => {
+    if (!lead.appointmentAt) return acc
+    const key = formatAppointmentDate(lead.appointmentAt, slug)
+    if (!acc[key]) acc[key] = []
+    acc[key].push(lead)
     return acc
-  }, {} as Record<string, number>)
+  }, {} as Record<string, Lead[]>)
 
   return (
     <div className="min-h-screen bg-neutral-50 text-black flex flex-col">
@@ -154,65 +158,46 @@ export default function IncomingPage() {
         </div>
       </header>
 
-      {/* Status pills */}
-      <div className="bg-white border-b border-black/10 px-6 py-3">
-        <div className="max-w-7xl mx-auto flex gap-2 flex-wrap">
-          <button
-            onClick={() => setStatusFilter('all')}
-            className={`px-3 py-1.5 text-xs font-bold uppercase tracking-widest border ${statusFilter === 'all' ? 'bg-black text-white border-black' : 'border-black/20 text-black/60 hover:border-black/40'}`}
-          >
-            All ({leads.length})
-          </button>
-          {STATUSES.map(s => (
-            <button
-              key={s.value}
-              onClick={() => setStatusFilter(s.value)}
-              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-widest border ${statusFilter === s.value ? 'bg-black text-white border-black' : `${s.color} border-transparent`}`}
-            >
-              {s.label} ({counts[s.value] || 0})
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Lead list */}
       <div className="flex-1 overflow-auto">
         <div className="max-w-4xl mx-auto p-6">
           {loading && <p className="text-black/40 text-sm">Loading...</p>}
-          {!loading && filteredLeads.length === 0 && (
-            <p className="text-black/40 text-sm">No leads in this view.</p>
+          {!loading && leads.length === 0 && (
+            <p className="text-black/40 text-sm">No appointments in this view.</p>
           )}
-          <div className="space-y-2">
-            {filteredLeads.map(lead => {
-              const status = STATUSES.find(s => s.value === lead.status)
-              return (
-                <button
-                  key={lead.id}
-                  onClick={() => router.push(`/${slug}/incoming/${lead.id}`)}
-                  className="w-full text-left bg-white border border-black/10 p-4 hover:border-black/40 transition-colors"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <p className="font-bold truncate">{lead.name}</p>
-                        {lead._count.intakes > 0 && (
-                          <span className="text-[10px] font-heading uppercase tracking-widest bg-emerald-100 text-emerald-700 px-1.5 py-0.5">Intake</span>
-                        )}
-                      </div>
-                      <p className="text-sm text-black/60 truncate">{lead.email}</p>
-                      <p className="text-sm text-black/60">{lead.phone || 'No phone'}</p>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <span className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 mb-1 ${status?.color || 'bg-neutral-200 text-neutral-700'}`}>
-                        {status?.label || lead.status}
-                      </span>
-                      <p className="text-[10px] text-black/40">{timeAgo(lead.createdAt)}</p>
-                      <p className="text-[10px] text-black/40">{lead.source}</p>
-                    </div>
-                  </div>
-                </button>
-              )
-            })}
+          <div className="space-y-8">
+            {Object.entries(grouped).map(([dateLabel, dayLeads]) => (
+              <div key={dateLabel}>
+                <h2 className="font-heading text-xs uppercase tracking-widest font-bold text-black/40 mb-3">{dateLabel}</h2>
+                <div className="space-y-2">
+                  {dayLeads.map(lead => {
+                    const className = extractClassName(lead.notes)
+                    const time = lead.appointmentAt ? formatAppointmentTime(lead.appointmentAt, slug) : ''
+                    return (
+                      <button
+                        key={lead.id}
+                        onClick={() => router.push(`/${slug}/incoming/${lead.id}`)}
+                        className="w-full text-left bg-white border border-black/10 p-4 hover:border-black/40 transition-colors flex items-center gap-4"
+                      >
+                        <div className="w-20 shrink-0">
+                          <p className="font-heading text-lg font-bold">{time}</p>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <p className="font-bold truncate">{lead.name}</p>
+                            {lead._count.intakes > 0 && (
+                              <span className="text-[10px] font-heading uppercase tracking-widest bg-emerald-100 text-emerald-700 px-1.5 py-0.5">Intake</span>
+                            )}
+                          </div>
+                          {className && <p className="text-sm text-black/70 truncate">{className}</p>}
+                          <p className="text-xs text-black/50 truncate">{lead.phone || lead.email}</p>
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
