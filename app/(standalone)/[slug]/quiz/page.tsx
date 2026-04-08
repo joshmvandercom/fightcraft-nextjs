@@ -174,6 +174,7 @@ export default function QuizPage() {
   const step = steps[currentStep]
   const selected = answers[currentStep] || null
   const totalSteps = steps.length
+  const firstName = (getLead()?.name || '').trim().split(/\s+/)[0] || ''
 
   const advance = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current)
@@ -307,6 +308,11 @@ export default function QuizPage() {
           </div>
         ) : (
           <>
+            {firstName && (
+              <p className="font-heading text-xs uppercase tracking-widest text-white/40 mb-3">
+                {currentStep === 0 ? `Hey ${firstName},` : `${firstName},`}
+              </p>
+            )}
             <h1 className="font-heading text-4xl md:text-5xl uppercase font-bold tracking-tight mb-4">
               {step.question}
             </h1>
