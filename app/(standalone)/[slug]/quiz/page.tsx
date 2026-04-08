@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import RequireLead from '@/components/RequireLead'
-import { getLead } from '@/lib/lead'
+import { getLead, markQuizCompleted, isQuizLockedOut, quizLockoutRemainingMs } from '@/lib/lead'
 import { track } from '@/lib/analytics'
 import { resolveAnswer } from '@/lib/quiz-keys'
 
@@ -100,9 +100,19 @@ export default function QuizPage() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const answersRef = useRef<Record<number, string>>({})
   const programValuesRef = useRef<Record<string, string>>({})
+  const [lockedOut, setLockedOut] = useState(false)
+  const [daysRemaining, setDaysRemaining] = useState(0)
+
+  useEffect(() => {
+    if (isQuizLockedOut()) {
+      setLockedOut(true)
+      setDaysRemaining(Math.ceil(quizLockoutRemainingMs() / (24 * 60 * 60 * 1000)))
+    }
+  }, [])
 
   // Fetch location programs and build Q1 (or skip if program is pre-set)
   useEffect(() => {
+    if (isQuizLockedOut()) return
     const urlParams = new URLSearchParams(window.location.search)
     const presetProgram = urlParams.get('p')
 
@@ -194,6 +204,7 @@ export default function QuizPage() {
       })
 
       track('quiz_completed', { location: slug, program: programValue })
+      markQuizCompleted()
 
       // Send quiz data to GHL + Slack
       const lead = getLead()
@@ -269,6 +280,30 @@ export default function QuizPage() {
       if (intervalRef.current) clearInterval(intervalRef.current)
     }
   }, [])
+
+  if (lockedOut) {
+    return (
+      <RequireLead>
+        <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-8">
+          <div className="max-w-xl text-center">
+            <p className="font-heading text-xs uppercase tracking-widest text-white/40 mb-4">Already Completed</p>
+            <h1 className="font-heading text-3xl md:text-4xl uppercase font-bold tracking-tight mb-4">
+              You've already taken the quiz{firstName ? `, ${firstName}` : ''}.
+            </h1>
+            <p className="text-white/60 mb-8">
+              Your results are on file with our team. You can retake the quiz in {daysRemaining} {daysRemaining === 1 ? 'day' : 'days'}. In the meantime, reach out to your location if you have any questions.
+            </p>
+            <button
+              onClick={() => router.push(`/${slug}`)}
+              className="px-10 py-4 bg-white text-black font-heading text-sm uppercase tracking-widest hover:bg-white/90 transition-colors cursor-pointer"
+            >
+              Back to Home
+            </button>
+          </div>
+        </div>
+      </RequireLead>
+    )
+  }
 
   if (!step) {
     return <RequireLead><div className="min-h-screen bg-black" /></RequireLead>
