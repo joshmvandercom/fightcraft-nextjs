@@ -292,10 +292,10 @@ function QuizResults() {
 
         <div className="mt-4">
           <a
-            href={qualified ? `/${slug}/quiz/book?${qpStr}` : `/${slug}/quiz/call?${qpStr}`}
+            href={qualified ? `/${slug}/quiz/book?${qpStr}` : `/${slug}/quiz/thank-you?${qpStr}`}
             className="inline-block w-full max-w-sm py-4 bg-white text-black text-center font-heading text-base font-bold uppercase tracking-widest hover:bg-white/90 transition-colors"
           >
-            {qualified ? "Let's Do This" : "Book Your Free Orientation"}
+            {qualified ? "Let's Do This" : "Next Step"}
           </a>
         </div>
       </div>

@@ -23,9 +23,11 @@ export function isQualified(answers: { p: string; e: string; c: string; o: strin
   // Still exploring readiness always goes to call
   if (answers.r === 'D') return false
 
+  // Upcoming travel — never book into a class, route to call
+  if (answers.r === 'C') return false
+
   // Count flags for remaining answers
   let flags = 0
-  if (answers.r === 'C') flags++ // travel
   if (answers.c === 'D') flags++ // unsure on commitment
   if (answers.o === 'D') flags++ // cost concern
 
