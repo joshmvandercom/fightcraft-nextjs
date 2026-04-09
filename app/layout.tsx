@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import AnalyticsProvider from '@/components/AnalyticsProvider'
 import MetaPixel from '@/components/MetaPixel'
+import TabNotifier from '@/components/TabNotifier'
 
 export const metadata: Metadata = {
   title: 'FightCraft | Premier Martial Arts',
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SpeedInsights />
         <AnalyticsProvider />
         <MetaPixel />
+        <TabNotifier />
         {children}
       </body>
     </html>
