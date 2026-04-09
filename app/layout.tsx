@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import AnalyticsProvider from '@/components/AnalyticsProvider'
 import MetaPixel from '@/components/MetaPixel'
 import TabNotifier from '@/components/TabNotifier'
+import SocialProof from '@/components/SocialProof'
 
 export const metadata: Metadata = {
   title: 'FightCraft | Premier Martial Arts',
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AnalyticsProvider />
         <MetaPixel />
         <TabNotifier />
+        <SocialProof />
         {children}
       </body>
     </html>
