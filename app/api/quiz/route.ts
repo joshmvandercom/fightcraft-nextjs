@@ -56,13 +56,24 @@ export async function POST(request: NextRequest) {
     console.log('[DRY RUN] Quiz completed:', JSON.stringify(payload, null, 2))
   }
 
+  // Check for hard DQ reasons
+  const dqReasons: string[] = []
+  if (p === 'explore') dqReasons.push('No program selected')
+  if (r === 'D') dqReasons.push('Still exploring — no intent to start')
+  if (r === 'C') dqReasons.push('Upcoming travel — can\'t attend now')
+  if (c === 'D') dqReasons.push('Unsure on commitment')
+  if (i === 'B') dqReasons.push('Can\'t invest ($200/mo)')
+
+  const dqTag = dqReasons.length > 0 ? `\n🚫 HARD DQ: ${dqReasons.join(' | ')}` : ''
+
   await notifySlack(
     `Quiz Completed: ${name || 'Unknown'} (${email || 'no email'}) | Location: ${location}\n` +
     `Program Interest: ${p || 'unknown'}\n` +
     `Experience: ${DISPLAY_LABELS.experience[e] || e}\n` +
     `Commitment: ${DISPLAY_LABELS.commitment[c] || c}\n` +
     `Readiness: ${DISPLAY_LABELS.readiness[r] || r}` +
-    (i ? `\nInvestment: ${DISPLAY_LABELS.investment[i] || i}` : ''),
+    (i ? `\nInvestment: ${DISPLAY_LABELS.investment[i] || i}` : '') +
+    dqTag,
     location
   )
 
