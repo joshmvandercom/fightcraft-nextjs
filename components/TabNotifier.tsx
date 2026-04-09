@@ -24,10 +24,12 @@ export default function TabNotifier() {
     function onVisibilityChange() {
       if (document.hidden) {
         setFavicon('/favicon-notify.svg')
+        showingNotification = true
+        document.title = '(1) New Message'
         interval = setInterval(() => {
           showingNotification = !showingNotification
           document.title = showingNotification ? '(1) New Message' : originalTitle
-        }, 1500)
+        }, 1000)
       } else {
         if (interval) clearInterval(interval)
         interval = null
