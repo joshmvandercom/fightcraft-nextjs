@@ -5,7 +5,7 @@ import { Suspense } from 'react'
 import RequireLead from '@/components/RequireLead'
 import { isQualified } from '@/lib/qualify'
 
-function buildStory(p: string, e: string, c: string, o: string, v: string, r: string): string[] {
+function buildStory(p: string, e: string, c: string, r: string): string[] {
   const lines: string[] = []
 
   // Open loop
@@ -127,36 +127,6 @@ function buildStory(p: string, e: string, c: string, o: string, v: string, r: st
   lines.push("")
   lines.push("")
 
-  // Address what matters to them
-  if (o === 'A') {
-    lines.push("You said fitting training into your schedule matters most.")
-    lines.push("")
-    lines.push("We run classes every day. Morning to night.")
-    lines.push("")
-    lines.push("You need one hour. One slot. That's it.")
-  } else if (o === 'B') {
-    lines.push("You said feeling comfortable from day one matters most.")
-    lines.push("")
-    lines.push("Good. Because that's what we do better than anyone.")
-    lines.push("")
-    lines.push("Every person on our mat was new once. By the end of your first class, you'll know people by name.")
-  } else if (o === 'C') {
-    lines.push("You said you want to see real results.")
-    lines.push("")
-    lines.push("You will.")
-    lines.push("")
-    lines.push("Martial arts delivers fitness that a regular gym can't touch. You're so focused on learning that you forget you're working out.")
-  } else if (o === 'D') {
-    lines.push("You said getting the most value matters.")
-    lines.push("")
-    lines.push("Our members consistently say this is the best money they spend on themselves each month.")
-    lines.push("")
-    lines.push("Try it and see for yourself.")
-  }
-
-  lines.push("")
-  lines.push("")
-
   // Commitment
   if (c === 'A' || c === 'B') {
     lines.push("Two to three sessions a week.")
@@ -178,48 +148,6 @@ function buildStory(p: string, e: string, c: string, o: string, v: string, r: st
     lines.push("The people who last aren't the ones who go hardest at the beginning.")
     lines.push("")
     lines.push("They're the ones who keep showing up.")
-  }
-
-  lines.push("")
-  lines.push("")
-
-  // Vision
-  if (v === 'A') {
-    lines.push("Here's what's going to happen.")
-    lines.push("")
-    lines.push("A few months in, someone's going to tell you that you seem different.")
-    lines.push("")
-    lines.push("They won't be able to explain it.")
-    lines.push("")
-    lines.push("But you'll know exactly what changed.")
-  } else if (v === 'B') {
-    lines.push("Here's what nobody tells you about martial arts.")
-    lines.push("")
-    lines.push("The workout gets you in the door.")
-    lines.push("")
-    lines.push("The people keep you coming back.")
-    lines.push("")
-    lines.push("Some of the best friendships you'll ever have are about to start on this mat.")
-  } else if (v === 'C') {
-    lines.push("Here's what's waiting for you.")
-    lines.push("")
-    lines.push("A belt. A tournament. Something real.")
-    lines.push("")
-    lines.push("Something you can point to and say...")
-    lines.push("")
-    lines.push("\"I did that.\"")
-    lines.push("")
-    lines.push("We'll be in your corner when that day comes. Literally.")
-  } else {
-    lines.push("Here's what's going to happen.")
-    lines.push("")
-    lines.push("Someone at work is going to ask what you've been doing.")
-    lines.push("")
-    lines.push("You'll look different. Move different.")
-    lines.push("")
-    lines.push("And you won't have been on some program.")
-    lines.push("")
-    lines.push("You'll have just been training.")
   }
 
   lines.push("")
@@ -264,13 +192,12 @@ function QuizResults() {
   const p = searchParams.get('p') || 'explore'
   const e = searchParams.get('e') || 'A'
   const c = searchParams.get('c') || 'A'
-  const o = searchParams.get('o') || 'A'
-  const v = searchParams.get('v') || 'A'
   const r = searchParams.get('r') || 'A'
+  const i = searchParams.get('i') || undefined
 
-  const story = buildStory(p, e, c, o, v, r)
+  const story = buildStory(p, e, c, r)
   const locationName = slug === 'san-jose' ? 'San Jose' : slug === 'merced' ? 'Merced' : slug === 'brevard' ? 'Brevard' : slug
-  const qualified = isQualified({ p, e, c, o, r }, slug)
+  const qualified = isQualified({ p, e, c, r, i }, slug)
   const qpStr = new URLSearchParams(Object.fromEntries(searchParams.entries())).toString()
 
   return (

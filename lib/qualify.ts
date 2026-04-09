@@ -10,7 +10,7 @@
 // Currently disabled - all beginners book directly
 const BEGINNER_ORIENTATION_REQUIRED: Record<string, string[]> = {}
 
-export function isQualified(answers: { p: string; e: string; c: string; o: string; r: string }, location?: string): boolean {
+export function isQualified(answers: { p: string; e: string; c: string; r: string; i?: string }, location?: string): boolean {
   // Check if this specific program at this location requires beginner orientation
   if (answers.e === 'A' && location) {
     const programs = BEGINNER_ORIENTATION_REQUIRED[location] || []
@@ -26,12 +26,11 @@ export function isQualified(answers: { p: string; e: string; c: string; o: strin
   // Upcoming travel — never book into a class, route to call
   if (answers.r === 'C') return false
 
-  // Count flags for remaining answers
-  let flags = 0
-  if (answers.c === 'D') flags++ // unsure on commitment
-  if (answers.o === 'D') flags++ // cost concern
+  // Unsure on commitment
+  if (answers.c === 'D') return false
 
-  if (flags >= 2) return false
+  // Investment: "No" is a DQ
+  if (answers.i === 'B') return false
 
   return true
 }

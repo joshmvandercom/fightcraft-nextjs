@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import RequireLead from '@/components/RequireLead'
 import { getLead, markQuizCompleted, isQuizLockedOut, quizLockoutRemainingMs } from '@/lib/lead'
+import { isQualified } from '@/lib/qualify'
 import { track } from '@/lib/analytics'
 import { resolveAnswer } from '@/lib/quiz-keys'
 
@@ -56,26 +57,6 @@ const STATIC_STEPS: Step[] = [
     ],
   },
   {
-    question: "What matters most to you right now?",
-    subtitle: "Helps us understand what to focus on when we talk.",
-    options: [
-      { letter: 'A', title: 'Finding something that fits my schedule', description: 'I need training that works around my life', affirmation: "We run classes every day from early morning to late evening. We'll find a slot that works for you." },
-      { letter: 'B', title: "Feeling comfortable from day one", description: "I want to know I'll be welcomed and supported", affirmation: "Every single person on our mat felt that way on day one. Our coaches walk you through everything. Within a week, you'll wonder why you waited." },
-      { letter: 'C', title: "Seeing real physical results", description: "I want training that actually changes how I look and feel", affirmation: "Martial arts delivers fitness that a regular gym can't touch. You're so focused on learning that you forget you're working out." },
-      { letter: 'D', title: "Getting the most value for my money", description: "I want to make sure this is worth it", affirmation: "Our members consistently say this is the best investment they make in themselves each month. We'll make sure you feel the same way." },
-    ],
-  },
-  {
-    question: "A year from now, what does success look like?",
-    subtitle: "This one matters. Visualizing your outcome is the first act of achieving it.",
-    options: [
-      { letter: 'A', title: 'I move through the world with confidence', description: 'People can tell something has changed', affirmation: "That quiet confidence is the most common transformation our members describe. It doesn't come from learning to fight. It comes from knowing you can." },
-      { letter: 'B', title: "I've found my people", description: 'Training is the best part of my week', affirmation: "The community is what keeps people training for years. The workout gets you in the door. The people keep you coming back." },
-      { letter: 'C', title: "I've leveled up and competed", description: "Tangible proof that I've grown", affirmation: "There's nothing like testing yourself. Whether it's your first tournament or your tenth, our coaches will have you prepared and our team will be in your corner." },
-      { letter: 'D', title: "I'm the healthiest I've ever been", description: 'Body and mind both sharper', affirmation: "Martial arts delivers fitness that a regular gym can't touch because you're so focused on learning that you forget you're working out." },
-    ],
-  },
-  {
     question: "How soon are you looking to start?",
     subtitle: "No pressure. Just helps us know how to follow up.",
     options: [
@@ -86,6 +67,15 @@ const STATIC_STEPS: Step[] = [
     ],
   },
 ]
+
+const INVESTMENT_STEP: Step = {
+  question: "Our programs start at $200/mo. If you see the value, are you ready to invest in yourself?",
+  subtitle: "Just want to make sure we're on the same page before your first class.",
+  options: [
+    { letter: 'A', title: "Yes", description: "I'm ready to invest in myself", affirmation: "That's the mindset. The people who get the most out of training are the ones who treat it as an investment, not an expense." },
+    { letter: 'B', title: "No", description: "That's not in my budget right now", affirmation: "We appreciate your honesty. A coach will reach out to walk you through your options." },
+  ],
+}
 
 export default function QuizPage() {
   const router = useRouter()
@@ -166,7 +156,8 @@ export default function QuizPage() {
             subtitle: "Pick the one that interests you most.",
             options: programOptions,
           }
-          setSteps([q1, ...STATIC_STEPS])
+          const allSteps = slug === 'san-jose' ? [q1, ...STATIC_STEPS, INVESTMENT_STEP] : [q1, ...STATIC_STEPS]
+          setSteps(allSteps)
           setCurrentStep(1)
           track('quiz_started', { location: slug, program: presetProgram })
         } else {
@@ -175,7 +166,8 @@ export default function QuizPage() {
             subtitle: "Pick the one that interests you most. You can always try others later.",
             options: programOptions,
           }
-          setSteps([q1, ...STATIC_STEPS])
+          const allSteps = slug === 'san-jose' ? [q1, ...STATIC_STEPS, INVESTMENT_STEP] : [q1, ...STATIC_STEPS]
+          setSteps(allSteps)
           track('quiz_started', { location: slug })
         }
       })
@@ -200,7 +192,7 @@ export default function QuizPage() {
       const programValue = programValuesRef.current[a[0]] || a[0]
       const qp = new URLSearchParams({
         p: programValue, e: a[1] || '', c: a[2] || '',
-        o: a[3] || '', v: a[4] || '', r: a[5] || '',
+        r: a[3] || '', ...(a[4] ? { i: a[4] } : {}),
       })
 
       track('quiz_completed', { location: slug, program: programValue })
@@ -217,11 +209,16 @@ export default function QuizPage() {
           name: lead?.name || '',
           phone: lead?.phone || '',
           p: programValue, e: a[1] || '', c: a[2] || '',
-          o: a[3] || '', v: a[4] || '', r: a[5] || '',
+          r: a[3] || '', ...(a[4] ? { i: a[4] } : {}),
         }),
       }).catch(() => {})
 
-      router.push(`/${slug}/quiz/complete?${qp.toString()}`)
+      const qualified = isQualified({
+        p: programValue, e: a[1] || '', c: a[2] || '',
+        r: a[3] || '', i: a[4],
+      }, slug)
+      const dest = qualified ? `/${slug}/quiz/book?${qp.toString()}` : `/${slug}/quiz/thank-you?${qp.toString()}`
+      router.push(dest)
     }
   }, [currentStep, totalSteps, slug, router])
 
@@ -233,7 +230,7 @@ export default function QuizPage() {
     setAutoProgress(0)
 
     // Track in Amplitude
-    const stepNames = ['program', 'experience', 'commitment', 'objection', 'vision', 'readiness']
+    const stepNames = ['program', 'experience', 'commitment', 'readiness', 'investment']
     const resolvedValue = currentStep === 0 ? (programValuesRef.current[letter] || letter) : resolveAnswer(currentStep, letter)
     track('quiz_step_answered', { location: slug, step: stepNames[currentStep], answer: resolvedValue })
 
@@ -299,6 +296,14 @@ export default function QuizPage() {
             >
               Back to Home
             </button>
+            {process.env.NODE_ENV === 'development' && (
+              <button
+                onClick={() => { localStorage.removeItem('fightcraft_quiz_completed_at'); window.location.reload() }}
+                className="mt-4 block text-xs text-white/30 underline cursor-pointer"
+              >
+                [DEV] Reset quiz lockout
+              </button>
+            )}
           </div>
         </div>
       </RequireLead>

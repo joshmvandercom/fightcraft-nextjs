@@ -12,23 +12,15 @@ export const STABLE_KEYS: Record<string, Record<string, string>> = {
     C: 'starting_slow',
     D: 'unsure',
   },
-  objection: {
-    A: 'time',
-    B: 'intimidation',
-    C: 'fitness_first',
-    D: 'cost',
-  },
-  vision: {
-    A: 'confidence',
-    B: 'community',
-    C: 'competition',
-    D: 'health',
-  },
   readiness: {
     A: 'ready_now',
     B: 'couple_weeks',
     C: 'after_travel',
     D: 'exploring',
+  },
+  investment: {
+    A: 'yes',
+    B: 'no',
   },
 }
 
@@ -46,28 +38,20 @@ export const DISPLAY_LABELS: Record<string, Record<string, string>> = {
     C: '1-2 times to start',
     D: 'Not sure yet',
   },
-  objection: {
-    A: 'Fits my schedule',
-    B: 'Feeling comfortable',
-    C: 'Physical results',
-    D: 'Best value',
-  },
-  vision: {
-    A: 'Confidence',
-    B: 'Community',
-    C: 'Competition',
-    D: 'Health & fitness',
-  },
   readiness: {
     A: 'Ready now',
     B: 'Within a couple weeks',
     C: 'After travel',
     D: 'Still exploring',
   },
+  investment: {
+    A: 'Yes',
+    B: 'No',
+  },
 }
 
 // Step index to key name mapping
-export const STEP_KEYS = ['program', 'experience', 'commitment', 'objection', 'vision', 'readiness']
+export const STEP_KEYS = ['program', 'experience', 'commitment', 'readiness', 'investment']
 
 // Resolve a raw answer letter to its stable key
 export function resolveAnswer(stepIndex: number, letter: string): string {

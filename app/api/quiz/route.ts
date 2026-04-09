@@ -10,7 +10,7 @@ const WEBHOOKS: Record<string, string | undefined> = {
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
-  const { location, email, name, phone, p, e, c, o, v, r } = body
+  const { location, email, name, phone, p, e, c, r, i } = body
 
   if (!location) {
     return NextResponse.json({ error: 'Location required' }, { status: 400 })
@@ -30,17 +30,15 @@ export async function POST(request: NextRequest) {
     quiz_program: p || 'unknown',
     quiz_experience: STABLE_KEYS.experience[e] || e,
     quiz_commitment: STABLE_KEYS.commitment[c] || c,
-    quiz_objection: STABLE_KEYS.objection[o] || o,
-    quiz_vision: STABLE_KEYS.vision[v] || v,
     quiz_readiness: STABLE_KEYS.readiness[r] || r,
+    ...(i ? { quiz_investment: STABLE_KEYS.investment[i] || i } : {}),
     tags: [
       'quiz-completed',
       `program:${p || 'unknown'}`,
       `experience:${STABLE_KEYS.experience[e] || e}`,
       `commitment:${STABLE_KEYS.commitment[c] || c}`,
-      `objection:${STABLE_KEYS.objection[o] || o}`,
-      `vision:${STABLE_KEYS.vision[v] || v}`,
       `readiness:${STABLE_KEYS.readiness[r] || r}`,
+      ...(i ? [`investment:${STABLE_KEYS.investment[i] || i}`] : []),
     ],
   }
 
@@ -63,9 +61,8 @@ export async function POST(request: NextRequest) {
     `Program Interest: ${p || 'unknown'}\n` +
     `Experience: ${DISPLAY_LABELS.experience[e] || e}\n` +
     `Commitment: ${DISPLAY_LABELS.commitment[c] || c}\n` +
-    `Objection: ${DISPLAY_LABELS.objection[o] || o}\n` +
-    `Vision: ${DISPLAY_LABELS.vision[v] || v}\n` +
-    `Readiness: ${DISPLAY_LABELS.readiness[r] || r}`,
+    `Readiness: ${DISPLAY_LABELS.readiness[r] || r}` +
+    (i ? `\nInvestment: ${DISPLAY_LABELS.investment[i] || i}` : ''),
     location
   )
 

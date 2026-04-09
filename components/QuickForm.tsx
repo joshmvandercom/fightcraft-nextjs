@@ -60,11 +60,11 @@ export default function QuickForm() {
     setSubmitting(false)
   }
 
-  const inputDesktop = "flex-1 px-4 py-3 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30"
-  const inputMobile = "px-3 py-2.5 bg-white text-black placeholder-black/40 text-sm border border-black/10 focus:outline-none focus:border-black/30"
+  const inputDesktop = "flex-1 px-4 py-3 bg-white/10 text-white placeholder-white/40 text-sm border border-white/20 focus:outline-none focus:border-white/50"
+  const inputMobile = "px-3 py-2.5 bg-white/10 text-white placeholder-white/40 text-sm border border-white/20 focus:outline-none focus:border-white/50"
 
   return (
-    <div className="bg-neutral-100 py-4 px-6">
+    <div className="bg-black py-6 px-6 border-t-4 border-white/20">
       <div className="max-w-5xl mx-auto">
         {/* Desktop */}
         <form onSubmit={handleSubmit} className="hidden md:flex gap-3 items-center mb-3">
@@ -72,8 +72,8 @@ export default function QuickForm() {
           <input type="email" placeholder="Your Best Email" required value={email} onChange={e => setEmail(e.target.value)} className={inputDesktop} />
           <input type="tel" placeholder="Your Mobile Phone" value={phone} onChange={e => setPhone(e.target.value)} className={inputDesktop} />
           <input type="hidden" value={location} />
-          <button type="submit" disabled={submitting} className="px-8 py-3 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors disabled:opacity-50 whitespace-nowrap">
-            {submitting ? '...' : 'Get Started'}
+          <button type="submit" disabled={submitting} className="px-8 py-3 bg-white text-black font-heading text-sm uppercase tracking-widest hover:bg-white/90 transition-colors disabled:opacity-50 whitespace-nowrap">
+            {submitting ? '...' : 'Request More Info'}
           </button>
         </form>
 
@@ -83,24 +83,24 @@ export default function QuickForm() {
           <input type="email" placeholder="Your Best Email" required value={email} onChange={e => setEmail(e.target.value)} className={inputMobile} />
           <input type="tel" placeholder="Your Mobile Phone" value={phone} onChange={e => setPhone(e.target.value)} className={`${inputMobile} col-span-2`} />
           <input type="hidden" value={location} />
-          <button type="submit" disabled={submitting} className="col-span-2 py-2.5 bg-black text-white font-heading text-sm uppercase tracking-widest hover:bg-black/80 transition-colors disabled:opacity-50">
-            {submitting ? '...' : 'Get Started'}
+          <button type="submit" disabled={submitting} className="col-span-2 py-2.5 bg-white text-black font-heading text-sm uppercase tracking-widest hover:bg-white/90 transition-colors disabled:opacity-50">
+            {submitting ? '...' : 'Request More Info'}
           </button>
         </form>
 
         {/* Social proof - desktop */}
         <div className="hidden md:flex items-center justify-center gap-3">
           <Stars />
-          <p className="text-sm text-black/60">
-            Rated <span className="font-bold text-black">4.9</span> out of 5 from <span className="font-bold text-black">139+ reviews</span> on Google
+          <p className="text-sm text-white/60">
+            Rated <span className="font-bold text-white">4.9</span> out of 5 from <span className="font-bold text-white">139+ reviews</span> on Google
           </p>
           <img src="/images/google.webp" alt="Google" className="w-4 h-4" />
         </div>
 
         {/* Social proof - mobile */}
         <div className="md:hidden flex flex-col items-center gap-1.5">
-          <p className="text-xs text-black/60">
-            Rated <span className="font-bold text-black">4.9</span> out of 5 from <span className="font-bold text-black">139+ reviews</span> on Google <img src="/images/google.webp" alt="Google" className="w-3.5 h-3.5 inline" />
+          <p className="text-xs text-white/60">
+            Rated <span className="font-bold text-white">4.9</span> out of 5 from <span className="font-bold text-white">139+ reviews</span> on Google <img src="/images/google.webp" alt="Google" className="w-3.5 h-3.5 inline" />
           </p>
           <Stars />
         </div>

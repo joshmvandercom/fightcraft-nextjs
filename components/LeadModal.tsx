@@ -95,9 +95,9 @@ export default function LeadModal() {
         </button>
 
         <div className="p-8">
-          <h2 className="text-2xl font-bold mb-2">Get Started</h2>
+          <h2 className="text-2xl font-bold mb-2">Request More Information</h2>
           <p className="text-sm text-black/50 mb-6">
-            Drop your info and we&apos;ll reach out with everything you need to get started.
+            Drop your info and we&apos;ll reach out with everything you need.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -142,7 +142,7 @@ export default function LeadModal() {
               disabled={submitting}
               className="w-full py-4 bg-black text-white font-heading text-lg font-bold uppercase tracking-widest rounded-lg hover:bg-black/80 transition-colors disabled:opacity-50"
             >
-              {submitting ? 'Sending...' : 'Get Started'}
+              {submitting ? 'Sending...' : 'Request More Info'}
             </button>
           </form>
 
