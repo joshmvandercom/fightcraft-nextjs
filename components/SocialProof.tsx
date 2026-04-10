@@ -21,19 +21,28 @@ function saveState(names: string[], index: number, nextShowAt: number) {
   } catch {}
 }
 
+// Pages where social proof should NOT appear (post-opt-in surfaces)
+const HIDDEN_PATHS = ['/quiz', '/next-steps', '/checkout', '/quiz/', '/incoming']
+
+function shouldHide(path: string): boolean {
+  return HIDDEN_PATHS.some(p => path.includes(p))
+}
+
 export default function SocialProof() {
   const [current, setCurrent] = useState<string | null>(null)
   const [visible, setVisible] = useState(false)
   const [totalRecent, setTotalRecent] = useState(0)
   const [bannerVisible, setBannerVisible] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const namesRef = useRef<string[]>([])
   const indexRef = useRef(0)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Watch for promo banner presence
+  // Watch for promo banner presence and path changes
   useEffect(() => {
     function check() {
       setBannerVisible(!!document.getElementById('promo-banner'))
+      setHidden(shouldHide(window.location.pathname))
     }
     check()
     const observer = new MutationObserver(check)
@@ -90,7 +99,7 @@ export default function SocialProof() {
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current) }
   }, [])
 
-  if (!current) return null
+  if (!current || hidden) return null
 
   return (
     <div
