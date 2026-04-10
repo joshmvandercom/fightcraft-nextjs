@@ -64,17 +64,30 @@ function ThankYouContent() {
                 ? "No rush — enjoy your trip. When would you like us to follow up so we can get you started?"
                 : "Take your time. When would be a good time for us to check back in?"}
             </p>
-            <div className="mb-6">
-              <label className="block text-sm text-white/40 mb-2 font-heading uppercase tracking-widest">
-                Best date to reach out
-              </label>
-              <input
-                type="date"
-                value={followUpDate}
-                onChange={e => setFollowUpDate(e.target.value)}
-                min={minDate}
-                className="dark-autofill w-full px-4 py-3 bg-white/10 text-white border border-white/20 focus:outline-none focus:border-white/50"
-              />
+            <div className="flex flex-wrap gap-2 mb-6">
+              {[
+                { label: '1 Week', days: 7 },
+                { label: '2 Weeks', days: 14 },
+                { label: '1 Month', days: 30 },
+                { label: '3 Months', days: 90 },
+              ].map(opt => {
+                const d = new Date()
+                d.setDate(d.getDate() + opt.days)
+                const val = d.toISOString().split('T')[0]
+                return (
+                  <button
+                    key={opt.label}
+                    onClick={() => setFollowUpDate(val)}
+                    className={`px-4 py-2 text-sm font-heading uppercase tracking-widest border transition-colors cursor-pointer ${
+                      followUpDate === val
+                        ? 'bg-white text-black border-white'
+                        : 'bg-transparent text-white/60 border-white/20 hover:border-white/40'
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                )
+              })}
             </div>
             <button
               onClick={handleSubmit}
