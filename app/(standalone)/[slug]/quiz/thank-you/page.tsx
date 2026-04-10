@@ -1,14 +1,47 @@
 'use client'
 
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
+import { Suspense, useState } from 'react'
 import RequireLead from '@/components/RequireLead'
 import { getLead } from '@/lib/lead'
 
 function ThankYouContent() {
   const params = useParams()
+  const searchParams = useSearchParams()
   const slug = params.slug as string
   const locationName = slug === 'san-jose' ? 'San Jose' : slug === 'merced' ? 'Merced' : slug === 'brevard' ? 'Brevard' : slug
   const firstName = (getLead()?.name || '').trim().split(/\s+/)[0] || ''
+  const r = searchParams.get('r') || ''
+  const showDatePicker = r === 'C' || r === 'D'
+
+  const [followUpDate, setFollowUpDate] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+
+  async function handleSubmit() {
+    if (!followUpDate) return
+    setSubmitting(true)
+    const lead = getLead()
+    await fetch('/api/quiz-followup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        location: slug,
+        email: lead?.email || '',
+        name: lead?.name || '',
+        phone: lead?.phone || '',
+        followUpDate,
+        reason: r === 'C' ? 'travel' : 'exploring',
+      }),
+    }).catch(() => {})
+    setSubmitted(true)
+    setSubmitting(false)
+  }
+
+  // Min date: tomorrow
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  const minDate = tomorrow.toISOString().split('T')[0]
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col px-6 py-8">
@@ -23,18 +56,62 @@ function ThankYouContent() {
         <h1 className="font-heading text-3xl md:text-4xl uppercase font-bold tracking-tight mb-4">
           {firstName ? `Thanks, ${firstName}.` : 'Thanks for completing your profile.'}
         </h1>
-        <p className="text-white/60 mb-4">
-          We've got your info and a coach from our {locationName} location will be reaching out to you soon.
-        </p>
-        <p className="text-white/60 mb-8">
-          In the meantime, keep an eye on your phone and email. We'll be in touch within 24 hours.
-        </p>
-        <a
-          href={`/${slug}`}
-          className="inline-block w-full max-w-sm py-4 bg-white text-black text-center font-heading text-base font-bold uppercase tracking-widest hover:bg-white/90 transition-colors"
-        >
-          Back to Home
-        </a>
+
+        {showDatePicker && !submitted ? (
+          <>
+            <p className="text-white/60 mb-6">
+              {r === 'C'
+                ? "No rush — enjoy your trip. When would you like us to follow up so we can get you started?"
+                : "Take your time. When would be a good time for us to check back in?"}
+            </p>
+            <div className="mb-6">
+              <label className="block text-sm text-white/40 mb-2 font-heading uppercase tracking-widest">
+                Best date to reach out
+              </label>
+              <input
+                type="date"
+                value={followUpDate}
+                onChange={e => setFollowUpDate(e.target.value)}
+                min={minDate}
+                className="dark-autofill w-full px-4 py-3 bg-white/10 text-white border border-white/20 focus:outline-none focus:border-white/50"
+              />
+            </div>
+            <button
+              onClick={handleSubmit}
+              disabled={!followUpDate || submitting}
+              className="w-full max-w-sm py-4 bg-white text-black text-center font-heading text-base font-bold uppercase tracking-widest hover:bg-white/90 transition-colors disabled:opacity-50 cursor-pointer"
+            >
+              {submitting ? '...' : 'Set Reminder'}
+            </button>
+          </>
+        ) : submitted ? (
+          <>
+            <p className="text-white/60 mb-4">
+              We&apos;ll reach out on {new Date(followUpDate + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}. Looking forward to it{firstName ? `, ${firstName}` : ''}.
+            </p>
+            <a
+              href={`/${slug}`}
+              className="inline-block w-full max-w-sm py-4 bg-white text-black text-center font-heading text-base font-bold uppercase tracking-widest hover:bg-white/90 transition-colors"
+            >
+              Back to Home
+            </a>
+          </>
+        ) : (
+          <>
+            <p className="text-white/60 mb-4">
+              We&apos;ve got your info and a coach from our {locationName} location will be reaching out to you soon.
+            </p>
+            <p className="text-white/60 mb-8">
+              In the meantime, keep an eye on your phone and email. We&apos;ll be in touch within 24 hours.
+            </p>
+            <a
+              href={`/${slug}`}
+              className="inline-block w-full max-w-sm py-4 bg-white text-black text-center font-heading text-base font-bold uppercase tracking-widest hover:bg-white/90 transition-colors"
+            >
+              Back to Home
+            </a>
+          </>
+        )}
       </div>
     </div>
   )
@@ -43,7 +120,9 @@ function ThankYouContent() {
 export default function ThankYouPage() {
   return (
     <RequireLead>
-      <ThankYouContent />
+      <Suspense fallback={<div className="min-h-screen bg-black" />}>
+        <ThankYouContent />
+      </Suspense>
     </RequireLead>
   )
 }
