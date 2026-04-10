@@ -20,6 +20,15 @@ export async function POST(request: NextRequest) {
   const isLive = process.env.WEBHOOKS_LIVE === 'true'
   const webhookReady = webhookUrl && !webhookUrl.includes('example.com') && !webhookUrl.includes('placeholder')
 
+  // Check for hard DQ reasons
+  const dqReasons: string[] = []
+  if (p === 'explore') dqReasons.push('No program selected')
+  if (r === 'D') dqReasons.push('Still exploring')
+  if (r === 'C') dqReasons.push('Upcoming travel')
+  if (c === 'D') dqReasons.push('Unsure on commitment')
+  if (i === 'B') dqReasons.push('Can\'t invest')
+  const qualified = dqReasons.length === 0
+
   const payload = {
     email: email || '',
     name: name || '',
@@ -32,6 +41,8 @@ export async function POST(request: NextRequest) {
     quiz_commitment: STABLE_KEYS.commitment[c] || c,
     quiz_readiness: STABLE_KEYS.readiness[r] || r,
     ...(i ? { quiz_investment: STABLE_KEYS.investment[i] || i } : {}),
+    quiz_qualified: qualified ? 'yes' : 'no',
+    ...(!qualified ? { quiz_dq_reason: dqReasons.join(', ') } : {}),
     tags: [
       'quiz-completed',
       `program:${p || 'unknown'}`,
@@ -39,6 +50,7 @@ export async function POST(request: NextRequest) {
       `commitment:${STABLE_KEYS.commitment[c] || c}`,
       `readiness:${STABLE_KEYS.readiness[r] || r}`,
       ...(i ? [`investment:${STABLE_KEYS.investment[i] || i}`] : []),
+      qualified ? 'qualified' : 'dq',
     ],
   }
 
@@ -56,15 +68,7 @@ export async function POST(request: NextRequest) {
     console.log('[DRY RUN] Quiz completed:', JSON.stringify(payload, null, 2))
   }
 
-  // Check for hard DQ reasons
-  const dqReasons: string[] = []
-  if (p === 'explore') dqReasons.push('No program selected')
-  if (r === 'D') dqReasons.push('Still exploring — no intent to start')
-  if (r === 'C') dqReasons.push('Upcoming travel — can\'t attend now')
-  if (c === 'D') dqReasons.push('Unsure on commitment')
-  if (i === 'B') dqReasons.push('Can\'t invest ($200/mo)')
-
-  const dqTag = dqReasons.length > 0 ? `\n🚫 HARD DQ: ${dqReasons.join(' | ')}` : ''
+  const dqTag = !qualified ? `\n🚫 HARD DQ: ${dqReasons.join(' | ')}` : ''
 
   await notifySlack(
     `Quiz Completed: ${name || 'Unknown'} (${email || 'no email'}) | Location: ${location}\n` +
