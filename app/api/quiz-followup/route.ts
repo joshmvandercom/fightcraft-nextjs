@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { notifySlack } from '@/lib/slack'
 
 const WEBHOOKS: Record<string, string | undefined> = {
-  'san-jose': process.env.WEBHOOK_QUIZ_COMPLETE_SAN_JOSE,
-  'merced': process.env.WEBHOOK_QUIZ_COMPLETE_MERCED,
-  'brevard': process.env.WEBHOOK_QUIZ_COMPLETE_BREVARD,
+  'san-jose': process.env.WEBHOOK_QUIZ_FOLLOWUP_SAN_JOSE,
+  'merced': process.env.WEBHOOK_QUIZ_FOLLOWUP_MERCED,
+  'brevard': process.env.WEBHOOK_QUIZ_FOLLOWUP_BREVARD,
 }
 
 export async function POST(request: NextRequest) {
