@@ -14,7 +14,7 @@ export default function PromoBanner() {
   if (!show || dismissed) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-3 px-4">
+    <div id="promo-banner" className="fixed bottom-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-3 px-4">
       <a href="/san-jose/web-special" className="hover:underline">
         <span className="font-heading text-xs md:text-sm uppercase tracking-widest font-bold">
           Limited Time Offer: Your first month for $97

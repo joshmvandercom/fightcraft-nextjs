@@ -34,6 +34,15 @@ body {
   overflow: hidden;
 }
 
+input.dark-autofill:-webkit-autofill,
+input.dark-autofill:-webkit-autofill:hover,
+input.dark-autofill:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgba(0,0,0,0.9) inset !important;
+  -webkit-text-fill-color: #fff !important;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: #fff;
+}
+
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 

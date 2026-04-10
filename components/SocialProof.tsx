@@ -25,9 +25,21 @@ export default function SocialProof() {
   const [current, setCurrent] = useState<string | null>(null)
   const [visible, setVisible] = useState(false)
   const [totalRecent, setTotalRecent] = useState(0)
+  const [bannerVisible, setBannerVisible] = useState(false)
   const namesRef = useRef<string[]>([])
   const indexRef = useRef(0)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Watch for promo banner presence
+  useEffect(() => {
+    function check() {
+      setBannerVisible(!!document.getElementById('promo-banner'))
+    }
+    check()
+    const observer = new MutationObserver(check)
+    observer.observe(document.body, { childList: true, subtree: true })
+    return () => observer.disconnect()
+  }, [])
 
   // Always fetch count + names on mount
   useEffect(() => {
@@ -82,7 +94,7 @@ export default function SocialProof() {
 
   return (
     <div
-      className={`fixed bottom-24 right-6 z-50 transition-all duration-500 ${
+      className={`fixed ${bannerVisible ? 'bottom-24' : 'bottom-6'} right-6 z-50 transition-all duration-500 ${
         visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
       }`}
     >

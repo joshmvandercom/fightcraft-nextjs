@@ -140,3 +140,30 @@ export function getSchedule(locationSlug: string): ScheduleDay[] {
   const data = load('schedules.yml').schedules
   return data[locationSlug] || []
 }
+
+export interface Comparison {
+  slug: string
+  name: string
+  short_name: string
+  programs: string[]
+  google_rating: number
+  google_reviews: number
+  has_kids: boolean
+  has_nogi: boolean
+  has_mma: boolean
+  has_wrestling: boolean
+  pricing_note: string
+  schedule_note: string
+  differentiators: string[]
+  weaknesses: string[]
+}
+
+export function getComparisons(locationSlug: string): Comparison[] {
+  const data = load('comparisons.yml')
+  return data[locationSlug] || []
+}
+
+export function getComparison(locationSlug: string, gymSlug: string): Comparison | null {
+  const comps = getComparisons(locationSlug)
+  return comps.find(c => c.slug === gymSlug) || null
+}

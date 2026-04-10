@@ -1,0 +1,103 @@
+san-jose:
+  - slug: aka
+    name: American Kickboxing Academy
+    short_name: AKA
+    programs: [Kickboxing, Boxing, Muay Thai, BJJ, Wrestling]
+    google_rating: 4.5
+    google_reviews: 200
+    has_kids: true
+    has_nogi: false
+    has_mma: true
+    has_wrestling: true
+    pricing_note: "Not disclosed publicly"
+    schedule_note: "Limited class times"
+    differentiators:
+      - "Large facility with weight room, pool, and racquetball"
+      - "Known for pro MMA fighters"
+      - "Founded in 1985"
+    weaknesses:
+      - "Can feel intimidating for beginners — pro fighter atmosphere"
+      - "Less focus on individual attention with larger class sizes"
+      - "Facility shows its age compared to newer gyms"
+
+  - slug: smash-gyms
+    name: Smash Gyms San Jose
+    short_name: Smash Gyms
+    programs: [MMA, Boxing, Kickboxing, BJJ, No-Gi, Wrestling, Judo]
+    google_rating: 4.1
+    google_reviews: 128
+    has_kids: true
+    has_nogi: true
+    has_mma: true
+    has_wrestling: true
+    pricing_note: "Not disclosed publicly"
+    schedule_note: "Standard schedule"
+    differentiators:
+      - "Wide variety of programs"
+      - "Multiple locations in the Bay Area"
+    weaknesses:
+      - "Lower Google rating suggests inconsistent experience"
+      - "Large class sizes can mean less personal coaching"
+
+  - slug: condition-and-competition
+    name: Condition and Competition Kickboxing
+    short_name: Condition & Competition
+    programs: [Kickboxing, Muay Thai, Boxing]
+    google_rating: 4.9
+    google_reviews: 353
+    has_kids: false
+    has_nogi: false
+    has_mma: false
+    has_wrestling: false
+    pricing_note: "From $31.50 for group classes"
+    schedule_note: "Standard schedule"
+    differentiators:
+      - "Highly rated for kickboxing specifically"
+      - "Strong coaching reputation"
+      - "New equipment throughout"
+    weaknesses:
+      - "Striking only — no grappling, BJJ, or wrestling"
+      - "No kids programs"
+      - "Limited if you want a complete martial arts education"
+
+  - slug: dark-horse-gym
+    name: Dark Horse Gym
+    short_name: Dark Horse
+    programs: [MMA, Boxing, Kickboxing, Jiu Jitsu, Muay Thai]
+    google_rating: 4.5
+    google_reviews: 22
+    has_kids: true
+    has_nogi: false
+    has_mma: true
+    has_wrestling: false
+    pricing_note: "$129/month for all group classes"
+    schedule_note: "Standard schedule"
+    differentiators:
+      - "30+ years in business"
+      - "Founded by retired UFC veteran"
+      - "Downtown San Jose location"
+    weaknesses:
+      - "Smaller facility"
+      - "Fewer reviews — less established community presence"
+      - "No dedicated wrestling or no-gi program"
+
+  - slug: gloglo-bjj
+    name: GloGlo BJJ
+    short_name: GloGlo BJJ
+    programs: [BJJ, Kickboxing, Muay Thai]
+    google_rating: 4.9
+    google_reviews: 79
+    has_kids: true
+    has_nogi: false
+    has_mma: false
+    has_wrestling: false
+    pricing_note: "Not disclosed publicly"
+    schedule_note: "Standard schedule"
+    differentiators:
+      - "Largest mat space in San Jose (4,500 sq ft)"
+      - "Strong community focus"
+      - "Highly rated for supportive atmosphere"
+    weaknesses:
+      - "Primarily a BJJ gym — limited striking options"
+      - "No MMA or wrestling programs"
+      - "Smaller program variety"

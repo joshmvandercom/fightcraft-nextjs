@@ -1,4 +1,4 @@
-import { getLocations, getOfferSlugs, getProgramSlugs, getOffer, getProgramConfig } from '@/lib/content'
+import { getLocations, getOfferSlugs, getProgramSlugs, getOffer, getProgramConfig, getComparisons } from '@/lib/content'
 
 export default function LandingPagesIndex() {
   const locations = getLocations()
@@ -133,6 +133,28 @@ export default function LandingPagesIndex() {
                   </a>
                 </div>
               </div>
+
+              {/* VS Comparisons */}
+              {(() => {
+                const comps = getComparisons(loc.slug)
+                if (comps.length === 0) return null
+                return (
+                  <div>
+                    <h3 className="font-heading text-sm uppercase tracking-widest text-black/40 mb-2">VS Comparisons</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                      {comps.map(comp => {
+                        const url = `/${loc.slug}/vs/${comp.slug}`
+                        return (
+                          <a key={comp.slug} href={url} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                            <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">FightCraft vs {comp.short_name}</p>
+                            <p className="text-[10px] text-black/40">{url}</p>
+                          </a>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })()}
 
               {/* Legacy / other */}
               <div>

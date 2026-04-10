@@ -60,11 +60,11 @@ export default function QuickForm() {
     setSubmitting(false)
   }
 
-  const inputDesktop = "flex-1 px-4 py-3 bg-white/10 text-white placeholder-white/40 text-sm border border-white/20 focus:outline-none focus:border-white/50"
-  const inputMobile = "px-3 py-2.5 bg-white/10 text-white placeholder-white/40 text-sm border border-white/20 focus:outline-none focus:border-white/50"
+  const inputDesktop = "dark-autofill flex-1 px-4 py-3 bg-white/10 text-white placeholder-white/40 text-sm border border-white/20 focus:outline-none focus:border-white/50"
+  const inputMobile = "dark-autofill px-3 py-2.5 bg-white/10 text-white placeholder-white/40 text-sm border border-white/20 focus:outline-none focus:border-white/50"
 
   return (
-    <div className="bg-black py-6 px-6 border-t-4 border-white/20">
+    <div className="bg-black/40 backdrop-blur-sm py-4 px-6">
       <div className="max-w-5xl mx-auto">
         {/* Desktop */}
         <form onSubmit={handleSubmit} className="hidden md:flex gap-3 items-center mb-3">

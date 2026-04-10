@@ -83,7 +83,7 @@ export default function LeadForm({ selectedLocation, variant = 'dark', onSuccess
   }
 
   const inputClass = variant === 'dark'
-    ? 'w-full px-4 py-3 bg-transparent border border-white/30 text-white placeholder-white/30 font-heading text-sm uppercase tracking-wider focus:border-white focus:outline-none transition-colors'
+    ? 'dark-autofill w-full px-4 py-3 bg-transparent border border-white/30 text-white placeholder-white/30 font-heading text-sm uppercase tracking-wider focus:border-white focus:outline-none transition-colors'
     : 'w-full px-4 py-3 bg-transparent border border-black/30 text-black placeholder-black/30 font-heading text-sm uppercase tracking-wider focus:border-black focus:outline-none transition-colors'
 
   const buttonClass = variant === 'dark'
