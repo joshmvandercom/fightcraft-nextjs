@@ -17,6 +17,9 @@ export function isQualified(answers: { p: string; e: string; c: string; r: strin
     if (programs.includes(answers.p)) return false
   }
 
+  // Kickboxing always qualifies (financial DQ handled separately in quiz routing)
+  if (answers.p === 'kickboxing') return true
+
   // "Not sure" on program always goes to orientation
   if (answers.p === 'explore') return false
 

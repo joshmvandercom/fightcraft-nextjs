@@ -1,7 +1,7 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useParams, useSearchParams } from "next/navigation";
+import { Suspense, useState, useEffect, useRef } from "react";
 import { getLead, setLead } from "@/lib/lead";
 import { setSidCookie } from "@/lib/sid";
 import { identify, track } from "@/lib/analytics";
@@ -79,10 +79,12 @@ function CTAButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-export default function StartPage() {
+function StartPageContent() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const slug = params.slug as string;
   const loc = LOCATION_DATA[slug] || LOCATION_DATA["san-jose"];
+  const fromQuiz = searchParams.get("from") === "quiz";
 
   const [pageLoadTime] = useState(() => Date.now());
   const [modalOpen, setModalOpen] = useState(false);
@@ -208,6 +210,33 @@ export default function StartPage() {
 
   return (
     <div className="flex flex-col bg-black min-h-screen">
+      {/* Quiz DQ intro */}
+      {fromQuiz && (
+        <div className="bg-black text-white py-12 px-6 border-b border-white/10">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="font-heading text-xs uppercase tracking-widest text-white/40 mb-4">
+              One More Thing
+            </p>
+            <h2 className="font-heading text-2xl md:text-3xl uppercase font-bold tracking-tight mb-4">
+              {firstName
+                ? <>Hey {firstName}, it looks like the investment{' '}<span className="whitespace-nowrap">isn&apos;t quite a fit right now.</span></>
+                : <>Hey, it looks like the investment{' '}<span className="whitespace-nowrap">isn&apos;t quite a fit right now.</span></>}
+            </h2>
+            <p className="text-white/60 mb-6 max-w-xl mx-auto">
+              Sometimes people need to see the value first. We get that. So here&apos;s what we can do:
+            </p>
+            <div className="inline-block border border-white/20 px-6 py-4 mb-4">
+              <p className="font-heading text-lg uppercase tracking-tight font-bold text-white">
+                Start for just <span className="text-red-500">$33/week</span>
+              </p>
+              <p className="text-sm text-white/50 mt-1">
+                That&apos;s 50% off. This is a one-time, online-only offer.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero — video background */}
       <div className="relative min-h-[85vh] flex items-center overflow-hidden">
         <AutoPlayVideo
@@ -751,5 +780,13 @@ export default function StartPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function StartPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <StartPageContent />
+    </Suspense>
   );
 }

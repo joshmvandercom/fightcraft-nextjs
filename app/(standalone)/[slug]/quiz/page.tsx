@@ -217,7 +217,16 @@ export default function QuizPage() {
         p: programValue, e: a[1] || '', c: a[2] || '',
         r: a[3] || '', i: a[4],
       }, slug)
-      const dest = qualified ? `/${slug}/quiz/book?${qp.toString()}` : `/${slug}/quiz/thank-you?${qp.toString()}`
+
+      let dest: string
+      if (a[4] === 'B') {
+        // Financial DQ overrides everything → discounted start offer
+        dest = `/${slug}/start?from=quiz`
+      } else if (qualified) {
+        dest = `/${slug}/quiz/book?${qp.toString()}`
+      } else {
+        dest = `/${slug}/quiz/thank-you?${qp.toString()}`
+      }
       router.push(dest)
     }
   }, [currentStep, totalSteps, slug, router])

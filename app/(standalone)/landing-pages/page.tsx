@@ -131,6 +131,22 @@ export default function LandingPagesIndex() {
                     <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Class Confirmed</p>
                     <p className="text-[10px] text-black/40">/{loc.slug}/quiz/class-confirmed</p>
                   </a>
+                  <a href={`/${loc.slug}/quiz/thank-you?r=C`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">DQ: Travel</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/quiz/thank-you?r=C</p>
+                  </a>
+                  <a href={`/${loc.slug}/quiz/thank-you?r=D`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">DQ: Exploring</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/quiz/thank-you?r=D</p>
+                  </a>
+                  <a href={`/${loc.slug}/quiz/thank-you`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">DQ: Other</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/quiz/thank-you</p>
+                  </a>
+                  <a href={`/${loc.slug}/start?from=quiz`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">DQ: Can't Invest (LBO)</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/start?from=quiz</p>
+                  </a>
                 </div>
               </div>
 
