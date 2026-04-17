@@ -34,7 +34,8 @@ export async function POST(request: NextRequest) {
   if (!price || price.includes('your_')) {
     console.log('[STRIPE DRY RUN] Would create checkout for:', { email, name, location, offer, price })
     await notifySlack(`Checkout Initiated (DRY RUN): ${name} (${email}) | Offer: ${offer} | Location: ${location}`, location)
-    return NextResponse.json({ url: `/${location}/checkout/gear?session_id=dry_run` })
+    const gearPage = offer === 'start-bjj-33' ? 'gear-bjj' : 'gear'
+    return NextResponse.json({ url: `/${location}/checkout/${gearPage}?session_id=dry_run&offer=${offer}` })
   }
 
   try {
@@ -45,6 +46,7 @@ export async function POST(request: NextRequest) {
       metadata: { phone: phone || '', location, offer, source: 'fightcraft-web' },
     })
 
+    const gearPage = offer === 'start-bjj-33' ? 'gear-bjj' : 'gear'
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: [{ price, quantity: 1 }],
@@ -52,7 +54,7 @@ export async function POST(request: NextRequest) {
       payment_intent_data: {
         setup_future_usage: 'off_session',
       },
-      success_url: `${baseUrl}/${location}/checkout/gear?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${baseUrl}/${location}/checkout/${gearPage}?session_id={CHECKOUT_SESSION_ID}&offer=${offer}`,
       cancel_url: `${baseUrl}${cancelPath || `/${location}/web-special`}`,
       metadata: {
         name: name || '',

@@ -1,23 +1,36 @@
 'use client'
 
-import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useParams, useSearchParams } from 'next/navigation'
+import { Suspense, useEffect, useState } from 'react'
 import { getLead } from '@/lib/lead'
 import { track } from '@/lib/analytics'
 import { metaPixelTrack } from '@/components/MetaPixel'
 
-export default function WebSpecialSuccessPage() {
+const OFFER_VALUES: Record<string, number> = {
+  'web-special-97': 97,
+  'fast-pass-499': 499,
+  'early-riser-33': 33,
+  'start-33': 33,
+  'start-bjj-33': 33,
+  'gear-package-249': 249,
+  'beginner-program-499': 499,
+}
+
+function SuccessContent() {
   const params = useParams()
+  const searchParams = useSearchParams()
   const slug = params.slug as string
+  const offer = searchParams.get('offer') || ''
   const [firstName, setFirstName] = useState('')
   const locationName = slug === 'san-jose' ? 'San Jose' : slug === 'merced' ? 'Merced' : slug === 'brevard' ? 'Brevard' : slug
 
   useEffect(() => {
     const lead = getLead()
     if (lead?.name) setFirstName(lead.name.split(' ')[0])
-    track('purchase_completed', { location: slug })
-    metaPixelTrack('Purchase', { currency: 'USD' })
-  }, [slug])
+    const value = OFFER_VALUES[offer] || 33
+    track('purchase_completed', { location: slug, offer })
+    metaPixelTrack('Purchase', { currency: 'USD', value, content_name: offer || 'membership' })
+  }, [slug, offer])
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col px-6 py-8">
@@ -57,5 +70,13 @@ export default function WebSpecialSuccessPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <SuccessContent />
+    </Suspense>
   )
 }

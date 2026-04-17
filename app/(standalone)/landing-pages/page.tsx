@@ -88,6 +88,10 @@ export default function LandingPagesIndex() {
                     <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Start ($33 / 50% off 3mo)</p>
                     <p className="text-[10px] text-black/40">/{loc.slug}/start</p>
                   </a>
+                  <a href={`/${loc.slug}/start-bjj`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                    <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Start BJJ ($33 / 50% off 3mo)</p>
+                    <p className="text-[10px] text-black/40">/{loc.slug}/start-bjj</p>
+                  </a>
                   <a href={`/${loc.slug}/gear-kickboxing`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
                     <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Gear / Beginner Program</p>
                     <p className="text-[10px] text-black/40">/{loc.slug}/gear-kickboxing</p>

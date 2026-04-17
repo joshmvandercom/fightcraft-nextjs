@@ -12,6 +12,8 @@ const UPSELL_PRICES: Record<string, { envKey: string; amount: number; name: stri
   'premium-gear': { envKey: 'STRIPE_PRICE_PREMIUM_GEAR', amount: 19900, name: 'Premium Gear Set + T-Shirt' },
   'meal-plan': { envKey: 'STRIPE_PRICE_MEAL_PLAN', amount: 4900, name: 'Fighter Meal Plan' },
   'meal-plan-coach': { envKey: 'STRIPE_PRICE_MEAL_PLAN_COACH', amount: 9900, name: 'Meal Plan + Accountability Coach' },
+  'gi-white': { envKey: 'STRIPE_PRICE_GI_WHITE', amount: 12900, name: 'White Gi' },
+  'gi-black': { envKey: 'STRIPE_PRICE_GI_BLACK', amount: 12900, name: 'Black Gi' },
   'gear-package': { envKey: 'STRIPE_PRICE_GEAR_PACKAGE', amount: 24900, name: 'Gear Package' },
   'beginner-program': { envKey: 'STRIPE_PRICE_BEGINNER_PROGRAM', amount: 49900, name: 'Six Week Beginner Program' },
 }

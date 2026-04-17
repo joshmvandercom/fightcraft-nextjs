@@ -4,6 +4,7 @@ import { useParams, useSearchParams, useRouter } from 'next/navigation'
 import { Suspense, useState, useEffect } from 'react'
 import { getLead } from '@/lib/lead'
 import { track } from '@/lib/analytics'
+import { metaPixelTrack } from '@/components/MetaPixel'
 import AutoPlayVideo from '@/components/AutoPlayVideo'
 
 function Check() {
@@ -20,6 +21,7 @@ function AcceleratorContent() {
   const router = useRouter()
   const slug = params.slug as string
   const sessionId = searchParams.get('session_id') || ''
+  const offer = searchParams.get('offer') || ''
   const locationName = slug === 'san-jose' ? 'San Jose' : slug === 'merced' ? 'Merced' : slug === 'brevard' ? 'Brevard' : slug
 
   const [processing, setProcessing] = useState<string | null>(null)
@@ -40,8 +42,10 @@ function AcceleratorContent() {
         body: JSON.stringify({ sessionId, location: slug, upsellId: optionId }),
       })
       if (res.ok) {
+        const upsellValue = optionId === 'meal-plan-coach' ? 99 : 49
         track('upsell_accepted', { location: slug, offer: optionId })
-        router.push(`/${slug}/checkout/success?session_id=${sessionId}&accelerator=${optionId}`)
+        metaPixelTrack('Purchase', { currency: 'USD', value: upsellValue, content_name: optionId })
+        router.push(`/${slug}/checkout/success?session_id=${sessionId}&accelerator=${optionId}&offer=${offer}`)
         return
       }
     } catch {}
@@ -50,7 +54,7 @@ function AcceleratorContent() {
 
   function declineUpsell() {
     track('upsell_declined', { location: slug, offer: 'accelerator' })
-    router.push(`/${slug}/checkout/success?session_id=${sessionId}`)
+    router.push(`/${slug}/checkout/success?session_id=${sessionId}&offer=${offer}`)
   }
 
   function scrollToOptions() {

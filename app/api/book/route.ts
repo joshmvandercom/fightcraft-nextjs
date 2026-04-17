@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { notifySlack } from '@/lib/slack'
 
-const WEBHOOKS: Record<string, string | undefined> = {
-  'san-jose': process.env.WEBHOOK_SAN_JOSE,
-  'merced': process.env.WEBHOOK_MERCED,
-  'brevard': process.env.WEBHOOK_BREVARD,
-}
-
 export async function POST(request: NextRequest) {
   const body = await request.json()
   const { location, day, date, time, className, name, email, phone } = body
@@ -15,35 +9,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 })
   }
 
-  const webhookUrl = WEBHOOKS[location]
-  const isLive = process.env.WEBHOOKS_LIVE === 'true'
-  const webhookReady = webhookUrl && !webhookUrl.includes('example.com') && !webhookUrl.includes('placeholder')
-
-  const payload = {
-    source: 'fightcraft-quiz-booking',
-    location,
-    name: name || '',
-    email: email || '',
-    phone: phone || '',
-    booked_class: className,
-    booked_day: day,
-    booked_time: time,
-    tags: [`booked:${className.toLowerCase().replace(/\s+/g, '-')}`, 'quiz-booking'],
-  }
-
-  if (isLive && webhookReady) {
-    try {
-      await fetch(webhookUrl!, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-    } catch (err) {
-      console.error('Booking webhook error:', err)
-    }
-  }
-
-  // Always send Slack
+  // Slack notification only — GHL webhook handled by /api/leads
   await notifySlack(`Class Booked: ${name || 'Unknown'} (${email || 'no email'}) | ${className} | ${day} at ${time} | Location: ${location}`, location)
 
   // Generate .ics content using the actual date from the client
