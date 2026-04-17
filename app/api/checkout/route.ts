@@ -11,6 +11,7 @@ const OFFER_PRICES: Record<string, string | undefined> = {
   'fast-pass-499': process.env.STRIPE_PRICE_FAST_PASS,
   'early-riser-33': process.env.STRIPE_PRICE_EARLY_RISER,
   'start-33': process.env.STRIPE_PRICE_EARLY_RISER,
+  'start-bjj-33': process.env.STRIPE_PRICE_EARLY_RISER,
   'gear-package-249': process.env.STRIPE_PRICE_GEAR_PACKAGE,
   'beginner-program-499': process.env.STRIPE_PRICE_BEGINNER_PROGRAM,
 }
