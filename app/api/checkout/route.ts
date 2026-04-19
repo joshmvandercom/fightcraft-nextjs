@@ -6,6 +6,22 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   apiVersion: '2025-03-31.basil',
 })
 
+const CHECKOUT_WEBHOOKS: Record<string, string | undefined> = {
+  'san-jose': process.env.WEBHOOK_CHECKOUT_SAN_JOSE,
+  'merced': process.env.WEBHOOK_CHECKOUT_MERCED,
+  'brevard': process.env.WEBHOOK_CHECKOUT_BREVARD,
+}
+
+const OFFER_DISPLAY: Record<string, string> = {
+  'web-special-97': 'Web Special',
+  'fast-pass-499': '90-Day Fast Pass',
+  'early-riser-33': 'Early Riser',
+  'start-33': 'Start Training',
+  'start-bjj-33': 'Jiu-Jitsu Starter',
+  'gear-package-249': 'Gear Package',
+  'beginner-program-499': 'Beginner Program',
+}
+
 const OFFER_PRICES: Record<string, string | undefined> = {
   'web-special-97': process.env.STRIPE_PRICE_WEB_SPECIAL,
   'fast-pass-499': process.env.STRIPE_PRICE_FAST_PASS,
@@ -66,6 +82,33 @@ export async function POST(request: NextRequest) {
     })
 
     await notifySlack(`Checkout Started: ${name} (${email}) | Offer: ${offer} | Location: ${location}`, location)
+
+    // Send checkout_started webhook to GHL for abandoned checkout follow-up
+    const checkoutWebhook = CHECKOUT_WEBHOOKS[location]
+    const isLive = process.env.WEBHOOKS_LIVE === 'true'
+    const webhookReady = checkoutWebhook && !checkoutWebhook.includes('example.com') && !checkoutWebhook.includes('placeholder')
+
+    if (isLive && webhookReady) {
+      try {
+        await fetch(checkoutWebhook!, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            name: name || '',
+            phone: phone || '',
+            location,
+            source: 'fightcraft-web',
+            event: 'checkout_started',
+            offer,
+            offer_name: OFFER_DISPLAY[offer] || offer,
+            tags: ['checkout_started', `offer:${offer}`],
+          }),
+        })
+      } catch (err) {
+        console.error('Checkout webhook error:', err)
+      }
+    }
 
     return NextResponse.json({ url: session.url })
   } catch (err) {

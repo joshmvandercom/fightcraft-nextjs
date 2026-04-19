@@ -30,6 +30,21 @@ function SuccessContent() {
     const value = OFFER_VALUES[offer] || 33
     track('purchase_completed', { location: slug, offer })
     metaPixelTrack('Purchase', { currency: 'USD', value, content_name: offer || 'membership' })
+
+    // Notify GHL of completed checkout
+    if (lead?.email) {
+      fetch('/api/checkout-complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: lead.email,
+          name: lead.name,
+          phone: lead.phone,
+          location: slug,
+          offer,
+        }),
+      }).catch(() => {})
+    }
   }, [slug, offer])
 
   return (
