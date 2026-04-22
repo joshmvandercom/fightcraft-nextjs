@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import PageHero from '@/components/PageHero'
 import Testimonials from '@/components/Testimonials'
 import LeadCapture from '@/components/LeadCapture'
 import SetLocation from '../../../SetLocation'
 import CTAButton from '@/components/CTAButton'
 import AutoPlayVideo from '@/components/AutoPlayVideo'
+import QuickForm from '@/components/QuickForm'
 import { getLocations, getPrograms, getTestimonials, getNeighborhoods } from '@/lib/content'
 
 type Params = { slug: string; program: string; neighborhood: string }
@@ -77,32 +77,50 @@ export default async function NeighborhoodProgramPage({ params }: { params: Prom
   const otherNeighborhoods = allNeighborhoods.filter(n => n.slug !== neighborhoodSlug)
   const isLocal = neighborhood.preposition === 'in'
 
-  const heroTitle = isLocal
-    ? `${program.name} in ${neighborhood.name}`
-    : `${program.name} Near ${neighborhood.name}`
-
-  const heroSubtitle = isLocal
-    ? `${neighborhood.serving}`
-    : `${neighborhood.distance} from ${neighborhood.name}`
-
   return (
     <>
       <SetLocation slug={slug} />
-      <PageHero
-        title={heroTitle}
-        subtitle={heroSubtitle}
-        image={program.image}
-        videoSrc={program.hero_video}
-        tall
-      />
+
+      {/* Hero */}
+      <section className="relative min-h-screen md:min-h-[70vh] flex flex-col overflow-hidden">
+        {program.hero_video ? (
+          <div className="absolute inset-0">
+            <AutoPlayVideo
+              src={program.hero_video}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover grayscale"
+            />
+            <div className="absolute inset-0 bg-black/70" />
+          </div>
+        ) : (
+          <div className="absolute inset-0">
+            <img src={program.image} alt="" className="w-full h-full object-cover grayscale" />
+            <div className="absolute inset-0 bg-black/80" />
+          </div>
+        )}
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20 flex-1 flex flex-col items-center justify-center">
+          <h1 className="font-heading text-5xl sm:text-6xl md:text-8xl uppercase font-bold tracking-tight text-white">
+            {isLocal
+              ? <>{program.name} <span className="whitespace-nowrap">in {neighborhood.name}</span></>
+              : <>{program.name} <span className="whitespace-nowrap">Near {neighborhood.name}</span></>}
+          </h1>
+          <p className="font-heading text-lg md:text-xl uppercase tracking-[0.3em] text-white/50 mt-6">
+            {isLocal
+              ? neighborhood.serving
+              : <><span className="whitespace-nowrap">{neighborhood.distance}</span> from <span className="whitespace-nowrap">{neighborhood.name}</span></>}
+          </p>
+        </div>
+        <div className="relative z-10">
+          <QuickForm />
+        </div>
+      </section>
 
       {/* Primary content */}
       <section className="bg-neutral-100 text-black py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl uppercase font-bold tracking-tight text-black mb-12 text-center max-w-5xl mx-auto">
             {isLocal
-              ? `${neighborhood.name}'s Home for ${program.name}`
-              : `${program.name} Training for ${neighborhood.name} Residents`}
+              ? <><span className="whitespace-nowrap">{neighborhood.name}&apos;s</span> Home for <span className="whitespace-nowrap">{program.name}</span></>
+              : <>{program.name} Training for <span className="whitespace-nowrap">{neighborhood.name} Residents</span></>}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
@@ -129,7 +147,7 @@ export default async function NeighborhoodProgramPage({ params }: { params: Prom
                   {location.address}, {location.city}, {location.state} {location.zip}
                 </p>
                 <p className="text-sm text-black/50 mt-1">
-                  {neighborhood.distance} from {neighborhood.name}
+                  <span className="whitespace-nowrap">{neighborhood.distance}</span> from <span className="whitespace-nowrap">{neighborhood.name}</span>
                 </p>
               </div>
             </div>
@@ -225,7 +243,7 @@ export default async function NeighborhoodProgramPage({ params }: { params: Prom
 
         <div className="max-w-7xl mx-auto mt-12">
           <a href={`/${location.slug}/programs/${program.slug}`} className="inline-block font-heading text-xs uppercase tracking-widest text-black/50 hover:text-black transition-colors">
-            &larr; Back to {program.name} at FightCraft {location.name}
+            &larr; Back to {program.name} at <span className="whitespace-nowrap">FightCraft {location.name}</span>
           </a>
         </div>
       </section>
@@ -235,7 +253,7 @@ export default async function NeighborhoodProgramPage({ params }: { params: Prom
         <section className="bg-white text-black py-16 px-6">
           <div className="max-w-7xl mx-auto">
             <h3 className="font-heading text-lg uppercase font-bold tracking-tight text-black mb-6">
-              {program.name} {isLocal ? 'Also Serving' : 'Near Other'} {location.name} Neighborhoods
+              {program.name} {isLocal ? 'Also Serving' : 'Near Other'} <span className="whitespace-nowrap">{location.name} Neighborhoods</span>
             </h3>
             <div className="flex flex-wrap gap-2">
               {otherNeighborhoods.map(n => (
