@@ -61,6 +61,7 @@ export default function Nav({ locations, programs }: NavProps) {
     } else {
       const saved = localStorage.getItem('fightcraft_location')
       const savedAt = localStorage.getItem('fightcraft_location_set_at')
+      // One-time reset: expire anyone who doesn't have a timestamp yet (pre-expiration users)
       const isExpired = !savedAt || Date.now() - parseInt(savedAt) > 28 * 24 * 60 * 60 * 1000
       if (saved && !isExpired) {
         updateContext(saved)
