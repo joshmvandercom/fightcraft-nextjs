@@ -34,6 +34,7 @@ export default function Nav({ locations, programs }: NavProps) {
     setCurrentLocation(loc)
     setLocationPrograms(programs.filter(p => p.location === slug))
     localStorage.setItem('fightcraft_location', slug)
+    localStorage.setItem('fightcraft_location_set_at', Date.now().toString())
   }, [locations, programs])
 
   useEffect(() => {
@@ -59,7 +60,9 @@ export default function Nav({ locations, programs }: NavProps) {
       updateContext(firstSegment)
     } else {
       const saved = localStorage.getItem('fightcraft_location')
-      if (saved) {
+      const savedAt = localStorage.getItem('fightcraft_location_set_at')
+      const isExpired = !savedAt || Date.now() - parseInt(savedAt) > 28 * 24 * 60 * 60 * 1000
+      if (saved && !isExpired) {
         updateContext(saved)
       } else if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
