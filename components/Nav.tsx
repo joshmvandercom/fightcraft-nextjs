@@ -14,6 +14,7 @@ export default function Nav({ locations, programs }: NavProps) {
     setMobileOpenState(open)
     document.body.style.overflow = open ? 'hidden' : ''
   }
+  const [showLocationPicker, setShowLocationPicker] = useState(false)
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
@@ -80,11 +81,11 @@ export default function Nav({ locations, programs }: NavProps) {
             })
             updateContext(nearest)
           },
-          () => updateContext('san-jose'),
+          () => setShowLocationPicker(true),
           { timeout: 5000 }
         )
       } else {
-        updateContext('san-jose')
+        setShowLocationPicker(true)
       }
     }
 
@@ -298,6 +299,47 @@ export default function Nav({ locations, programs }: NavProps) {
             </select>
           </div>
         )}
+      </div>
+    )}
+
+    {/* Location picker — shown when geo is denied or unavailable */}
+    {showLocationPicker && (
+      <div className="fixed inset-0 z-[1000] flex items-center justify-center p-6">
+        <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+        <div className="relative w-full max-w-sm">
+          <div className="bg-black border border-white/20 p-8">
+            <div className="flex justify-center mb-6">
+              <img src="/images/fc-white-initials.svg" alt="FightCraft" className="h-10 brightness-0 invert" />
+            </div>
+            <h2 className="font-heading text-xl uppercase font-bold tracking-tight text-white text-center mb-2">
+              Which location?
+            </h2>
+            <p className="text-sm text-white/50 text-center mb-8">
+              Select the gym nearest to you.
+            </p>
+            <div className="space-y-3">
+              {locations.map(loc => (
+                <button
+                  key={loc.slug}
+                  onClick={() => {
+                    updateContext(loc.slug)
+                    setShowLocationPicker(false)
+                  }}
+                  className="w-full text-left p-4 border border-white/20 hover:border-white/40 transition-all duration-200 flex items-center gap-4 cursor-pointer"
+                >
+                  <svg className="w-5 h-5 text-white/50 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <div>
+                    <p className="font-heading text-base uppercase tracking-widest font-bold text-white">{loc.name}</p>
+                    <p className="text-xs text-white/50">{loc.city}, {loc.state}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     )}
     </>
