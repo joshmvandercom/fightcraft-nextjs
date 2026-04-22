@@ -33,6 +33,7 @@ export default function Footer({ locations }: FooterProps) {
               <a href="/about" className="block text-sm text-white/60 hover:text-white transition-colors">About Us</a>
               <a href="/privacy-policy" className="block text-sm text-white/60 hover:text-white transition-colors">Privacy Policy</a>
               <a href="/refund-policy" className="block text-sm text-white/60 hover:text-white transition-colors">Refund Policy</a>
+              <a href="/affiliate" className="block text-sm text-white/60 hover:text-white transition-colors">Become an Affiliate</a>
             </div>
           </div>
 

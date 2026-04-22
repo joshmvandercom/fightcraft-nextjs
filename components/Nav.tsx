@@ -125,6 +125,7 @@ export default function Nav({ locations, programs }: NavProps) {
                 <a href="/about/faq" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">FAQ</a>
                 <a href="/about/reviews" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Reviews</a>
                 <a href="/about/core-values" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Core Values</a>
+                <a href="/affiliate" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Become an Affiliate</a>
               </div>
             )}
           </div>
@@ -203,7 +204,11 @@ export default function Nav({ locations, programs }: NavProps) {
         {/* Mobile: location + hamburger */}
         <div className="md:hidden flex items-center gap-4">
           {currentLocation && (
-            <a href={`/${currentLocation.slug}`} className="font-heading text-xs uppercase tracking-widest text-white/60">
+            <a href={`/${currentLocation.slug}`} className="font-heading text-base uppercase tracking-widest text-white font-bold flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
               {currentLocation.name}
             </a>
           )}
@@ -245,6 +250,7 @@ export default function Nav({ locations, programs }: NavProps) {
               <a href="/about/faq" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">FAQ</a>
               <a href="/about/reviews" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Reviews</a>
               <a href="/about/core-values" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Core Values</a>
+              <a href="/affiliate" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Become an Affiliate</a>
             </div>
           )}
         </div>
