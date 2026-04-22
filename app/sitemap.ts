@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getLocations, getPrograms } from '@/lib/content'
+import { getLocations, getPrograms, getNeighborhoods } from '@/lib/content'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fightcraft.com'
@@ -35,5 +35,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...staticPages, ...locationPages, ...schedulePages, ...programPages]
+  const neighborhoodPages: MetadataRoute.Sitemap = []
+  locations.forEach(loc => {
+    const neighborhoods = getNeighborhoods(loc.slug)
+    programs
+      .filter(p => p.location === loc.slug)
+      .forEach(p => {
+        neighborhoods.forEach(n => {
+          neighborhoodPages.push({
+            url: `${baseUrl}/${loc.slug}/programs/${p.slug}/${n.slug}`,
+            changeFrequency: 'monthly',
+            priority: 0.5,
+          })
+        })
+      })
+  })
+
+  return [...staticPages, ...locationPages, ...schedulePages, ...programPages, ...neighborhoodPages]
 }

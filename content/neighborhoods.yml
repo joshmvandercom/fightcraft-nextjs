@@ -1,0 +1,157 @@
+neighborhoods:
+  san-jose:
+    # === IN (physically located in these neighborhoods) ===
+    - slug: midtown
+      name: Midtown
+      preposition: "in"
+      description: "FightCraft is located right in the heart of Midtown San Jose on West San Carlos Street. Walk, bike, or drive. This is your neighborhood gym."
+      serving: "Midtown's go-to martial arts gym"
+      distance: "You're already here"
+
+    - slug: burbank
+      name: Burbank
+      preposition: "in"
+      description: "FightCraft sits right in the Burbank neighborhood. If you live or work in Burbank, you're minutes from some of the best martial arts training in the South Bay."
+      serving: "Training Burbank residents daily"
+      distance: "2 min walk"
+
+    - slug: buena-vista
+      name: Buena Vista
+      preposition: "in"
+      description: "FightCraft is right in the Buena Vista neighborhood on West San Carlos. No commute, no excuses. Just walk in and start training."
+      serving: "Buena Vista's home for martial arts"
+      distance: "2 min walk"
+
+    # === NEAR (serve these neighborhoods, not physically in them) ===
+    - slug: shasta-hanchett-park
+      name: Shasta Hanchett Park
+      preposition: "near"
+      description: "Shasta Hanchett Park residents are just a quick drive from FightCraft on West San Carlos. Many of our members come from the Shasta Hanchett area and train with us after work."
+      serving: "Serving students from the Shasta Hanchett Park area"
+      distance: "5 min drive"
+
+    - slug: rose-garden
+      name: Rose Garden
+      preposition: "near"
+      description: "The Rose Garden neighborhood is one of the closest to FightCraft. Many of our members walk or bike from Rose Garden to train with us on West San Carlos Street."
+      serving: "A top choice for Rose Garden residents"
+      distance: "5 min drive"
+
+    - slug: santana-row
+      name: Santana Row
+      preposition: "near"
+      description: "Located just minutes from Santana Row, FightCraft offers world-class martial arts training without the drive to downtown. Santana Row residents train with us regularly."
+      serving: "A top choice for Santana Row residents"
+      distance: "5 min drive"
+
+    - slug: winchester
+      name: Winchester
+      preposition: "near"
+      description: "Winchester residents looking for serious martial arts training choose FightCraft. We're a short drive down San Carlos with classes that fit around your schedule."
+      serving: "Serving students from the Winchester area"
+      distance: "5 min drive"
+
+    - slug: diridon
+      name: Diridon
+      preposition: "near"
+      description: "Located just minutes from the Diridon Station area, FightCraft is easy to get to whether you're commuting by train or driving. Many of our members stop in after their commute."
+      serving: "Convenient for the Diridon area"
+      distance: "5 min drive"
+
+    - slug: college-park
+      name: College Park
+      preposition: "near"
+      description: "College Park is one of our closest neighborhoods. FightCraft is a straight shot down San Carlos with evening and weekend classes that work around student and professional schedules."
+      serving: "Serving College Park students and residents"
+      distance: "5 min drive"
+
+    - slug: willow-glen
+      name: Willow Glen
+      preposition: "near"
+      description: "Just minutes from Willow Glen, FightCraft is the go-to gym for Willow Glen residents looking for martial arts training. Skip the drive to downtown and train close to home."
+      serving: "Located just minutes from Willow Glen"
+      distance: "5 min drive"
+
+    - slug: downtown
+      name: Downtown San Jose
+      preposition: "near"
+      description: "Located just off West San Carlos, FightCraft is one of the closest martial arts gyms to Downtown San Jose. Whether you work downtown or live nearby, we're an easy stop before or after your day."
+      serving: "Serving Downtown San Jose professionals"
+      distance: "5 min drive"
+
+    - slug: japantown
+      name: Japantown
+      preposition: "near"
+      description: "FightCraft is just a few minutes from Japantown. Our San Jose location on West San Carlos is easy to reach, with classes throughout the day that fit your schedule."
+      serving: "Serving Japantown residents"
+      distance: "7 min drive"
+
+    - slug: little-italy
+      name: Little Italy
+      preposition: "near"
+      description: "Little Italy residents are just minutes from FightCraft. We're located on West San Carlos with parking and easy access from the Little Italy neighborhood."
+      serving: "A short trip from Little Italy"
+      distance: "5 min drive"
+
+    - slug: the-alameda
+      name: The Alameda
+      preposition: "near"
+      description: "The Alameda is one of the closest corridors to FightCraft. Whether you live or work along The Alameda, our gym is a quick drive or bike ride away."
+      serving: "Convenient for The Alameda residents"
+      distance: "5 min drive"
+
+    - slug: fruitdale
+      name: Fruitdale
+      preposition: "near"
+      description: "Fruitdale residents train at FightCraft every day. We're just down San Carlos Street with classes from morning to evening."
+      serving: "Serving the Fruitdale community"
+      distance: "3 min drive"
+
+    - slug: campbell-downtown
+      name: Campbell Downtown
+      preposition: "near"
+      description: "FightCraft sits right on the Campbell border. If you're in downtown Campbell, you're closer than you think to the best martial arts training in the South Bay."
+      serving: "Just minutes from downtown Campbell"
+      distance: "5 min drive"
+
+    - slug: cambrian-park
+      name: Cambrian Park
+      preposition: "near"
+      description: "Cambrian Park families and professionals make the short drive to FightCraft for martial arts training that's worth the trip. We're accessible via Camden or San Carlos."
+      serving: "Serving Cambrian Park families"
+      distance: "10 min drive"
+
+    - slug: west-san-jose
+      name: West San Jose
+      preposition: "near"
+      description: "We're located on West San Carlos Street, right on the edge of West San Jose. If you live in the area, FightCraft is practically your neighborhood gym."
+      serving: "Right on the edge of West San Jose"
+      distance: "5 min drive"
+
+    - slug: almaden-valley
+      name: Almaden Valley
+      preposition: "near"
+      description: "Almaden Valley families and professionals train at FightCraft. We're a straight shot up Almaden Expressway with classes that fit busy schedules."
+      serving: "Serving Almaden Valley residents"
+      distance: "15 min drive"
+
+    - slug: blossom-valley
+      name: Blossom Valley
+      preposition: "near"
+      description: "Blossom Valley residents looking for quality martial arts training choose FightCraft in San Jose. We're worth the short drive with classes all week long."
+      serving: "A top pick for Blossom Valley residents"
+      distance: "15 min drive"
+
+    - slug: north-san-jose
+      name: North San Jose
+      preposition: "near"
+      description: "North San Jose tech workers and families make the commute to FightCraft for training that's a level above. Our evening classes are perfectly timed for the post-work drive."
+      serving: "Serving North San Jose professionals"
+      distance: "15 min drive"
+
+    - slug: berryessa
+      name: Berryessa
+      preposition: "near"
+      description: "Berryessa residents looking for kickboxing, Muay Thai, or jiu-jitsu train at FightCraft San Jose. We're accessible from Berryessa via 101 or 680."
+      serving: "Accessible from Berryessa via 101 or 680"
+      distance: "20 min drive"

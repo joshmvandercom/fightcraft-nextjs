@@ -167,3 +167,17 @@ export function getComparison(locationSlug: string, gymSlug: string): Comparison
   const comps = getComparisons(locationSlug)
   return comps.find(c => c.slug === gymSlug) || null
 }
+
+export interface Neighborhood {
+  slug: string
+  name: string
+  preposition: 'in' | 'near'
+  description: string
+  serving: string
+  distance: string
+}
+
+export function getNeighborhoods(locationSlug: string): Neighborhood[] {
+  const data = load('neighborhoods.yml').neighborhoods
+  return data[locationSlug] || []
+}
