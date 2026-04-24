@@ -57,13 +57,18 @@ export default function Footer({ locations }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-16 pt-8 border-t border-white/30 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <img src="/images/fc-white-initials.svg" alt="FC" className="h-8 brightness-0 invert" />
-            <div className="w-px h-6 bg-white/20" />
+            <div className="w-px h-6 bg-white/40" />
             <span className="font-heading text-sm uppercase tracking-[0.3em] text-white">FIGHTCRAFT</span>
           </div>
-          <p className="text-[10px] uppercase tracking-[0.2em] text-white/40">&copy; {new Date().getFullYear()} FIGHTCRAFT. All rights reserved.</p>
+          <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
+            <p className="text-xs uppercase tracking-[0.2em] text-white/80">&copy; {new Date().getFullYear()} FIGHTCRAFT. All rights reserved.</p>
+            <a href="https://schedulous.com" target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-[0.2em] text-white/80 hover:text-white transition-colors">
+              Powered by Schedulous
+            </a>
+          </div>
         </div>
       </div>
     </footer>
