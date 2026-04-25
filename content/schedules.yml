@@ -88,9 +88,6 @@ schedules:
           name: "Kickboxing All Levels"
         - time: "10:00am"
           name: "Jiu-Jitsu - No Gi All Levels"
-        - time: "11:00am"
-          name: "Fight Team"
-          bookable: false
     - day: Sunday
       classes:
         - time: "9:00am"
