@@ -96,6 +96,12 @@ export default function LandingPagesIndex() {
                     <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Gear / Beginner Program</p>
                     <p className="text-[10px] text-black/40">/{loc.slug}/gear-kickboxing</p>
                   </a>
+                  {loc.slug === 'san-jose' && (
+                    <a href={`/${loc.slug}/mma-scholarship`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
+                      <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">MMA Scholarship (Free)</p>
+                      <p className="text-[10px] text-black/40">/{loc.slug}/mma-scholarship</p>
+                    </a>
+                  )}
                   <a href={`/${loc.slug}/checkout/gear?session_id=dry_run`} className="block p-3 border border-black/10 hover:border-black/30 transition-colors">
                     <p className="font-heading text-xs uppercase tracking-widest font-bold mb-1">Gear Upsell</p>
                     <p className="text-[10px] text-black/40">/{loc.slug}/checkout/gear</p>
