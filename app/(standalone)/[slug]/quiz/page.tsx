@@ -218,11 +218,15 @@ export default function QuizPage() {
         r: a[3] || '', i: a[4],
       }, slug)
 
+      // Locations with an active GHL booking calendar. Others fall through to
+      // the thank-you page so the team reaches out manually.
+      const LOCATIONS_WITH_CALENDAR = new Set(['san-jose'])
+
       let dest: string
       if (a[4] === 'B') {
         // Financial DQ overrides everything → discounted start offer
         dest = `/${slug}/start?from=quiz`
-      } else if (qualified) {
+      } else if (qualified && LOCATIONS_WITH_CALENDAR.has(slug)) {
         dest = `/${slug}/quiz/book?${qp.toString()}`
       } else {
         dest = `/${slug}/quiz/thank-you?${qp.toString()}`
