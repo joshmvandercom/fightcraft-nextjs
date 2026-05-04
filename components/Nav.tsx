@@ -16,8 +16,10 @@ export default function Nav({ locations, programs }: NavProps) {
   }
   const [showLocationPicker, setShowLocationPicker] = useState(false)
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
+  const [mobileLocationsOpen, setMobileLocationsOpen] = useState(false)
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
+  const [locationsNavOpen, setLocationsNavOpen] = useState(false)
   const [contextOpen, setContextOpen] = useState(false)
   const [locationSwitcherOpen, setLocationSwitcherOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -25,6 +27,7 @@ export default function Nav({ locations, programs }: NavProps) {
   const [locationPrograms, setLocationPrograms] = useState<Program[]>([])
 
   const aboutRef = useRef<HTMLDivElement>(null)
+  const locationsNavRef = useRef<HTMLDivElement>(null)
   const contextRef = useRef<HTMLDivElement>(null)
   const locationSwitcherRef = useRef<HTMLDivElement>(null)
 
@@ -44,6 +47,9 @@ export default function Nav({ locations, programs }: NavProps) {
     const onClickOutside = (e: MouseEvent) => {
       if (aboutRef.current && !aboutRef.current.contains(e.target as Node)) {
         setAboutOpen(false)
+      }
+      if (locationsNavRef.current && !locationsNavRef.current.contains(e.target as Node)) {
+        setLocationsNavOpen(false)
       }
       if (contextRef.current && !contextRef.current.contains(e.target as Node)) {
         setContextOpen(false)
@@ -116,7 +122,7 @@ export default function Nav({ locations, programs }: NavProps) {
           {/* About Dropdown */}
           <div className="relative" ref={aboutRef}>
             <button
-              onClick={() => { setAboutOpen(!aboutOpen); setContextOpen(false) }}
+              onClick={() => { setAboutOpen(!aboutOpen); setLocationsNavOpen(false); setContextOpen(false) }}
               className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors flex items-center gap-2"
             >
               About
@@ -130,12 +136,35 @@ export default function Nav({ locations, programs }: NavProps) {
                 <a href="/about/faq" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">FAQ</a>
                 <a href="/about/reviews" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Reviews</a>
                 <a href="/about/core-values" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Core Values</a>
-                <a href="/affiliate" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Become an Affiliate</a>
+                <a href="/careers" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Careers</a>
               </div>
             )}
           </div>
 
-          <a href="/locations" className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors">Locations</a>
+          {/* Locations Dropdown */}
+          <div className="relative" ref={locationsNavRef}>
+            <button
+              onClick={() => { setLocationsNavOpen(!locationsNavOpen); setAboutOpen(false); setContextOpen(false) }}
+              className="font-heading text-base uppercase tracking-widest text-white/90 hover:text-white transition-colors flex items-center gap-2"
+            >
+              Locations
+              <svg className={`w-3 h-3 transition-transform ${locationsNavOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {locationsNavOpen && (
+              <div className="absolute top-full left-0 mt-3 py-2 bg-black border border-white/20 min-w-[200px]">
+                <a href="/locations" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">All Locations</a>
+                {locations.map(loc => (
+                  <a key={loc.slug} href={`/${loc.slug}`} className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">
+                    {loc.name}
+                  </a>
+                ))}
+                <div className="my-1 border-t border-white/10" />
+                <a href="/affiliate" className="block px-4 py-2 font-heading text-sm uppercase tracking-widest text-white/80 hover:text-white hover:bg-white/5 transition-colors">Become an Affiliate</a>
+              </div>
+            )}
+          </div>
 
           {/* Context Nav — Programs & Schedule inline when location is set */}
           {currentLocation && (
@@ -255,7 +284,7 @@ export default function Nav({ locations, programs }: NavProps) {
               <a href="/about/faq" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">FAQ</a>
               <a href="/about/reviews" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Reviews</a>
               <a href="/about/core-values" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Core Values</a>
-              <a href="/affiliate" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Become an Affiliate</a>
+              <a href="/careers" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Careers</a>
             </div>
           )}
         </div>
@@ -285,7 +314,24 @@ export default function Nav({ locations, programs }: NavProps) {
           <a href={`/${currentLocation.slug}/schedule`} onClick={() => setMobileOpen(false)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Schedule</a>
         )}
 
-        <a href="/locations" onClick={() => setMobileOpen(false)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors">Locations</a>
+        {/* Locations dropdown */}
+        <div className="w-full">
+          <button onClick={() => setMobileLocationsOpen(!mobileLocationsOpen)} className="font-heading text-xl uppercase tracking-widest text-white hover:text-white/60 transition-colors flex items-center gap-2">
+            Locations
+            <svg className={`w-4 h-4 transition-transform ${mobileLocationsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {mobileLocationsOpen && (
+            <div className="pl-4 mt-3 flex flex-col gap-3">
+              <a href="/locations" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">All Locations</a>
+              {locations.map(loc => (
+                <a key={loc.slug} href={`/${loc.slug}`} onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">{loc.name}</a>
+              ))}
+              <a href="/affiliate" onClick={() => setMobileOpen(false)} className="font-heading text-base uppercase tracking-widest text-white/50 hover:text-white transition-colors">Become an Affiliate</a>
+            </div>
+          )}
+        </div>
 
         {/* Location switcher */}
         {currentLocation && (
