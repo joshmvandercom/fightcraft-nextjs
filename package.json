@@ -20,6 +20,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/blob": "^2.3.3",
     "@vercel/speed-insights": "^2.0.0",
     "canvas-confetti": "^1.9.4",
     "next": "^16.2.1",
@@ -28,10 +29,14 @@
     "prisma": "^7.6.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "resend": "^6.12.2",
     "stripe": "^22.0.0",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.2",
-    "yaml": "^2.8.3"
+    "yaml": "^2.8.3",
+    "zod": "^4.4.2"
   },
   "devDependencies": {
     "@types/node": "25.5.0",
